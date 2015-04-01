@@ -9,7 +9,7 @@ public interface IPiece {
 	public void show();
 	public void setObserver(IPieceObserver observer);
 	public void setLocation(Point location);
-	public void getLocation(Point location);
+	public Point getLocation();
 	/**
 	 * Method called by the piece when it is pressed
 	 */
