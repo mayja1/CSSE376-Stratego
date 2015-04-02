@@ -10,8 +10,9 @@ public interface IPiece {
 	public void setObserver(IPieceObserver observer);
 	public void setLocation(Point location);
 	public Point getLocation();
-	/**
-	 * Method called by the piece when it is pressed
-	 */
-	public void processPress();
+	public boolean compareWith(IPiece piece);
+//	/**
+//	 * Method called by the piece when it is pressed
+//	 */
+//	public void processPress();
 }
