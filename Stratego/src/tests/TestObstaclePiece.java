@@ -3,17 +3,17 @@ package tests;
 import java.awt.Point;
 
 import org.junit.Assert;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import game.AbstractPiece;
 import game.IPiece;
 
 //Test that this piece doesn't do anything
 public class TestObstaclePiece {
 
-	IPiece piece;
+	AbstractPiece piece;
 	MockPieceObserver observer;
 	@Before
 	public void setup() {
@@ -40,7 +40,7 @@ public class TestObstaclePiece {
 	public void testProcessPressOnSelectedPiece() {
 		Assert.assertFalse(observer.selectButtonPressed);
 		piece.setSelected(true);
-		piece.processPress();
+		piece.actionPerformed(null);
 		Assert.assertFalse(observer.selectButtonPressed);
 		
 	}
@@ -49,7 +49,7 @@ public class TestObstaclePiece {
 	public void testProcessPressOnNonSelectedPiece() {
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 		piece.setSelected(false);
-		piece.processPress();
+		piece.actionPerformed(null);
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 	}
 	@After

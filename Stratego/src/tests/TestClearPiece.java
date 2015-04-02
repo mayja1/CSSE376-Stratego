@@ -1,5 +1,7 @@
 package tests;
 
+import game.AbstractPiece;
+import game.ClearPiece;
 import game.IPiece;
 
 import java.awt.Point;
@@ -11,10 +13,11 @@ import org.junit.Test;
 
 public class TestClearPiece {
 
-	IPiece piece;
+	AbstractPiece piece;
 	MockPieceObserver observer;
 	@Before
 	public void setup() {
+		piece = new ClearPiece();
 		observer = new MockPieceObserver();
 		piece.setObserver(observer);
 	}
@@ -38,7 +41,7 @@ public class TestClearPiece {
 	public void testProcessPressOnSelectedPiece() {
 		Assert.assertFalse(observer.selectButtonPressed);
 		piece.setSelected(true);
-		piece.processPress();
+		piece.actionPerformed(null);
 		Assert.assertTrue(observer.selectButtonPressed);
 		
 	}
@@ -47,7 +50,7 @@ public class TestClearPiece {
 	public void testProcessPressOnNonSelectedPiece() {
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 		piece.setSelected(false);
-		piece.processPress();
+		piece.actionPerformed(null);
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 	}
 	@After
