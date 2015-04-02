@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 
@@ -11,11 +12,11 @@ public class ClearPiece extends AbstractPiece {
 	
 	public ClearPiece() {
 		addActionListener(this);
+		setBackground(Color.GREEN);
 	}
 
 	@Override
 	public boolean compareWith(IPiece piece) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -27,13 +28,13 @@ public class ClearPiece extends AbstractPiece {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("TEST");
+		observer.nonSelectedButtonPressed(location);
 		
 	}
 
 	@Override
 	public boolean isSelected() {
-		// TODO Auto-generated method stub
-		return false;
+		return selected;
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class ClearPiece extends AbstractPiece {
 
 	@Override
 	public void setLocation(Point location) {
-		// TODO Auto-generated method stub
+		this.location = location;
 		
 	}
 

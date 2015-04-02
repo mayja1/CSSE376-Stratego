@@ -1,6 +1,5 @@
 package game;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.HashMap;
@@ -12,18 +11,20 @@ public class GameBoard extends JPanel implements IPieceObserver {
 
 	private HashMap<Point, IPiece> pieces = new HashMap<Point, IPiece>();
 	private IPiece selectedPiece = new Soldier(0);
+	private GridLayout layout;
 
 	public GameBoard() {
 		super();
-		GridLayout layout = new GridLayout(10, 10);
+		layout = new GridLayout(10, 10);
 		this.setLayout(layout);
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				JButton button = new ClearPiece();
+				IPiece button = new ClearPiece();
 				button.setLocation(new Point(i, j));
-				button.setBackground(Color.GREEN);
-				this.add(button, i, j);
-				button.validate();
+				button.setObserver(this);
+				pieces.put(new Point(i, j), button);
+				this.add((JButton) button, i, j);
+				((JButton) button).validate();
 			}
 		}
 
@@ -57,6 +58,12 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	}
 
 	private void swapPieces(IPiece p1, IPiece p2) {
+//		pieces.remove(p1.getLocation());
+//		pieces.remove(p2.getLocation());
+//		pieces.put(p2.getLocation(), p1);
+//		pieces.put(p1.getLocation(), p2);
+		this.add((JButton) p1, p2.getLocation().x, p2.getLocation().y);
+//		((Object) layout).replaceComponent();
 		System.out.println("SWAP");
 	}
 }
