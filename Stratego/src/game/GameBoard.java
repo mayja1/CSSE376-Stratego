@@ -1,16 +1,10 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Point;
-import java.util.HashMap;
-
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 public class GameBoard extends JPanel implements IPieceObserver {
 
@@ -60,8 +54,6 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		if(selectedPiece !=null) {
 			if(selectedPiece.equals(pieces[gridLocation.x][gridLocation.y])) {
 				selectedPiece.setSelected(false);
-				((JButton) selectedPiece).setBorder(new LineBorder(Color.GRAY, 1));
-				
 			} else {
 				swapPieces(selectedPiece, pieces[gridLocation.x][gridLocation.y]);
 			}
@@ -81,9 +73,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			p.setSelected(false);
 			}
 		}
-		System.out.println("grid location:    " + gridLocation);
 		AbstractPiece nonSelected = pieces[gridLocation.x][gridLocation.y];
-		System.out.println("Not selected: " + nonSelected.getLocation());
 		this.selectedPiece = nonSelected;
 		nonSelected.setSelected(true);
 		int x = nonSelected.getLocation().x;
@@ -112,19 +102,6 @@ public class GameBoard extends JPanel implements IPieceObserver {
 				piece.setSelected(true);
 			}	
 		}
-		/*8if (isObject(nonSelected, ClearPiece.class) && !isObject(selectedPiece, Dummy.class) && withinDistance(selectedPiece, nonSelected)) {
-			System.out.println(selectedPiece.getIndex());
-			selectedPiece.setSelected(false);
-			swapPieces(nonSelected, selectedPiece);
-			((JButton) selectedPiece).setBorder(new LineBorder(Color.GRAY, 1));
-			selectedPiece = dummy;
-		} else if (selectedPiece == dummy
-				&& !isObject(nonSelected, ClearPiece.class)) {
-			selectedPiece = nonSelected;
-			((JButton) selectedPiece)
-					.setBorder(new LineBorder(Color.YELLOW, 5));
-			selectedPiece.setSelected(true);*/
-		
 	}
 
 	private void swapPieces(AbstractPiece p1, AbstractPiece p2) {
@@ -136,8 +113,6 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		p2.setLocation(point1);
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
-		//c.weightx = 1;
-		//c.weighty = 1;
 		c.gridx = point1.x;
 		c.gridy = point1.y;
 		pieces[point1.x][point1.y] = p2;
@@ -149,14 +124,4 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		validate();
 		repaint();
 	}
-
-	/*private boolean isObject(IPiece p1, Object obj) {
-		return p1.getClass().equals(obj);
-	}
-	
-	private boolean withinDistance(IPiece p1, IPiece p2) {
-		if (p1.getIndex() + 10 == p2.getIndex() || p1.getIndex() - 10 == p2.getIndex()) return true;
-		else if (p1.getIndex() + 1 == p2.getIndex() || p1.getIndex() - 1 == p2.getIndex()) return true;
-		return false;
-	}*/
 }

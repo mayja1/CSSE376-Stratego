@@ -2,9 +2,6 @@ package game;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JButton;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 public class Soldier extends AbstractPiece {
@@ -40,7 +37,6 @@ public class Soldier extends AbstractPiece {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Pressed" + this.getLocation());
 		if (selected) {
 			observer.selectedButtonPressed(location);
 		} else {
