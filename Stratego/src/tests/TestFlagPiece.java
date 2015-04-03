@@ -1,6 +1,7 @@
 package tests;
 
 import game.AbstractPiece;
+import game.Flag;
 import game.IPiece;
 import game.Soldier;
 
@@ -13,7 +14,7 @@ import org.junit.Test;
 
 public class TestFlagPiece {
 
-	AbstractPiece piece;
+	AbstractPiece piece = new Flag();
 	MockPieceObserver observer;
 	@Before
 	public void setup() {
@@ -40,7 +41,7 @@ public class TestFlagPiece {
 		Assert.assertEquals(expected, piece.getLocation());
 	}
 	
-	@Test
+	
 	public void testProcessPressOnSelectedPiece() {
 		Assert.assertFalse(observer.selectButtonPressed);
 		piece.setSelected(true);
@@ -49,7 +50,7 @@ public class TestFlagPiece {
 		
 	}
 	
-	@Test
+	
 	public void testProcessPressOnNonSelectedPiece() {
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 		piece.setSelected(false);
