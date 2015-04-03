@@ -28,12 +28,12 @@ public class GameBoard extends JPanel implements IPieceObserver {
 				button.setObserver(this);
 				button.setIndex(index);
 				pieces.put(new Point(i, j), button);
-				this.add((JButton) button, i, j);
+				this.add((JButton) button, null, index);
 				((JButton) button).validate();
 				index++;
 			}
 		}
-
+		index = 0;
 		for (int i = 3; i < 7; i++) {
 			Point p = new Point(9, i);
 			IPiece s = new Soldier(i);
@@ -41,6 +41,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			s.setObserver(this);
 			s.setIndex(index);
 			replaceInMap(s);
+			this.remove(index);
 			this.add((JButton) s, null, index);
 			((JButton) s).validate();
 			index++;
@@ -59,13 +60,10 @@ public class GameBoard extends JPanel implements IPieceObserver {
 
 		IPiece nonSelected = pieces.get(gridLocation);
 
-		if (isObject(nonSelected, ClearPiece.class)) {
-			System.out.println(nonSelected.getLocation());
-		}
-
 		if (isObject(nonSelected, ClearPiece.class) && !isObject(selectedPiece, Dummy.class)) {
+			System.out.println(selectedPiece.getIndex());
 			selectedPiece.setSelected(false);
-			swapPieces(selectedPiece, nonSelected);
+			swapPieces(nonSelected, selectedPiece);
 			((JButton) selectedPiece).setBorder(new LineBorder(Color.GRAY, 1));
 			selectedPiece = dummy;
 		} else if (selectedPiece == dummy
@@ -77,24 +75,24 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		} else {
 			// Do nothing
 		}
+		
 	}
 
 	private void swapPieces(IPiece p1, IPiece p2) {
+		int tempIndex = p2.getIndex();
+		Point tempPoint = p2.getLocation();
 		pieces.remove(p1.getLocation());
 		pieces.remove(p2.getLocation());
 		pieces.put(p2.getLocation(), p1);
 		pieces.put(p1.getLocation(), p2);
-//		this.remove((JButton) p1);
-		System.out.println(p2.getLocation());
-		System.out.println(p1.getLocation());
-//		this.remove((JButton) p2);
-//		this.add((JButton) p2, p1.getLocation().x, p1.getLocation().y);
-		((JButton) p2).validate();
-		this.add((JButton) p1, 0, p2.getLocation().y);
-		((JButton) p1).validate();
+		p2.setIndex(p1.getIndex());
+		p2.setLocation(p1.getLocation());
+		p1.setLocation(tempPoint);
+		p1.setIndex(tempIndex);
+		this.add((JButton) p1, null, p1.getIndex());
+		this.add((JButton) p2, null, p2.getIndex());
 
 		validate();
-		// System.out.println("SWAP");
 	}
 
 	private boolean isObject(IPiece p1, Object obj) {

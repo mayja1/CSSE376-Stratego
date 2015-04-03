@@ -9,6 +9,7 @@ public class ClearPiece extends AbstractPiece {
 	private Point location = new Point();
 	private Boolean selected = false;
 	private IPieceObserver observer;
+	private int index;
 	
 	public ClearPiece() {
 		addActionListener(this);
@@ -27,9 +28,7 @@ public class ClearPiece extends AbstractPiece {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("TEST");
 		observer.nonSelectedButtonPressed(location);
-		
 	}
 
 	@Override
@@ -67,14 +66,12 @@ public class ClearPiece extends AbstractPiece {
 
 	@Override
 	public void setIndex(int index) {
-		// TODO Auto-generated method stub
-		
+		this.index = index;
 	}
 
 	@Override
 	public int getIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.index;
 	}
 
 }
