@@ -10,13 +10,19 @@ import javax.swing.border.LineBorder;
 public class Soldier extends AbstractPiece {
 
 	public Soldier(int rank) {
-		setBackground(Color.BLUE);
+		setBackground(Color.GREEN);
 		this.rank = rank;
+		this.setText("" + rank);
 		addActionListener(this);
 	}
 
 	@Override
 	public void setSelected(boolean selected) {
+		if (selected) {
+			this.setBorder(new LineBorder(Color.YELLOW, 5));
+		} else {
+			this.setBorder(new LineBorder(Color.GRAY, 1));
+		}
 		this.selected = selected;
 	}
 
@@ -34,6 +40,7 @@ public class Soldier extends AbstractPiece {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("Pressed" + this.getLocation());
 		if (selected) {
 			observer.selectedButtonPressed(location);
 		} else {

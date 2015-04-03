@@ -45,16 +45,6 @@ public abstract class AbstractPiece extends JButton implements IPiece, ActionLis
 	@Override
 	public Point getLocation() {
 		return this.location;
-	}
-
-	@Override
-	public void setIndex(int index) {
-		this.boardIndex = index;	
-	}
-
-	@Override
-	public int getIndex() {
-		return boardIndex;
 	} 
 
 }

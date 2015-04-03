@@ -1,6 +1,9 @@
 package game;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.HashMap;
@@ -11,56 +14,105 @@ import javax.swing.border.LineBorder;
 
 public class GameBoard extends JPanel implements IPieceObserver {
 
-	private HashMap<Point, IPiece> pieces = new HashMap<Point, IPiece>();
-	private IPiece dummy = new Dummy();
-	private IPiece selectedPiece = dummy;
-	private GridLayout layout;
+	private static final Dimension PIECE_SIZE = new Dimension(80, 80);
+	private AbstractPiece[][] pieces;
+	private AbstractPiece selectedPiece;
+	private GridBagLayout layout;
 
 	public GameBoard() {
 		super();
-		layout = new GridLayout(10, 10);
+		pieces = new AbstractPiece[10][10];
+		layout = new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
 		this.setLayout(layout);
-		int index = 0;
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				IPiece button = new ClearPiece();
+				AbstractPiece button = new ClearPiece();
+				button.setPreferredSize(PIECE_SIZE);
 				button.setLocation(new Point(i, j));
 				button.setObserver(this);
-				button.setIndex(index);
-				pieces.put(new Point(i, j), button);
-				this.add((JButton) button, null, index);
-				((JButton) button).validate();
-				index++;
+				pieces[i][j] = button;
+				c.gridx = i;
+				c.gridy = j;
+				this.add(button, c);
+				button.validate();
+				
 			}
 		}
-		index = 0;
 		for (int i = 3; i < 7; i++) {
-			Point p = new Point(9, i);
-			IPiece s = new Soldier(i);
+			Point p = new Point(i, 0);
+			AbstractPiece s = new Soldier(i);
+			s.setPreferredSize(PIECE_SIZE);
 			s.setLocation(p);
 			s.setObserver(this);
-			s.setIndex(index);
-			replaceInMap(s);
-			this.remove(index);
-			this.add((JButton) s, null, index);
-			((JButton) s).validate();
-			index++;
+			this.remove(pieces[i][0]);
+			pieces[i][0] = s;
+			c.gridx = i;
+			c.gridy = 0;
+			this.add(s, c);
+			s.validate();
 		}
 	}
 
 	@Override
 	public void selectedButtonPressed(Point gridLocation) {
-		selectedPiece.setSelected(false);
-		((JButton) selectedPiece).setBorder(new LineBorder(Color.GRAY, 1));
-		selectedPiece = dummy;
+		if(selectedPiece !=null) {
+			if(selectedPiece.equals(pieces[gridLocation.x][gridLocation.y])) {
+				selectedPiece.setSelected(false);
+				((JButton) selectedPiece).setBorder(new LineBorder(Color.GRAY, 1));
+				
+			} else {
+				swapPieces(selectedPiece, pieces[gridLocation.x][gridLocation.y]);
+			}
+		}
+		for(AbstractPiece[] pRow: pieces) {
+			for(AbstractPiece p: pRow) {
+			p.setSelected(false);
+			}
+		}
+		selectedPiece = null;
 	}
 
 	@Override
 	public void nonSelectedButtonPressed(Point gridLocation) {
-
-		IPiece nonSelected = pieces.get(gridLocation);
-
-		if (isObject(nonSelected, ClearPiece.class) && !isObject(selectedPiece, Dummy.class) && withinDistance(selectedPiece, nonSelected)) {
+		for(AbstractPiece[] pRow: pieces) {
+			for(AbstractPiece p: pRow) {
+			p.setSelected(false);
+			}
+		}
+		System.out.println("grid location:    " + gridLocation);
+		AbstractPiece nonSelected = pieces[gridLocation.x][gridLocation.y];
+		System.out.println("Not selected: " + nonSelected.getLocation());
+		this.selectedPiece = nonSelected;
+		nonSelected.setSelected(true);
+		int x = nonSelected.getLocation().x;
+		int y = nonSelected.getLocation().y;
+		if (x < 10) {
+			AbstractPiece piece = pieces[x + 1][y];
+			if(piece instanceof ClearPiece) {
+				piece.setSelected(true);
+			}	
+		}
+		if (x > 0) {
+			AbstractPiece piece = pieces[x - 1][y];
+			if(piece instanceof ClearPiece) {
+				piece.setSelected(true);
+			}	
+		}
+		if (y > 0) {
+			AbstractPiece piece = pieces[x][y - 1];
+			if(piece instanceof ClearPiece) {
+				piece.setSelected(true);
+			}	
+		}
+		if (y < 10) {
+			AbstractPiece piece = pieces[x][y + 1];
+			if(piece instanceof ClearPiece) {
+				piece.setSelected(true);
+			}	
+		}
+		/*8if (isObject(nonSelected, ClearPiece.class) && !isObject(selectedPiece, Dummy.class) && withinDistance(selectedPiece, nonSelected)) {
 			System.out.println(selectedPiece.getIndex());
 			selectedPiece.setSelected(false);
 			swapPieces(nonSelected, selectedPiece);
@@ -71,41 +123,40 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			selectedPiece = nonSelected;
 			((JButton) selectedPiece)
 					.setBorder(new LineBorder(Color.YELLOW, 5));
-			selectedPiece.setSelected(true);
-		}
+			selectedPiece.setSelected(true);*/
+		
 	}
 
-	private void swapPieces(IPiece p1, IPiece p2) {
-		int tempIndex = p2.getIndex();
-		Point tempPoint = p2.getLocation();
-		pieces.remove(p1.getLocation());
-		pieces.remove(p2.getLocation());
-		pieces.put(p2.getLocation(), p1);
-		pieces.put(p1.getLocation(), p2);
-		p2.setIndex(p1.getIndex());
-		p2.setLocation(p1.getLocation());
-		p1.setLocation(tempPoint);
-		p1.setIndex(tempIndex);
-		this.add((JButton) p1, null, p1.getIndex());
-		this.add((JButton) p2, null, p2.getIndex());
-
+	private void swapPieces(AbstractPiece p1, AbstractPiece p2) {
+		Point point1 = p1.getLocation();
+		Point point2 = p2.getLocation();
+		this.remove(p1);
+		this.remove(p2);
+		p1.setLocation(point2);
+		p2.setLocation(point1);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		//c.weightx = 1;
+		//c.weighty = 1;
+		c.gridx = point1.x;
+		c.gridy = point1.y;
+		pieces[point1.x][point1.y] = p2;
+		this.add(p2, c);
+		c.gridx = point2.x;
+		c.gridy = point2.y;
+		pieces[point2.x][point2.y] = p1;
+		this.add(p1, c);
 		validate();
+		repaint();
 	}
 
-	private boolean isObject(IPiece p1, Object obj) {
+	/*private boolean isObject(IPiece p1, Object obj) {
 		return p1.getClass().equals(obj);
-	}
-
-	private void replaceInMap(IPiece piece) {
-		if (pieces.containsKey(piece.getLocation())) {
-			pieces.remove(piece.getLocation());
-		}
-		pieces.put(piece.getLocation(), piece);
 	}
 	
 	private boolean withinDistance(IPiece p1, IPiece p2) {
 		if (p1.getIndex() + 10 == p2.getIndex() || p1.getIndex() - 10 == p2.getIndex()) return true;
 		else if (p1.getIndex() + 1 == p2.getIndex() || p1.getIndex() - 1 == p2.getIndex()) return true;
 		return false;
-	}
+	}*/
 }
