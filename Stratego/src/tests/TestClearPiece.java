@@ -24,7 +24,7 @@ public class TestClearPiece {
 	@Test
 	public void testSetSelectedTrue() {
 		piece.setSelected(true);
-		Assert.assertFalse(piece.isSelected());
+		Assert.assertTrue(piece.isSelected());
 	}
 	
 	@Test
