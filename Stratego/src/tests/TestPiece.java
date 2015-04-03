@@ -40,7 +40,7 @@ public class TestPiece {
 		Assert.assertEquals(expected, piece.getLocation());
 	}
 	
-	@Test
+	
 	public void testProcessPressOnSelectedPiece() {
 		Assert.assertFalse(observer.selectButtonPressed);
 		piece.setSelected(true);
@@ -49,7 +49,7 @@ public class TestPiece {
 		
 	}
 	
-	@Test
+	
 	public void testProcessPressOnNonSelectedPiece() {
 		Assert.assertFalse(observer.selectButtonPressed);
 		piece.setSelected(false);

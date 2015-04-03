@@ -4,6 +4,9 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 
 public class Obstacle extends AbstractPiece {
+	
+	private Point location;
+	
 
 	@Override
 	public void setIndex(int index) {
@@ -55,14 +58,14 @@ public class Obstacle extends AbstractPiece {
 
 	@Override
 	public void setLocation(Point location) {
-		// TODO Auto-generated method stub
+		this.location = location;
 		
 	}
 
 	@Override
 	public Point getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.location;
 	}
 
 	@Override
