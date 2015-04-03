@@ -2,6 +2,7 @@ package tests;
 
 import game.AbstractPiece;
 import game.IPiece;
+import game.Soldier;
 
 import java.awt.Point;
 
@@ -20,11 +21,13 @@ public class TestBombPiece {
 		piece.setObserver(observer);
 	}
 	
+	@Test
 	public void testSetSelectedTrue() {
 		piece.setSelected(true);
 		Assert.assertTrue(piece.isSelected());
 	}
 	
+	@Test
 	public void testSetSelectedFalse() {
 		piece.setSelected(false);
 		Assert.assertFalse(piece.isSelected());

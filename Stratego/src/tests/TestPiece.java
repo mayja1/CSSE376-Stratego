@@ -2,6 +2,7 @@ package tests;
 
 import game.AbstractPiece;
 import game.IPiece;
+import game.Soldier;
 
 import java.awt.Point;
 
@@ -12,7 +13,7 @@ import org.junit.Test;
 
 public class TestPiece {
 
-	AbstractPiece piece;
+	AbstractPiece piece = new Soldier(0);
 	MockPieceObserver observer;
 	@Before
 	public void setup() {
@@ -20,15 +21,19 @@ public class TestPiece {
 		piece.setObserver(observer);
 	}
 	
+	@Test
 	public void testSetSelectedTrue() {
 		piece.setSelected(true);
 		Assert.assertTrue(piece.isSelected());
 	}
 	
+	@Test
 	public void testSetSelectedFalse() {
 		piece.setSelected(false);
 		Assert.assertFalse(piece.isSelected());
 	}
+	
+	@Test
 	public void testLocation() {
 		Point expected = new Point(2,3);
 		piece.setLocation(expected);

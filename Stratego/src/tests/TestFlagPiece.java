@@ -2,6 +2,7 @@ package tests;
 
 import game.AbstractPiece;
 import game.IPiece;
+import game.Soldier;
 
 import java.awt.Point;
 
@@ -20,15 +21,19 @@ public class TestFlagPiece {
 		piece.setObserver(observer);
 	}
 	
+	@Test
 	public void testSetSelectedTrue() {
 		piece.setSelected(true);
 		Assert.assertTrue(piece.isSelected());
 	}
 	
+	@Test
 	public void testSetSelectedFalse() {
 		piece.setSelected(false);
 		Assert.assertFalse(piece.isSelected());
 	}
+	
+	@Test
 	public void testLocation() {
 		Point expected = new Point(2,3);
 		piece.setLocation(expected);
@@ -49,7 +54,7 @@ public class TestFlagPiece {
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 		piece.setSelected(false);
 		piece.actionPerformed(null);
-		Assert.assertFalse(observer.nonSelectButtonPressed);
+		Assert.assertTrue(observer.nonSelectButtonPressed);
 	}
 	@After
 	public void tearDown() {

@@ -2,8 +2,6 @@ package tests;
 
 import game.AbstractPiece;
 import game.ClearPiece;
-import game.IPiece;
-
 import java.awt.Point;
 
 import org.junit.After;
@@ -13,8 +11,9 @@ import org.junit.Test;
 
 public class TestClearPiece {
 
-	AbstractPiece piece;
+	AbstractPiece piece = new ClearPiece();
 	MockPieceObserver observer;
+	
 	@Before
 	public void setup() {
 		piece = new ClearPiece();
@@ -22,15 +21,19 @@ public class TestClearPiece {
 		piece.setObserver(observer);
 	}
 	
+	@Test
 	public void testSetSelectedTrue() {
 		piece.setSelected(true);
 		Assert.assertTrue(piece.isSelected());
 	}
 	
+	@Test
 	public void testSetSelectedFalse() {
 		piece.setSelected(false);
 		Assert.assertFalse(piece.isSelected());
 	}
+	
+	@Test
 	public void testLocation() {
 		Point expected = new Point(2,3);
 		piece.setLocation(expected);
