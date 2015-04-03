@@ -60,7 +60,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 
 		IPiece nonSelected = pieces.get(gridLocation);
 
-		if (isObject(nonSelected, ClearPiece.class) && !isObject(selectedPiece, Dummy.class)) {
+		if (isObject(nonSelected, ClearPiece.class) && !isObject(selectedPiece, Dummy.class) && withinDistance(selectedPiece, nonSelected)) {
 			System.out.println(selectedPiece.getIndex());
 			selectedPiece.setSelected(false);
 			swapPieces(nonSelected, selectedPiece);
@@ -72,10 +72,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			((JButton) selectedPiece)
 					.setBorder(new LineBorder(Color.YELLOW, 5));
 			selectedPiece.setSelected(true);
-		} else {
-			// Do nothing
 		}
-		
 	}
 
 	private void swapPieces(IPiece p1, IPiece p2) {
@@ -104,5 +101,11 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			pieces.remove(piece.getLocation());
 		}
 		pieces.put(piece.getLocation(), piece);
+	}
+	
+	private boolean withinDistance(IPiece p1, IPiece p2) {
+		if (p1.getIndex() + 10 == p2.getIndex() || p1.getIndex() - 10 == p2.getIndex()) return true;
+		else if (p1.getIndex() + 1 == p2.getIndex() || p1.getIndex() - 1 == p2.getIndex()) return true;
+		return false;
 	}
 }
