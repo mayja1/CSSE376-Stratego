@@ -14,6 +14,7 @@ public class Soldier extends AbstractPiece {
 	private Point location = new Point();
 	private IPieceObserver observer;
 	private int rank;
+	private int boardIndex = 0;
 
 	public Soldier(int rank) {
 		setBackground(Color.BLUE);
@@ -62,10 +63,8 @@ public class Soldier extends AbstractPiece {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (selected) {
-			this.setBorder(new LineBorder(Color.GRAY, 1));
 			observer.selectedButtonPressed(location);
 		} else {
-			this.setBorder(new LineBorder(Color.YELLOW, 5));
 			observer.nonSelectedButtonPressed(location);
 		}
 	}
@@ -77,4 +76,16 @@ public class Soldier extends AbstractPiece {
 		}
 		return false;
 	}
+
+	@Override
+	public void setIndex(int index) {
+		this.boardIndex = index;	
+	}
+
+	@Override
+	public int getIndex() {
+		return boardIndex;
+	}
+	
+	
 }

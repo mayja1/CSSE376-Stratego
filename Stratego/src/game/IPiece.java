@@ -11,6 +11,8 @@ public interface IPiece {
 	public void setLocation(Point location);
 	public Point getLocation();
 	public boolean compareWith(IPiece piece);
+	public void setIndex(int index);
+	public int getIndex();
 //	/**
 //	 * Method called by the piece when it is pressed
 //	 */

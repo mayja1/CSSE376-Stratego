@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 
-public class ClearPiece extends AbstractPiece {
+public class Dummy extends AbstractPiece {
 	
 	private Point location = new Point();
 	private Boolean selected = false;
 	private IPieceObserver observer;
 	
-	public ClearPiece() {
+	public Dummy() {
 		addActionListener(this);
 		setBackground(Color.GREEN);
 	}
@@ -39,6 +39,7 @@ public class ClearPiece extends AbstractPiece {
 
 	@Override
 	public void setSelected(boolean selected) {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -62,7 +63,8 @@ public class ClearPiece extends AbstractPiece {
 
 	@Override
 	public Point getLocation() {
-		return location;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
