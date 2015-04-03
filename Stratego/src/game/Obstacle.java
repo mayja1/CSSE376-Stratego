@@ -27,11 +27,4 @@ public class Obstacle extends AbstractPiece {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public boolean compareWith(IPiece piece) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

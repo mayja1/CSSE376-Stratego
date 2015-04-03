@@ -27,9 +27,6 @@ public abstract class AbstractPiece extends JButton implements IPiece, ActionLis
 	public abstract void show();
 
 	@Override
-	public abstract boolean compareWith(IPiece piece);
-
-	@Override
 	public boolean isSelected() {
 		return selected;
 	}

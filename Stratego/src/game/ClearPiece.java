@@ -13,11 +13,6 @@ public class ClearPiece extends AbstractPiece {
 	}
 
 	@Override
-	public boolean compareWith(IPiece piece) {
-		return true;
-	}
-
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		observer.nonSelectedButtonPressed(location);
 	}

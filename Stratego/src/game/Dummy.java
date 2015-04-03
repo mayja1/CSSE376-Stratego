@@ -11,11 +11,6 @@ public class Dummy extends AbstractPiece {
 	}
 
 	@Override
-	public boolean compareWith(IPiece piece) {
-		return true;
-	}
-
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("TEST");
 		observer.nonSelectedButtonPressed(location);

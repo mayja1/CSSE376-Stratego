@@ -40,14 +40,5 @@ public class Soldier extends AbstractPiece {
 			observer.nonSelectedButtonPressed(location);
 		}
 	}
-
-	@Override
-	public boolean compareWith(IPiece piece) {
-		if (piece.getClass().equals(ClearPiece.class)) {
-			return true;
-		}
-		return false;
-	}
-	
 	
 }
