@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 public class GameBoard extends JPanel implements IPieceObserver {
 
+	public static enum User {PLAYER1, PLAYER2};
 	private static final Dimension PIECE_SIZE = new Dimension(80, 80);
 	private AbstractPiece[][] pieces;
 	private AbstractPiece selectedPiece;

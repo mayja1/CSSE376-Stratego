@@ -1,6 +1,8 @@
 package tests;
 
+import static org.junit.Assert.*;
 import game.AbstractPiece;
+import game.GameBoard.User;
 import game.IPiece;
 import game.Soldier;
 
@@ -59,8 +61,8 @@ public class TestPiece {
 	
 	@Test
 	public void testUserForPiece() {
-		piece.setUser(User.Player1);
-		assertEquals(piece.getUser(), User.Player1);
+		piece.setOwner(User.PLAYER1);
+		assertEquals(piece.getOwner(), User.PLAYER1);
 	}
 	
 	@After

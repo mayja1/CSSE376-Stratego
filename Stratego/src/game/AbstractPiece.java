@@ -1,5 +1,7 @@
 package game;
 
+import game.GameBoard.User;
+
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,7 @@ public abstract class AbstractPiece extends JButton implements IPiece, ActionLis
 	protected IPieceObserver observer;
 	protected int rank;
 	protected int boardIndex = 0;
+	protected User owner;
 
 	@Override
 	public abstract void actionPerformed(ActionEvent e);
@@ -46,5 +49,15 @@ public abstract class AbstractPiece extends JButton implements IPiece, ActionLis
 	public Point getLocation() {
 		return this.location;
 	} 
+	
+	@Override
+	public User getOwner() {
+		return owner;
+	}
+
+	@Override
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
 
 }

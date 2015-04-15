@@ -1,5 +1,7 @@
 package game;
 
+import game.GameBoard.User;
+
 import java.awt.Point;
 
 public interface IPiece {
@@ -10,6 +12,8 @@ public interface IPiece {
 	public void setObserver(IPieceObserver observer);
 	public void setLocation(Point location);
 	public Point getLocation();
+	public User getOwner();
+	public void setOwner(User owner);
 //	/**
 //	 * Method called by the piece when it is pressed
 //	 */
