@@ -56,6 +56,13 @@ public class TestPiece {
 		piece.actionPerformed(null);
 		Assert.assertTrue(observer.nonSelectButtonPressed);
 	}
+	
+	@Test
+	public void testUserForPiece() {
+		piece.setUser(User.Player1);
+		assertEquals(piece.getUser(), User.Player1);
+	}
+	
 	@After
 	public void tearDown() {
 		piece = null;
