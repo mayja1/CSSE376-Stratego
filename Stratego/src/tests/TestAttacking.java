@@ -53,5 +53,18 @@ public class TestAttacking {
 		game.attack(s1, s2);
 		assertEquals(new Point(1, 1), s1.getLocation());
 	}
+	
+	@Test
+	public void TestRemovePieceAfterLosing() {
+		AbstractPiece s1 = new Soldier(5);
+		s1.setOwner(User.PLAYER1);
+		s1.setLocation(new Point(0, 1));
+		AbstractPiece s2 = new Soldier(6);
+		s2.setOwner(User.PLAYER2);
+		s2.setLocation(new Point(1, 1));
+		game.attack(s1, s2);
+		assertEquals(new Point(1, 1), s1.getLocation());
+		assertEquals(new Point(0, 1), s2.getLocation());
+	}
 
 }
