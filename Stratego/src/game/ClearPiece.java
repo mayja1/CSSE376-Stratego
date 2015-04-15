@@ -1,5 +1,7 @@
 package game;
 
+import game.GameBoard.User;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 
@@ -42,6 +44,16 @@ public class ClearPiece extends AbstractPiece {
 	public void show() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void setOwner(User u) {
+		this.owner = null;
+	}
+	
+	@Override
+	public User getOwner() {
+		return null;
 	}
 
 }
