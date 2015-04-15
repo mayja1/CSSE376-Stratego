@@ -41,5 +41,17 @@ public class TestAttacking {
 		s2.setOwner(User.PLAYER2);
 		assertEquals("PLAYER1 tied PLAYER2", game.attack(s1, s2));
 	}
+	
+	@Test
+	public void TestGetNewLocationAfterWin() {
+		AbstractPiece s1 = new Soldier(6);
+		s1.setOwner(User.PLAYER1);
+		s1.setLocation(new Point(0, 1));
+		AbstractPiece s2 = new Soldier(5);
+		s2.setOwner(User.PLAYER2);
+		s2.setLocation(new Point(1, 1));
+		game.attack(s1, s2);
+		assertEquals(s2.getLocation(), s1.getLocation());
+	}
 
 }
