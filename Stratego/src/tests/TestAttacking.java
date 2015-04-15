@@ -51,7 +51,7 @@ public class TestAttacking {
 		s2.setOwner(User.PLAYER2);
 		s2.setLocation(new Point(1, 1));
 		game.attack(s1, s2);
-		assertEquals(s2.getLocation(), s1.getLocation());
+		assertEquals(new Point(1, 1), s1.getLocation());
 	}
 
 }

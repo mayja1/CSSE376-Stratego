@@ -128,6 +128,8 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	
 	public String attack(AbstractPiece p1, AbstractPiece p2) {
 		if (p1.rank > p2.rank) {
+			swapPieces(p1, p2);
+			removePiece(p2);
 			return p1.getOwner() + " beat " + p2.getOwner();
 		} else if (p1.rank < p2.rank) {
 			return p2.getOwner() + " beat " + p1.getOwner();
@@ -135,5 +137,25 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			return p1.getOwner() + " tied " + p2.getOwner();
 		}
 		return "Error: case not handled";
+	}
+	
+	private void removePiece(AbstractPiece p) {
+		AbstractPiece clear = new ClearPiece();
+		clear.setLocation(p.getLocation());
+		clear.setPreferredSize(PIECE_SIZE);
+		clear.setObserver(this);
+		Point point1 = p.getLocation();
+		Point point2 = clear.getLocation();
+		this.remove(p);
+		p.setLocation(point2);
+		clear.setLocation(point1);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = point1.x;
+		c.gridy = point1.y;
+		pieces[point1.x][point1.y] = clear;
+		this.add(clear, c);
+		validate();
+		repaint();
 	}
 }
