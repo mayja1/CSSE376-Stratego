@@ -10,6 +10,7 @@ import org.junit.Test;
 import game.AbstractPiece;
 import game.IPiece;
 import game.Obstacle;
+import game.GameBoard.User;
 
 //Test that this piece doesn't do anything
 public class TestObstaclePiece {
@@ -57,6 +58,14 @@ public class TestObstaclePiece {
 		piece.actionPerformed(null);
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 	}
+	
+	@Test
+	public void testOwnerIsNullForObstaclePiece() {
+		Assert.assertNull(piece.getOwner());
+		piece.setOwner(User.PLAYER1);
+		Assert.assertNull(piece.getOwner());
+	}
+	
 	@After
 	public void tearDown() {
 		piece = null;
