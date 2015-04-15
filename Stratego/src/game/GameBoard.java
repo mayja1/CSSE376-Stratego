@@ -125,4 +125,8 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		validate();
 		repaint();
 	}
+	
+	public int attack(AbstractPiece p1, AbstractPiece p2) {
+		return 5;
+	}
 }
