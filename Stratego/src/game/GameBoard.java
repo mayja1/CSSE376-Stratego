@@ -127,6 +127,13 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	}
 	
 	public String attack(AbstractPiece p1, AbstractPiece p2) {
-		return "";
+		if (p1.rank > p2.rank) {
+			return p1.getOwner() + " beat " + p2.getOwner();
+		} else if (p1.rank < p2.rank) {
+			return p2.getOwner() + " beat " + p1.getOwner();
+		} else if (p1.rank == p2.rank) {
+			return p1.getOwner() + " tied " + p2.getOwner();
+		}
+		return "Error: case not handled";
 	}
 }
