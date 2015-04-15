@@ -10,6 +10,7 @@ import org.junit.runners.Suite;
 			TestClearPiece.class,
 			TestFlagPiece.class,
 			TestObstaclePiece.class,
+			TestAttacking.class,
 			TestPiece.class
 		})
 public class AllTests {
