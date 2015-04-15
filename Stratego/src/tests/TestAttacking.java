@@ -18,21 +18,21 @@ public class TestAttacking {
 	public void TestAttackLowerRank() {
 		AbstractPiece s1 = new Soldier(5);
 		AbstractPiece s2 = new Soldier(6);
-		assertEquals(-1, game.attack(s1, s2));
+		assertEquals("Player1's soldier beat Player2's soldier", game.attack(s1, s2));
 	}
 	
 	@Test
 	public void TestAttackHigherRank() {
 		AbstractPiece s1 = new Soldier(6);
 		AbstractPiece s2 = new Soldier(5);
-		assertEquals(1, game.attack(s1, s2));
+		assertEquals("Player2's soldier beat Player1's soldier", game.attack(s1, s2));
 	}
 	
 	@Test
 	public void TestAttackSameRank() {
 		AbstractPiece s1 = new Soldier(5);
 		AbstractPiece s2 = new Soldier(5);
-		assertEquals(0, game.attack(s1, s2));
+		assertEquals("Player1's soldier tied Player2's soldier", game.attack(s1, s2));
 	}
 
 }
