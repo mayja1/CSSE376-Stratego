@@ -132,6 +132,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			removePiece(p2);
 			return p1.getOwner() + " beat " + p2.getOwner();
 		} else if (p1.rank < p2.rank) {
+			removePiece(p1);
 			return p2.getOwner() + " beat " + p1.getOwner();
 		} else if (p1.rank == p2.rank) {
 			return p1.getOwner() + " tied " + p2.getOwner();
@@ -145,9 +146,8 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		clear.setPreferredSize(PIECE_SIZE);
 		clear.setObserver(this);
 		Point point1 = p.getLocation();
-		Point point2 = clear.getLocation();
 		this.remove(p);
-		p.setLocation(point2);
+		p.setLocation(null);
 		clear.setLocation(point1);
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
