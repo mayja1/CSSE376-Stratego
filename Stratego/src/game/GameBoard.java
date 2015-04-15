@@ -135,6 +135,8 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			removePiece(p1);
 			return p2.getOwner() + " beat " + p1.getOwner();
 		} else if (p1.rank == p2.rank) {
+			removePiece(p1);
+			removePiece(p2);
 			return p1.getOwner() + " tied " + p2.getOwner();
 		}
 		return "Error: case not handled";
