@@ -2,6 +2,8 @@ package tests;
 
 import game.AbstractPiece;
 import game.ClearPiece;
+import game.GameBoard.User;
+
 import java.awt.Point;
 
 import org.junit.After;
@@ -55,6 +57,13 @@ public class TestClearPiece {
 		piece.setSelected(false);
 		piece.actionPerformed(null);
 		Assert.assertFalse(observer.nonSelectButtonPressed);
+	}
+	
+	@Test
+	public void testOwnerIsNullForClearPiece() {
+		Assert.assertNull(piece.getOwner());
+		piece.setOwner(User.PLAYER1);
+		Assert.assertNull(piece.getOwner());
 	}
 	@After
 	public void tearDown() {
