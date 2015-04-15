@@ -35,9 +35,14 @@ public class GameBoard extends JPanel implements IPieceObserver {
 				
 			}
 		}
-		for (int i = 3; i < 7; i++) {
+		for (int i = 0; i < 10; i++) {
 			Point p = new Point(i, 0);
 			AbstractPiece s = new Soldier(i);
+			if (i % 2 == 0) {
+				s.setOwner(User.PLAYER1);
+			} else {
+				s.setOwner(User.PLAYER2);
+			}
 			s.setPreferredSize(PIECE_SIZE);
 			s.setLocation(p);
 			s.setObserver(this);
@@ -55,6 +60,8 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		if(selectedPiece !=null) {
 			if(selectedPiece.equals(pieces[gridLocation.x][gridLocation.y])) {
 				selectedPiece.setSelected(false);
+			} else if (isEnemey(selectedPiece, pieces[gridLocation.x][gridLocation.y])) {
+				attack(selectedPiece, pieces[gridLocation.x][gridLocation.y]);
 			} else {
 				swapPieces(selectedPiece, pieces[gridLocation.x][gridLocation.y]);
 			}
@@ -65,6 +72,10 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			}
 		}
 		selectedPiece = null;
+	}
+
+	private boolean isEnemey(AbstractPiece p1, AbstractPiece p2) {
+		return !(p1.getOwner().equals(p2.getOwner())) && p2.getOwner() != null;
 	}
 
 	@Override
@@ -79,27 +90,27 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		nonSelected.setSelected(true);
 		int x = nonSelected.getLocation().x;
 		int y = nonSelected.getLocation().y;
-		if (x < 10) {
+		if (x < 9) {
 			AbstractPiece piece = pieces[x + 1][y];
-			if(piece instanceof ClearPiece) {
+			if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
 				piece.setSelected(true);
 			}	
 		}
 		if (x > 0) {
 			AbstractPiece piece = pieces[x - 1][y];
-			if(piece instanceof ClearPiece) {
+			if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
 				piece.setSelected(true);
 			}	
 		}
 		if (y > 0) {
 			AbstractPiece piece = pieces[x][y - 1];
-			if(piece instanceof ClearPiece) {
+			if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
 				piece.setSelected(true);
 			}	
 		}
-		if (y < 10) {
+		if (y < 9) {
 			AbstractPiece piece = pieces[x][y + 1];
-			if(piece instanceof ClearPiece) {
+			if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
 				piece.setSelected(true);
 			}	
 		}
