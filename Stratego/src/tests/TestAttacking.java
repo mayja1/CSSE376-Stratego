@@ -89,10 +89,22 @@ public class TestAttacking {
 		AbstractPiece s2 = new Bomb();
 		s2.setOwner(User.PLAYER2);
 		s2.setLocation(new Point (1, 1));
+		game.attack(s2, s1);
+		assertEquals(null, s1.getLocation());
+		assertEquals(null, s2.getLocation());
+	}
+	
+	@Test
+	public void TestRemovePieceOnlyAttackingEnemyBomb() {
+		AbstractPiece s1 = new Soldier(5);
+		s1.setOwner(User.PLAYER1);
+		s1.setLocation(new Point (0, 1));
+		AbstractPiece s2 = new Bomb();
+		s2.setOwner(User.PLAYER2);
+		s2.setLocation(new Point (1, 1));
 		game.attack(s1, s2);
 		assertEquals(null, s1.getLocation());
 		assertEquals(null, s2.getLocation());
-		
 	}
 
 }
