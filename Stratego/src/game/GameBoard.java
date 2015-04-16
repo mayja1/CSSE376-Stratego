@@ -107,33 +107,35 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			}
 		}
 		AbstractPiece nonSelected = pieces[gridLocation.x][gridLocation.y];
-		this.selectedPiece = nonSelected;
-		nonSelected.setSelected(true);
-		int x = nonSelected.getLocation().x;
-		int y = nonSelected.getLocation().y;
-		if (x < 9) {
-			AbstractPiece piece = pieces[x + 1][y];
-			if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
-				piece.setSelected(true);
-			}	
-		}
-		if (x > 0) {
-			AbstractPiece piece = pieces[x - 1][y];
-			if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
-				piece.setSelected(true);
-			}	
-		}
-		if (y > 0) {
-			AbstractPiece piece = pieces[x][y - 1];
-			if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
-				piece.setSelected(true);
-			}	
-		}
-		if (y < 9) {
-			AbstractPiece piece = pieces[x][y + 1];
-			if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
-				piece.setSelected(true);
-			}	
+		if (!(nonSelected instanceof Bomb)) {
+			this.selectedPiece = nonSelected;
+			nonSelected.setSelected(true);
+			int x = nonSelected.getLocation().x;
+			int y = nonSelected.getLocation().y;
+			if (x < 9) {
+				AbstractPiece piece = pieces[x + 1][y];
+				if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
+					piece.setSelected(true);
+				}	
+			}
+			if (x > 0) {
+				AbstractPiece piece = pieces[x - 1][y];
+				if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
+					piece.setSelected(true);
+				}	
+			}
+			if (y > 0) {
+				AbstractPiece piece = pieces[x][y - 1];
+				if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
+					piece.setSelected(true);
+				}	
+			}
+			if (y < 9) {
+				AbstractPiece piece = pieces[x][y + 1];
+				if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
+					piece.setSelected(true);
+				}	
+			}
 		}
 	}
 
