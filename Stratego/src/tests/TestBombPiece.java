@@ -53,7 +53,7 @@ public class TestBombPiece {
 		
 	}
 	
-	
+	@Test
 	public void testProcessPressOnNonSelectedPiece() {
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 		piece.setSelected(false);
