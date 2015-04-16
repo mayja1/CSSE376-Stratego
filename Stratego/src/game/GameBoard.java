@@ -159,7 +159,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	}
 	
 	public String attack(AbstractPiece p1, AbstractPiece p2) {
-		if (p1 instanceof Bomb || p2 instanceof Bomb) {
+		if (p2 instanceof Bomb) {
 			removePiece(p1);
 			removePiece(p2);
 			return "A bomb has exploded!";
