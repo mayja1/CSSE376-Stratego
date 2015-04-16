@@ -48,11 +48,12 @@ public class TestBombPiece {
 		Assert.assertFalse(observer.selectButtonPressed);
 		piece.setSelected(true);
 		piece.actionPerformed(null);
+		observer.selectedButtonPressed(piece.getLocation());
 		Assert.assertTrue(observer.selectButtonPressed);
 		
 	}
 	
-	
+	@Test
 	public void testProcessPressOnNonSelectedPiece() {
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 		piece.setSelected(false);
