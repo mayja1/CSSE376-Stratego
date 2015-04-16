@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class TestAttacking {
 	
-	private GameBoard game = new GameBoard();
+	private GameBoard game = new GameBoard(User.PLAYER1);
 
 	@Test
 	public void TestAttackLowerRank() {

@@ -1,9 +1,11 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
+
 import javax.swing.JPanel;
 
 public class GameBoard extends JPanel implements IPieceObserver {
@@ -13,9 +15,11 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	private AbstractPiece[][] pieces;
 	private AbstractPiece selectedPiece;
 	private GridBagLayout layout;
+	private User owner;
 
-	public GameBoard() {
+	public GameBoard(User owner) {
 		super();
+		this.owner = owner;
 		pieces = new AbstractPiece[10][10];
 		layout = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
@@ -42,6 +46,9 @@ public class GameBoard extends JPanel implements IPieceObserver {
 				s.setOwner(User.PLAYER1);
 			} else {
 				s.setOwner(User.PLAYER2);
+			}
+			if(s.getOwner() != this.owner) {
+				s.setBackground(Color.RED);
 			}
 			s.setPreferredSize(PIECE_SIZE);
 			s.setLocation(p);
@@ -107,6 +114,9 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			}
 		}
 		AbstractPiece nonSelected = pieces[gridLocation.x][gridLocation.y];
+		if(nonSelected.getOwner() != this.owner) {
+			return;
+		}
 		if (!(nonSelected instanceof Bomb)) {
 			this.selectedPiece = nonSelected;
 			nonSelected.setSelected(true);
