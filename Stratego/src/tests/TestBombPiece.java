@@ -48,7 +48,7 @@ public class TestBombPiece {
 		Assert.assertFalse(observer.selectButtonPressed);
 		piece.setSelected(true);
 		piece.actionPerformed(null);
-		observer.nonSelectedButtonPressed(piece.getLocation());
+		observer.selectedButtonPressed(piece.getLocation());
 		Assert.assertTrue(observer.selectButtonPressed);
 		
 	}
