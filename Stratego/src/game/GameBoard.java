@@ -53,6 +53,26 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			this.add(s, c);
 			s.validate();
 		}
+		
+		//Initializing bomb for each player
+		for (int i = 0; i < 2; i++) {
+			AbstractPiece b = new Bomb();
+			Point p = new Point(i + 2, 2);
+			if (i % 2 == 0){
+				b.setOwner(User.PLAYER1);
+			} else {
+				b.setOwner(User.PLAYER2);
+			}
+			b.setPreferredSize(PIECE_SIZE);
+			b.setLocation(p);
+			b.setObserver(this);
+			this.remove(pieces[i + 2][2]);
+			pieces[i + 2][2] = b;
+			c.gridx = i + 2;
+			c.gridy = 2;
+			this.add(b, c);
+			b.validate();
+		}		
 	}
 
 	@Override
@@ -61,6 +81,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			if(selectedPiece.equals(pieces[gridLocation.x][gridLocation.y])) {
 				selectedPiece.setSelected(false);
 			} else if (isEnemey(selectedPiece, pieces[gridLocation.x][gridLocation.y])) {
+				System.out.println("Test");
 				attack(selectedPiece, pieces[gridLocation.x][gridLocation.y]);
 			} else {
 				swapPieces(selectedPiece, pieces[gridLocation.x][gridLocation.y]);
