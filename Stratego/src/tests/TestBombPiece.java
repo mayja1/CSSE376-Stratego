@@ -1,9 +1,11 @@
 package tests;
 
+import static org.junit.Assert.assertEquals;
 import game.AbstractPiece;
 import game.Bomb;
 import game.IPiece;
 import game.Soldier;
+import game.GameBoard.User;
 
 import java.awt.Point;
 
@@ -33,13 +35,15 @@ public class TestBombPiece {
 		piece.setSelected(false);
 		Assert.assertFalse(piece.isSelected());
 	}
+	
+	@Test
 	public void testLocation() {
 		Point expected = new Point(2,3);
 		piece.setLocation(expected);
 		Assert.assertEquals(expected, piece.getLocation());
 	}
 	
-	
+	@Test
 	public void testProcessPressOnSelectedPiece() {
 		Assert.assertFalse(observer.selectButtonPressed);
 		piece.setSelected(true);
@@ -55,6 +59,13 @@ public class TestBombPiece {
 		piece.actionPerformed(null);
 		Assert.assertFalse(observer.nonSelectButtonPressed);
 	}
+	
+	@Test
+	public void testUserForPiece() {
+		piece.setOwner(User.PLAYER2);
+		assertEquals(piece.getOwner(), User.PLAYER2);
+	}
+	
 	@After
 	public void tearDown() {
 		piece = null;
