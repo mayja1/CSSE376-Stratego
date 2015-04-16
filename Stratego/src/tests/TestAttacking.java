@@ -89,7 +89,7 @@ public class TestAttacking {
 		AbstractPiece s2 = new Bomb();
 		s2.setOwner(User.PLAYER2);
 		s2.setLocation(new Point (1, 1));
-		game.attack(s2, s1);
+		game.attack(s1, s2);
 		assertEquals(null, s1.getLocation());
 		assertEquals(null, s2.getLocation());
 	}
@@ -102,7 +102,7 @@ public class TestAttacking {
 		AbstractPiece s2 = new Bomb();
 		s2.setOwner(User.PLAYER2);
 		s2.setLocation(new Point (1, 1));
-		game.attack(s2, s1);
+		game.attack(s1, s2);
 		assertEquals(new Point(1, 1), s1.getLocation());
 		assertEquals(null, s2.getLocation());
 	}
