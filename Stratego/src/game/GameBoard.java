@@ -88,7 +88,6 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			if(selectedPiece.equals(pieces[gridLocation.x][gridLocation.y])) {
 				selectedPiece.setSelected(false);
 			} else if (isEnemey(selectedPiece, pieces[gridLocation.x][gridLocation.y])) {
-				System.out.println("Test");
 				attack(selectedPiece, pieces[gridLocation.x][gridLocation.y]);
 			} else {
 				swapPieces(selectedPiece, pieces[gridLocation.x][gridLocation.y]);
@@ -117,36 +116,35 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		if(nonSelected.getOwner() != this.owner) {
 			return;
 		}
-		if (!(nonSelected instanceof Bomb)) {
 			this.selectedPiece = nonSelected;
 			nonSelected.setSelected(true);
 			int x = nonSelected.getLocation().x;
 			int y = nonSelected.getLocation().y;
 			if (x < 9) {
 				AbstractPiece piece = pieces[x + 1][y];
-				if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
+				if(selectedPiece.getOwner() != piece.getOwner()) {
 					piece.setSelected(true);
 				}	
 			}
 			if (x > 0) {
 				AbstractPiece piece = pieces[x - 1][y];
-				if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
+				if(selectedPiece.getOwner() != piece.getOwner()) {
 					piece.setSelected(true);
 				}	
 			}
 			if (y > 0) {
 				AbstractPiece piece = pieces[x][y - 1];
-				if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
+				if(selectedPiece.getOwner() != piece.getOwner()) {
 					piece.setSelected(true);
 				}	
 			}
 			if (y < 9) {
 				AbstractPiece piece = pieces[x][y + 1];
-				if(piece instanceof ClearPiece || selectedPiece.getOwner() != piece.getOwner()) {
+				if(selectedPiece.getOwner() != piece.getOwner()) {
 					piece.setSelected(true);
 				}	
 			}
-		}
+		
 	}
 
 	private void swapPieces(AbstractPiece p1, AbstractPiece p2) {
