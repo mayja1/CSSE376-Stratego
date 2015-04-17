@@ -9,7 +9,8 @@ import javax.swing.border.LineBorder;
 public class Bomb extends AbstractPiece{
 	
 	public Bomb() {
-		setBackground(Color.BLACK);
+		setText("Bomb");
+		setBackground(Color.GREEN);
 		this.rank = rank;
 		addActionListener(this);
 	}

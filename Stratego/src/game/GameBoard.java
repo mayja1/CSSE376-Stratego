@@ -70,6 +70,9 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			} else {
 				b.setOwner(User.PLAYER2);
 			}
+			if(b.owner != this.owner) {
+				b.setBackground(Color.RED);
+			}
 			b.setPreferredSize(PIECE_SIZE);
 			b.setLocation(p);
 			b.setObserver(this);
