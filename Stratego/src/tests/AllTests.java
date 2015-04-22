@@ -11,6 +11,7 @@ import org.junit.runners.Suite;
 			TestFlagPiece.class,
 			TestObstaclePiece.class,
 			TestAttacking.class,
+			TestPieceFactory.class,
 			TestPiece.class
 		})
 public class AllTests {
