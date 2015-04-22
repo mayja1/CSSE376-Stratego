@@ -63,8 +63,9 @@ public class PieceFactory {
 	}
 
 	public static AbstractPiece createMiner() {
-		// TODO Auto-generated method stub
-		return null;
+		AbstractPiece soldier = new Soldier(2);
+		soldier.setName("Miner");
+		return soldier;
 	}
 
 	public static AbstractPiece createScout() {
