@@ -27,7 +27,9 @@ public class PieceFactory {
 	}
 	
 	public static IPiece createGeneral() {
-		return null;
+		AbstractPiece soldier = new Soldier(9);
+		soldier.setName("General");
+		return soldier;
 	}
 	
 	public static IPiece createColonel() {
@@ -37,7 +39,5 @@ public class PieceFactory {
 	public static IPiece createMajor() {
 		return null;
 	}
-	
-	
 
 }
