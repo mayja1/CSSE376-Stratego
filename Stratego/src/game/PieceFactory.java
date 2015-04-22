@@ -21,7 +21,9 @@ public class PieceFactory {
 	}
 	
 	public static IPiece createMarshall() {
-		return null;
+		AbstractPiece soldier = new Soldier(10);
+		soldier.setName("Marshall");
+		return soldier;
 	}
 	
 	
