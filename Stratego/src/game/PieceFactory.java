@@ -3,7 +3,9 @@ package game;
 public class PieceFactory {
 	
 	public static IPiece createBomb() {
-		return null;
+		AbstractPiece bomb = new Bomb();
+		bomb.setName("bomb");
+		return bomb;
 	}
 
 }
