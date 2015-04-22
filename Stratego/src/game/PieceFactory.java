@@ -15,51 +15,61 @@ public class PieceFactory {
 	}
 	
 	public static IPiece createSpy() {
-		AbstractPiece spy = new Soldier(1);
+		AbstractPiece spy = new Soldier(0);
 		spy.setName("Spy");
 		return spy;
 	}
 	
 	public static IPiece createMarshall() {
-		AbstractPiece soldier = new Soldier(10);
+		AbstractPiece soldier = new Soldier(9);
 		soldier.setName("Marshall");
 		return soldier;
 	}
 	
 	public static IPiece createGeneral() {
-		AbstractPiece soldier = new Soldier(9);
+		AbstractPiece soldier = new Soldier(8);
 		soldier.setName("General");
 		return soldier;
 	}
 	
 	public static IPiece createColonel() {
-		AbstractPiece soldier = new Soldier(8);
+		AbstractPiece soldier = new Soldier(7);
 		soldier.setName("Colonel");
 		return soldier;
 	}
 	
 	public static IPiece createMajor() {
-		AbstractPiece soldier = new Soldier(7);
+		AbstractPiece soldier = new Soldier(6);
 		soldier.setName("Major");
 		return soldier;
 	}
 
 	public static AbstractPiece createCaptain() {
-		AbstractPiece soldier = new Soldier(6);
+		AbstractPiece soldier = new Soldier(5);
 		soldier.setName("Captain");
 		return soldier;
 	}
 
 	public static AbstractPiece createLieutenant() {
-		AbstractPiece soldier = new Soldier(5);
+		AbstractPiece soldier = new Soldier(4);
 		soldier.setName("Lieutenant");
 		return soldier;
 	}
 
 	public static AbstractPiece createSergeant() {
-		AbstractPiece soldier = new Soldier(4);
+		AbstractPiece soldier = new Soldier(3);
 		soldier.setName("Sergeant");
 		return soldier;
+	}
+
+	public static AbstractPiece createMiner() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static AbstractPiece createScout() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
