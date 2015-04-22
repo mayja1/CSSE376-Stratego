@@ -9,7 +9,9 @@ public class PieceFactory {
 	}
 	
 	public static IPiece createFlag() {
-		return null;
+		AbstractPiece flag = new Flag();
+		flag.setName("Flag");
+		return flag;
 	}
 	
 	public static IPiece createSpy() {
