@@ -40,5 +40,29 @@ public class TestPieceFactory {
 		assertEquals("Marshall", soldier.getName());
 		assertEquals(10, soldier.getRank());
 	}
+	
+	@Test
+	public void testCreateGeneral() {
+		AbstractPiece soldier = (AbstractPiece) PieceFactory.createGeneral();
+		assertTrue(soldier instanceof Soldier);
+		assertEquals("General", soldier.getName());
+		assertEquals(9, soldier.getRank());
+	}
+	
+	@Test
+	public void testCreateColonel() {
+		AbstractPiece soldier = (AbstractPiece) PieceFactory.createColonel();
+		assertTrue(soldier instanceof Soldier);
+		assertEquals("Colonel", soldier.getName());
+		assertEquals(8, soldier.getRank());
+	}
+	
+	@Test
+	public void testCreateMajor() {
+		AbstractPiece soldier = (AbstractPiece) PieceFactory.createMajor();
+		assertTrue(soldier instanceof Soldier);
+		assertEquals("Major", soldier.getName());
+		assertEquals(7, soldier.getRank());
+	}
 
 }

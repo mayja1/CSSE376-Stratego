@@ -26,6 +26,18 @@ public class PieceFactory {
 		return soldier;
 	}
 	
+	public static IPiece createGeneral() {
+		return null;
+	}
+	
+	public static IPiece createColonel() {
+		return null;
+	}
+	
+	public static IPiece createMajor() {
+		return null;
+	}
+	
 	
 
 }
