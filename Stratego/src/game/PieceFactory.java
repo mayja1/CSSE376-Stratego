@@ -15,11 +15,15 @@ public class PieceFactory {
 	}
 	
 	public static IPiece createSpy() {
-		return null;
+		AbstractPiece spy = new Soldier(1);
+		spy.setName("Spy");
+		return spy;
 	}
 	
 	public static IPiece createMarshall() {
 		return null;
 	}
+	
+	
 
 }
