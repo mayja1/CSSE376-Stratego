@@ -44,4 +44,16 @@ public class PieceFactory {
 		return soldier;
 	}
 
+	public static AbstractPiece createCaptain() {
+		return null;
+	}
+
+	public static AbstractPiece createLieutenant() {
+		return null;
+	}
+
+	public static AbstractPiece createSergeant() {
+		return null;
+	}
+
 }
