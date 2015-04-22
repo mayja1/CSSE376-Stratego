@@ -51,7 +51,9 @@ public class PieceFactory {
 	}
 
 	public static AbstractPiece createLieutenant() {
-		return null;
+		AbstractPiece soldier = new Soldier(5);
+		soldier.setName("Lieutenant");
+		return soldier;
 	}
 
 	public static AbstractPiece createSergeant() {
