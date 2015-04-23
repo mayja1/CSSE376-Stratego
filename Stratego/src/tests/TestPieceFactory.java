@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 import game.AbstractPiece;
 import game.Bomb;
+import game.ClearPiece;
 import game.Flag;
 import game.PieceFactory;
 import game.Soldier;
@@ -77,7 +78,7 @@ public class TestPieceFactory {
 	public void testCreateLieutenant() {
 		AbstractPiece soldier = (AbstractPiece) PieceFactory.createLieutenant();
 		assertTrue(soldier instanceof Soldier);
-		assertEquals("Lieutenant", soldier.getName());
+		assertEquals("Lieut", soldier.getName());
 		assertEquals(4, soldier.getRank());
 	}
 	
@@ -103,6 +104,14 @@ public class TestPieceFactory {
 		assertTrue(soldier instanceof Soldier);
 		assertEquals("Scout", soldier.getName());
 		assertEquals(1, soldier.getRank());
+	}
+	
+	@Test
+	public void testCreateClearPiece() {
+		AbstractPiece soldier = (AbstractPiece) PieceFactory.createClearPiece();
+		assertTrue(soldier instanceof ClearPiece);
+		assertEquals(null, soldier.getName());
+		assertEquals(null, soldier.getRank());
 	}
 
 }

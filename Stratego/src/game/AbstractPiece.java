@@ -63,6 +63,7 @@ public abstract class AbstractPiece extends JButton implements IPiece, ActionLis
 	
 	public void setName(String name) {
 		this.name = name;
+		this.setText("" + name + " " + "(" + rank + ")");
 	}
 	
 	public String getName() {

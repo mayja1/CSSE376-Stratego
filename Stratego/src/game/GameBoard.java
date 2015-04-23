@@ -41,7 +41,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		}
 		for (int i = 0; i < 10; i++) {
 			Point p = new Point(i, 0);
-			AbstractPiece s = new Soldier(i);
+			AbstractPiece s = PieceFactory.createLieutenant();
 			if (i % 2 == 0) {
 				s.setOwner(User.PLAYER1);
 			} else {

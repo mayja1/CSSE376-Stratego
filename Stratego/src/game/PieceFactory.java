@@ -8,6 +8,10 @@ public class PieceFactory {
 		return bomb;
 	}
 	
+	public static IPiece createClearPiece() {
+		return null;
+	}
+	
 	public static IPiece createFlag() {
 		AbstractPiece flag = new Flag();
 		flag.setName("Flag");
@@ -52,7 +56,7 @@ public class PieceFactory {
 
 	public static AbstractPiece createLieutenant() {
 		AbstractPiece soldier = new Soldier(4);
-		soldier.setName("Lieutenant");
+		soldier.setName("Lieut");
 		return soldier;
 	}
 
