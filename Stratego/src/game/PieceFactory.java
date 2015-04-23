@@ -9,7 +9,7 @@ public class PieceFactory {
 	}
 	
 	public static IPiece createClearPiece() {
-		return null;
+		return new ClearPiece();
 	}
 	
 	public static IPiece createFlag() {

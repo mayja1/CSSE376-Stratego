@@ -111,7 +111,7 @@ public class TestPieceFactory {
 		AbstractPiece soldier = (AbstractPiece) PieceFactory.createClearPiece();
 		assertTrue(soldier instanceof ClearPiece);
 		assertEquals(null, soldier.getName());
-		assertEquals(null, soldier.getRank());
+		assertEquals(0, soldier.getRank());
 	}
 
 }

@@ -27,7 +27,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		this.setLayout(layout);
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				AbstractPiece button = new ClearPiece();
+				AbstractPiece button = (AbstractPiece) PieceFactory.createClearPiece();
 				button.setPreferredSize(PIECE_SIZE);
 				button.setLocation(new Point(i, j));
 				button.setObserver(this);
