@@ -48,6 +48,14 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			this.addPiece(i, 0, s);
 			
 		}
+		AbstractPiece s = PieceFactory.createScout();
+		s.setOwner(User.PLAYER1);
+		
+		if(s.getOwner() != this.owner) {
+			s.setBackground(Color.RED);
+		}
+		this.remove(pieces[0][0]);
+		this.addPiece(0, 0, s);
 		
 		//Initializing bomb for each player
 		for (int i = 0; i < 2; i++) {
@@ -117,31 +125,46 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			nonSelected.setSelected(true);
 			int x = nonSelected.getLocation().x;
 			int y = nonSelected.getLocation().y;
-			if (x < 9) {
-				AbstractPiece piece = pieces[x + 1][y];
-				if(selectedPiece.getOwner() != piece.getOwner()) {
-					piece.setSelected(true);
-				}	
+			if (this.selectedPiece.rank == 1) {
+				for (int i = 0; i < 10; i++) {
+					AbstractPiece piece = pieces[i][y];
+					if(i != x && selectedPiece.getOwner() != piece.getOwner()) {
+						piece.setSelected(true);
+					}	
+				}
+				
+				for (int i = 0; i < 10; i++) {
+					AbstractPiece piece = pieces[x][i];
+					if(i != y && selectedPiece.getOwner() != piece.getOwner()) {
+						piece.setSelected(true);
+					}	
+				}
+			} else {
+				if (x < 9) {
+					AbstractPiece piece = pieces[x + 1][y];
+					if(selectedPiece.getOwner() != piece.getOwner()) {
+						piece.setSelected(true);
+					}	
+				}
+				if (x > 0) {
+					AbstractPiece piece = pieces[x - 1][y];
+					if(selectedPiece.getOwner() != piece.getOwner()) {
+						piece.setSelected(true);
+					}	
+				}
+				if (y > 0) {
+					AbstractPiece piece = pieces[x][y - 1];
+					if(selectedPiece.getOwner() != piece.getOwner()) {
+						piece.setSelected(true);
+					}	
+				}
+				if (y < 9) {
+					AbstractPiece piece = pieces[x][y + 1];
+					if(selectedPiece.getOwner() != piece.getOwner()) {
+						piece.setSelected(true);
+					}	
+				}
 			}
-			if (x > 0) {
-				AbstractPiece piece = pieces[x - 1][y];
-				if(selectedPiece.getOwner() != piece.getOwner()) {
-					piece.setSelected(true);
-				}	
-			}
-			if (y > 0) {
-				AbstractPiece piece = pieces[x][y - 1];
-				if(selectedPiece.getOwner() != piece.getOwner()) {
-					piece.setSelected(true);
-				}	
-			}
-			if (y < 9) {
-				AbstractPiece piece = pieces[x][y + 1];
-				if(selectedPiece.getOwner() != piece.getOwner()) {
-					piece.setSelected(true);
-				}	
-			}
-		
 	}
 
 	private void swapPieces(AbstractPiece p1, AbstractPiece p2) {
