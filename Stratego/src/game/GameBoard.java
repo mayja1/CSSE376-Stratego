@@ -22,25 +22,19 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		this.owner = owner;
 		pieces = new AbstractPiece[10][10];
 		layout = new GridBagLayout();
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.BOTH;
 		this.setLayout(layout);
+		instantiateBoard();
+	}
+
+	private void instantiateBoard() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				AbstractPiece button = (AbstractPiece) PieceFactory.createClearPiece();
-				button.setPreferredSize(PIECE_SIZE);
-				button.setLocation(new Point(i, j));
-				button.setObserver(this);
-				pieces[i][j] = button;
-				c.gridx = i;
-				c.gridy = j;
-				this.add(button, c);
-				button.validate();
+				addPiece(i, j, button);
 				
 			}
 		}
 		for (int i = 0; i < 10; i++) {
-			Point p = new Point(i, 0);
 			AbstractPiece s = PieceFactory.createLieutenant();
 			if (i % 2 == 0) {
 				s.setOwner(User.PLAYER1);
@@ -50,15 +44,9 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			if(s.getOwner() != this.owner) {
 				s.setBackground(Color.RED);
 			}
-			s.setPreferredSize(PIECE_SIZE);
-			s.setLocation(p);
-			s.setObserver(this);
 			this.remove(pieces[i][0]);
-			pieces[i][0] = s;
-			c.gridx = i;
-			c.gridy = 0;
-			this.add(s, c);
-			s.validate();
+			this.addPiece(i, 0, s);
+			
 		}
 		
 		//Initializing bomb for each player
@@ -73,16 +61,22 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			if(b.owner != this.owner) {
 				b.setBackground(Color.RED);
 			}
-			b.setPreferredSize(PIECE_SIZE);
-			b.setLocation(p);
-			b.setObserver(this);
 			this.remove(pieces[i + 2][2]);
-			pieces[i + 2][2] = b;
-			c.gridx = i + 2;
-			c.gridy = 2;
-			this.add(b, c);
-			b.validate();
-		}		
+			this.addPiece(i+2,  2, b);			
+		}	
+	}
+	public void addPiece(int x, int y,
+			AbstractPiece piece) {
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		piece.setPreferredSize(PIECE_SIZE);
+		piece.setLocation(new Point(x, y));
+		piece.setObserver(this);
+		pieces[x][y] = piece;
+		c.gridx = x;
+		c.gridy = y;
+		this.add(piece, c);
+		piece.validate();
 	}
 
 	@Override
