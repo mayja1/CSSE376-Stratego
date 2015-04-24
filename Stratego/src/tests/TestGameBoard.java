@@ -51,11 +51,9 @@ public class TestGameBoard {
 		board.remove(board.getPieces()[0][0]);
 		board.addPiece(0, 0, piece);
 		piece.setOwner(User.PLAYER1);
-		//piece.setSelected(true);
 		board.nonSelectedButtonPressed(new Point(0, 0));
 		Assert.assertTrue(board.getPieces()[0][0].isSelected());
 		
-		//Assert.assertEquals((board.getPieces()[0][0].getRank()), 1);
 		for (int j = 1; j < 10; j++) {
 			Assert.assertTrue(board.getPieces()[0][j].isSelected());
 			Assert.assertTrue(board.getPieces()[j][0].isSelected());
