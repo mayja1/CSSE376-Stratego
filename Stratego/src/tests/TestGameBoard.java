@@ -144,6 +144,34 @@ public class TestGameBoard {
 		Assert.assertEquals(board.getSelectedPiece(), piece);
 	}
 	
+	@Test
+	public void testNonSelectedButtonPressedYourPiecePressedTopLeftCorner() {
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		board.remove(board.getPieces()[0][0]);
+		AbstractPiece piece = (AbstractPiece)PieceFactory.createMiner();
+		piece.setOwner(User.PLAYER1);
+		board.addPiece(0, 0, piece);
+		board.nonSelectedButtonPressed(new Point(0, 0));
+		Assert.assertTrue(piece.isSelected());
+		Assert.assertEquals(board.getSelectedPiece(), piece);
+		Assert.assertTrue(board.getPieces()[0][1].isSelected());
+		Assert.assertTrue(board.getPieces()[1][0].isSelected());
+	}
+	
+	@Test
+	public void testNonSelectedButtonPressedYourPiecePressedBottomRightCorner() {
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		board.remove(board.getPieces()[9][9]);
+		AbstractPiece piece = (AbstractPiece)PieceFactory.createMiner();
+		piece.setOwner(User.PLAYER1);
+		board.addPiece(9, 9, piece);
+		board.nonSelectedButtonPressed(new Point(9, 9));
+		Assert.assertTrue(piece.isSelected());
+		Assert.assertEquals(board.getSelectedPiece(), piece);
+		Assert.assertTrue(board.getPieces()[8][9].isSelected());
+		Assert.assertTrue(board.getPieces()[9][8].isSelected());
+	}
+	
 	private boolean testOneFriendlyNeighborPiece(AbstractPiece piece, Point location) {
 		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
 		board.remove(board.getPieces()[location.x][location.y]);
