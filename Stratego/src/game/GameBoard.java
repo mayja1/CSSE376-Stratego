@@ -34,6 +34,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 				
 			}
 		}
+		
 		for (int i = 0; i < 10; i++) {
 			AbstractPiece s = PieceFactory.createLieutenant();
 			if (i % 2 == 0) {
