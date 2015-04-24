@@ -1,6 +1,7 @@
 package tests;
 
 import java.awt.GridBagLayout;
+import java.awt.Point;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -41,6 +42,44 @@ public class TestGameBoard {
 		board.addPiece(0, 0, (AbstractPiece)PieceFactory.createBomb());
 		Assert.assertTrue(board.getPieces()[0][0] instanceof Bomb);
 	}
+	
+	@Test
+	public void testSelectedButtonPressedNoSelectedPiece() {
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		board.remove(board.getPieces()[0][0]);
+		AbstractPiece piece = (AbstractPiece)PieceFactory.createLieutenant();
+		board.addPiece(0, 0, piece);
+		piece.setSelected(true);
+		board.selectedButtonPressed(new Point(0, 0));
+		Assert.assertFalse(piece.isSelected());
+	}
+	
+	@Test
+	public void testSelectedButtonPressedSameSelectedPiecePressed() {
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		board.remove(board.getPieces()[0][0]);
+		AbstractPiece piece = (AbstractPiece)PieceFactory.createLieutenant();
+		board.addPiece(0, 0, piece);
+		piece.setSelected(true);
+		board.setSelectedPiece(piece);
+		board.selectedButtonPressed(new Point(0, 0));
+		Assert.assertFalse(piece.isSelected());
+	}
+	
+	@Test
+	public void testSelectedButtonPressedClearPiecePressed() {
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		board.remove(board.getPieces()[0][0]);
+		AbstractPiece piece = (AbstractPiece)PieceFactory.createLieutenant();
+		board.addPiece(0, 0, piece);
+		piece.setSelected(true);
+		board.setSelectedPiece(piece);
+		board.selectedButtonPressed(new Point(0, 1));
+		Assert.assertFalse(piece.isSelected());
+		Assert.assertTrue(piece.getLocation().getX()== 0);
+		Assert.assertTrue(piece.getLocation().getX()== 1);
+	}
+	
 	private class NoneGuiGameBoard extends GameBoard {
 		public NoneGuiGameBoard(User owner) {
 			super(owner);
@@ -57,6 +96,14 @@ public class TestGameBoard {
 		
 		public AbstractPiece[][] getPieces() {
 			return pieces;
+		}
+		
+		public AbstractPiece getSelectedPiece() {
+			return selectedPiece;
+		}
+		
+		public void setSelectedPiece(AbstractPiece piece) {
+			selectedPiece = piece;
 		}
 	}
 	
