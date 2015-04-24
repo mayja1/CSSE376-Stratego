@@ -127,6 +127,32 @@ public class TestGameBoard {
 		Assert.assertTrue(board.getPieces()[2][1].isSelected());
 	}
 	
+	@Test
+	public void testNonSelectedButtonPressedYourPiecePressedNonEdgeSurroundedByFriends() {
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		board.remove(board.getPieces()[0][0]);
+		AbstractPiece piece = (AbstractPiece)PieceFactory.createMiner();
+		piece.setOwner(User.PLAYER1);
+		board.addPiece(1, 1, piece);
+		Assert.assertFalse(testOneFriendlyNeighborPiece((AbstractPiece)PieceFactory.createMiner(), new Point(1, 0)));
+		Assert.assertFalse(testOneFriendlyNeighborPiece((AbstractPiece)PieceFactory.createMiner(), new Point(1, 2)));
+		Assert.assertFalse(testOneFriendlyNeighborPiece((AbstractPiece)PieceFactory.createMiner(), new Point(0, 1)));
+		Assert.assertFalse(testOneFriendlyNeighborPiece((AbstractPiece)PieceFactory.createMiner(), new Point(2, 1)));
+		
+		board.nonSelectedButtonPressed(new Point(1, 1));
+		Assert.assertTrue(piece.isSelected());
+		Assert.assertEquals(board.getSelectedPiece(), piece);
+	}
+	
+	private boolean testOneFriendlyNeighborPiece(AbstractPiece piece, Point location) {
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		board.remove(board.getPieces()[location.x][location.y]);
+		board.addPiece(location.x, location.y, piece);
+		piece.setOwner(User.PLAYER1);
+		board.nonSelectedButtonPressed(new Point(1, 1));
+		return board.getPieces()[location.x][location.y].isSelected();
+	}
+	
 	private class NoneGuiGameBoard extends GameBoard {
 		public NoneGuiGameBoard(User owner) {
 			super(owner);
