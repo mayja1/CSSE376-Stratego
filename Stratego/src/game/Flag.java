@@ -8,6 +8,7 @@ public class Flag extends AbstractPiece{
 	public Flag() {
 		setBackground(Color.ORANGE); //Will be team's color
 		this.rank = rank;
+		this.name = "Flag";
 		addActionListener(this);
 	}
 	@Override

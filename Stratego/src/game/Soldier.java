@@ -5,6 +5,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 
 public class Soldier extends AbstractPiece {
+	
+	public Soldier(int rank, String name) {
+		setBackground(Color.GREEN);
+		this.rank = rank;
+		this.name = name;
+		this.setText("" + name + " " + "(" + rank + ")");
+		addActionListener(this);
+	}
 
 	public Soldier(int rank) {
 		setBackground(Color.GREEN);

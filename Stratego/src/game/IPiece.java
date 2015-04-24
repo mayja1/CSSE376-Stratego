@@ -14,7 +14,6 @@ public interface IPiece {
 	public Point getLocation();
 	public User getOwner();
 	public void setOwner(User owner);
-	public void setName(String name);
 	public String getName();
 	public int getRank();
 //	/**

@@ -38,7 +38,7 @@ public class TestPieceFactory {
 	public void testCreateMarshall() {
 		AbstractPiece soldier = (AbstractPiece) PieceFactory.createMarshall();
 		assertTrue(soldier instanceof Soldier);
-		assertEquals("Marshall", soldier.getName());
+		assertEquals("Marsh", soldier.getName());
 		assertEquals(9, soldier.getRank());
 	}
 	

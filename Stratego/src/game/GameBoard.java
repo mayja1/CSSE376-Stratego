@@ -107,7 +107,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	}
 
 	private boolean isEnemey(AbstractPiece p1, AbstractPiece p2) {
-		return !(p1.getOwner().equals(p2.getOwner())) && p2.getOwner() != null;
+		return p1.getOwner()!=null && !(p1.getOwner().equals(p2.getOwner())) && p2.getOwner() != null;
 	}
 
 	@Override
