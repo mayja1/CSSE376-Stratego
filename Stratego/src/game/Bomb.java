@@ -12,6 +12,7 @@ public class Bomb extends AbstractPiece{
 		setText("Bomb");
 		setBackground(Color.GREEN);
 		this.rank = rank;
+		this.name = "Bomb";
 		addActionListener(this);
 	}
 
