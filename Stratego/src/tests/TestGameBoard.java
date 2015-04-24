@@ -80,6 +80,26 @@ public class TestGameBoard {
 		Assert.assertTrue(piece.getLocation().getY()== 1);
 	}
 	
+	@Test
+	public void testSelectedButtonPressedEnemyPiecePressed() {
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		AbstractPiece piece = (AbstractPiece)PieceFactory.createLieutenant();
+		AbstractPiece enemyPiece=(AbstractPiece) PieceFactory.createScout();
+		piece.setOwner(User.PLAYER1);
+		enemyPiece.setOwner(User.PLAYER2);
+		board.remove(board.getPieces()[0][0]);
+		board.addPiece(0, 0, piece);
+		board.remove(board.getPieces()[0][1]);
+		board.addPiece(0, 1, enemyPiece);
+		piece.setSelected(true);
+		board.setSelectedPiece(piece);
+		board.selectedButtonPressed(new Point(0, 1));
+		Assert.assertFalse(piece.isSelected());
+		Assert.assertTrue(piece.getLocation().getX()== 0);
+		Assert.assertTrue(piece.getLocation().getY()== 1);
+		Assert.assertTrue(board.getPieces()[0][0] instanceof ClearPiece);
+	}
+	
 	private class NoneGuiGameBoard extends GameBoard {
 		public NoneGuiGameBoard(User owner) {
 			super(owner);
