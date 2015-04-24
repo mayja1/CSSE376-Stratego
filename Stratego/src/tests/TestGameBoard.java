@@ -100,6 +100,17 @@ public class TestGameBoard {
 		Assert.assertTrue(board.getPieces()[0][0] instanceof ClearPiece);
 	}
 	
+	@Test
+	public void testNonSelectedButtonPressedClearPiecePressed() {
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		board.remove(board.getPieces()[0][0]);
+		AbstractPiece piece = (AbstractPiece)PieceFactory.createClearPiece();
+		board.addPiece(0, 0, piece);
+		board.nonSelectedButtonPressed(new Point(0, 0));
+		Assert.assertFalse(piece.isSelected());
+		Assert.assertNull(board.getSelectedPiece());
+	}
+	
 	private class NoneGuiGameBoard extends GameBoard {
 		public NoneGuiGameBoard(User owner) {
 			super(owner);
