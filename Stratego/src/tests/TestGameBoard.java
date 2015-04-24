@@ -77,7 +77,7 @@ public class TestGameBoard {
 		board.selectedButtonPressed(new Point(0, 1));
 		Assert.assertFalse(piece.isSelected());
 		Assert.assertTrue(piece.getLocation().getX()== 0);
-		Assert.assertTrue(piece.getLocation().getX()== 1);
+		Assert.assertTrue(piece.getLocation().getY()== 1);
 	}
 	
 	private class NoneGuiGameBoard extends GameBoard {
