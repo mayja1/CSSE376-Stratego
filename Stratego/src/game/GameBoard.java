@@ -180,6 +180,9 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			swapPieces(p1, p2);
 			removePiece(p2);
 			return p1.getOwner() + "has defeated" + p2.getOwner();
+		} else if ((p1.rank == 0) && (p2.rank == 9)) { //Spy attacking Marshall case
+			swapPieces(p1, p2);
+			removePiece(p2);
 		} else if (p1.rank > p2.rank) {
 			swapPieces(p1, p2);
 			removePiece(p2);
