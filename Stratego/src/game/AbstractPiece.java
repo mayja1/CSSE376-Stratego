@@ -69,4 +69,8 @@ public abstract class AbstractPiece extends JButton implements IPiece, ActionLis
 		return rank;
 	}
 
+	@Override
+	public String toString() {
+		return name + ": " + rank;
+	}
 }
