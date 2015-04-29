@@ -1,6 +1,5 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,12 +13,14 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	private static final Dimension PIECE_SIZE = new Dimension(90, 90);
 	protected AbstractPiece[][] pieces;
 	protected AbstractPiece selectedPiece;
+	private AbstractPiece[][] piecesToSet;
 	private GridBagLayout layout;
 	private User owner;
 
 	public GameBoard(User owner, AbstractPiece[][] pieces) {
 		super();
 		this.owner = owner;
+		piecesToSet = pieces;
 		this.pieces = new AbstractPiece[10][10];
 		layout = new GridBagLayout();
 		this.setLayout(layout);
@@ -35,44 +36,14 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			}
 		}
 		
-		for (int i = 0; i < 10; i++) {
-			AbstractPiece s = PieceFactory.createLieutenant();
-			if (i % 2 == 0) {
-				s.setOwner(User.PLAYER1);
-			} else {
-				s.setOwner(User.PLAYER2);
+		for (int i = 0; i < piecesToSet.length; i++) {
+			for (int j = 0; j < piecesToSet[i].length; j++) {
+				piecesToSet[i][j].setOwner(owner);
+				this.remove(pieces[i][j+6]);
+				this.addPiece(i, j+6, piecesToSet[i][j]);
 			}
-			if(s.getOwner() != this.owner) {
-				s.setBackground(Color.RED);
-			}
-			this.remove(pieces[i][0]);
-			this.addPiece(i, 0, s);
-			
 		}
-		AbstractPiece s = PieceFactory.createScout();
-		s.setOwner(User.PLAYER1);
 		
-		if(s.getOwner() != this.owner) {
-			s.setBackground(Color.RED);
-		}
-		this.remove(pieces[0][0]);
-		this.addPiece(0, 0, s);
-		
-		//Initializing bomb for each player
-		for (int i = 0; i < 2; i++) {
-			AbstractPiece b = new Bomb();
-			Point p = new Point(i + 2, 2);
-			if (i % 2 == 0){
-				b.setOwner(User.PLAYER1);
-			} else {
-				b.setOwner(User.PLAYER2);
-			}
-			if(b.owner != this.owner) {
-				b.setBackground(Color.RED);
-			}
-			this.remove(pieces[i + 2][2]);
-			this.addPiece(i+2,  2, b);			
-		}	
 	}
 	public void addPiece(int x, int y,
 			AbstractPiece piece) {
