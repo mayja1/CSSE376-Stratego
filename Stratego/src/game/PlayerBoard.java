@@ -18,7 +18,7 @@ public class PlayerBoard extends JPanel {
 		JLabel status = new JLabel("Test Label");
 		this.add(status, BorderLayout.NORTH);
 		this.setBoard(new GameBoard(owner));
-		this.add(getBoard(), BorderLayout.CENTER);
+		this.add(new SetupBoard(owner), BorderLayout.CENTER);
 	}
 	
 	public User getOwner() {
