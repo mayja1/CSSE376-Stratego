@@ -1,5 +1,10 @@
 package tests;
 
+import java.awt.Point;
+
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,7 +25,7 @@ public class TestSetupBoard {
 	
 	@Before
 	public void setup() {
-		testBoard = new SetupBoard(User.PLAYER1);
+		testBoard = new SetupBoardNoGui(User.PLAYER1);
 	}
 	
 	@After
@@ -38,5 +43,25 @@ public class TestSetupBoard {
 		testBoard.remove(testBoard.getPieces()[0][0]);
 		testBoard.addPiece(0, 0, (AbstractPiece)PieceFactory.createBomb());
 		Assert.assertTrue(testBoard.getPieces()[0][0] instanceof Bomb);
+	}
+	
+	public void testSelectedButtonPressedClearPiece() {
+		testBoard.selectedButtonPressed(new Point(0, 0));
+		Assert.assertTrue(((SetupBoardNoGui) testBoard).paneShown);
+	}
+	
+	private class SetupBoardNoGui extends SetupBoard {
+		boolean paneShown;
+		public SetupBoardNoGui(User owner) {
+			super(owner);
+			paneShown = false;
+		}
+		
+		@Override
+		protected void showJOptionPane(Point gridLocation, JPanel panel,
+				JComboBox<AbstractPiece> comboBox) {
+			paneShown = true;
+		}
+		
 	}
 }
