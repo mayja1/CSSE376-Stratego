@@ -41,6 +41,12 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 	@Override
 	public void isDone(AbstractPiece[][] pieces) {
 		// Not implemented
-		
+		GameBoard gameBoard = new GameBoard(owner, pieces);
+		this.remove(board);
+		this.add(gameBoard);
+		this.validate();
+		this.repaint();
+		this.setBoard(gameBoard);
 	}
+
 }

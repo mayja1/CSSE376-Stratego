@@ -81,7 +81,7 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 
 		showJOptionPane(gridLocation, panel, comboBox);
 		if(model.getSize() == 0) {
-			// todo
+			observer.isDone(pieces);
 		}
 		
 		this.validate();
