@@ -73,9 +73,41 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 	@Override
 	public void selectedButtonPressed(Point gridLocation) {
 		// this is a clear piece is pressed
-		
+		JPanel panel = new JPanel();
+		panel.add(new JLabel("Please make a selection:"));
+		JComboBox<AbstractPiece> comboBox = new JComboBox<>(model);
+		panel.add(comboBox);
+
+		showJOptionPane(gridLocation, panel, comboBox);
+		if(model.getSize() == 0) {
+			//do end behavior
+		}
+		this.validate();
+		this.repaint();
 	}
 
+	protected void showJOptionPane(Point gridLocation, JPanel panel,
+			JComboBox<AbstractPiece> comboBox) {
+		int result = JOptionPane.showConfirmDialog(null, panel, "Pieces",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+		switch (result) {
+		case JOptionPane.OK_OPTION:
+			if (comboBox.getSelectedIndex() != -1) {
+				System.out
+						.println("You selected " + comboBox.getSelectedItem());
+				AbstractPiece piece = (AbstractPiece) comboBox
+						.getSelectedItem();
+				piece.setOwner(owner);
+				System.out.println(piece.getText());
+				this.addPiece(gridLocation.x, gridLocation.y,
+						(AbstractPiece) comboBox.getSelectedItem());
+				model.removeElement(piece);
+				break;
+			}
+		}
+	}
+
+	
 	@Override
 	public void nonSelectedButtonPressed(Point gridLocation) {
 		//piece selected
