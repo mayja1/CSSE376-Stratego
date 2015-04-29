@@ -18,10 +18,11 @@ import javax.swing.border.LineBorder;
 
 public class SetupBoard extends JPanel implements IPieceObserver {
 
-	private static final Dimension PIECE_SIZE = new Dimension(80, 80);
+	private static final Dimension PIECE_SIZE = new Dimension(90, 90);
 	protected AbstractPiece[][] pieces;
 	private GridBagLayout layout;
 	private User owner;
+	private IBoardObserver observer;
 	private DefaultComboBoxModel<AbstractPiece> model;
 
 	public SetupBoard(User owner) {
@@ -36,7 +37,7 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 	}
 
 	protected void instantiateModel(DefaultComboBoxModel<AbstractPiece> model) {
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 3; i++) {
 			model.addElement(PieceFactory.createScout());
 		}
 	}
@@ -80,8 +81,9 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 
 		showJOptionPane(gridLocation, panel, comboBox);
 		if(model.getSize() == 0) {
-			//do end behavior
+			// todo
 		}
+		
 		this.validate();
 		this.repaint();
 	}
@@ -115,5 +117,9 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 	
 	public AbstractPiece[][] getPieces() {
 		return pieces;
+	}
+	
+	public void setObserver(IBoardObserver obs) {
+		this.observer = obs;
 	}
 }

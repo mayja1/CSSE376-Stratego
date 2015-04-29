@@ -8,14 +8,29 @@ import game.AbstractPiece;
 import game.Bomb;
 import game.Flag;
 import game.GameBoard;
+import game.PieceFactory;
 import game.GameBoard.User;
 import game.Soldier;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestAttacking {
 	
-	private GameBoard game = new GameBoard(User.PLAYER1);
+	private GameBoard game;
+	
+	@Before
+	public void setUp() {
+		
+		AbstractPiece[][] pieces = new AbstractPiece[10][4];
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 10; j++) {
+				pieces[j][i] = PieceFactory.createClearPiece();
+			}
+		}
+		
+		game = new GameBoard(User.PLAYER1, pieces);
+	}
 
 	@Test
 	public void TestAttackLowerRank() {

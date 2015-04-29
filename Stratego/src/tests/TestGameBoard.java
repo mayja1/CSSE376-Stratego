@@ -20,10 +20,17 @@ public class TestGameBoard {
 
 	private GameBoard testBoard;
 	MockPieceObserver observer;
+	private AbstractPiece[][] pieces;
 	
 	@Before
 	public void setup() {
-		testBoard = new NoneGuiGameBoard(User.PLAYER1);
+		pieces = new AbstractPiece[10][4];
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 10; j++) {
+				pieces[j][i] = PieceFactory.createClearPiece();
+			}
+		}
+		testBoard = new NoneGuiGameBoard(User.PLAYER1, pieces);
 	}
 	
 	@After
@@ -196,8 +203,8 @@ public class TestGameBoard {
 		return board.getPieces()[location.x][location.y].isSelected();
 	}
 	private class NoneGuiGameBoard extends GameBoard {
-		public NoneGuiGameBoard(User owner) {
-			super(owner);
+		public NoneGuiGameBoard(User owner, AbstractPiece[][] pieces) {
+			super(owner, pieces);		
 		}
 		
 		@Override

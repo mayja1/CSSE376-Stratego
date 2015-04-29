@@ -15,6 +15,7 @@ import org.junit.runners.Suite;
 			TestPiece.class,
 			TestGameBoard.class,
 			TestPlayerBoard.class,
+			TestBoardObserver.class,
 			TestSetupBoard.class
 		})
 public class AllTests {

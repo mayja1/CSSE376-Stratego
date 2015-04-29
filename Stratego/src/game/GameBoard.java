@@ -11,16 +11,16 @@ import javax.swing.JPanel;
 public class GameBoard extends JPanel implements IPieceObserver {
 
 	public static enum User {PLAYER1, PLAYER2};
-	private static final Dimension PIECE_SIZE = new Dimension(80, 80);
+	private static final Dimension PIECE_SIZE = new Dimension(90, 90);
 	protected AbstractPiece[][] pieces;
 	protected AbstractPiece selectedPiece;
 	private GridBagLayout layout;
 	private User owner;
 
-	public GameBoard(User owner) {
+	public GameBoard(User owner, AbstractPiece[][] pieces) {
 		super();
 		this.owner = owner;
-		pieces = new AbstractPiece[10][10];
+		this.pieces = new AbstractPiece[10][10];
 		layout = new GridBagLayout();
 		this.setLayout(layout);
 		instantiateBoard();
@@ -34,6 +34,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 				
 			}
 		}
+		
 		for (int i = 0; i < 10; i++) {
 			AbstractPiece s = PieceFactory.createLieutenant();
 			if (i % 2 == 0) {
