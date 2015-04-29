@@ -29,7 +29,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	protected void instantiateBoard() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				AbstractPiece button = (AbstractPiece) PieceFactory.createClearPiece();
+				AbstractPiece button = PieceFactory.createClearPiece();
 				addPiece(i, j, button);
 				
 			}
