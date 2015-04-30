@@ -31,7 +31,7 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 		pieces = new AbstractPiece[10][4];
 		layout = new GridBagLayout();
 		this.setLayout(layout);
-		model = new DefaultComboBoxModel<>();
+		model = new DefaultComboBoxModel<AbstractPiece>();
 		instantiateModel(model);
 		instantiateBoard();
 	}
@@ -76,7 +76,7 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 		// this is a clear piece is pressed
 		JPanel panel = new JPanel();
 		panel.add(new JLabel("Please make a selection:"));
-		JComboBox<AbstractPiece> comboBox = new JComboBox<>(model);
+		JComboBox<AbstractPiece> comboBox = new JComboBox<AbstractPiece>(model);
 		panel.add(comboBox);
 
 		showJOptionPane(gridLocation, panel, comboBox);
@@ -112,7 +112,7 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 	
 	@Override
 	public void nonSelectedButtonPressed(Point gridLocation) {
-		//piece selected
+		System.out.println("TEST");
 	}
 	
 	public AbstractPiece[][] getPieces() {
