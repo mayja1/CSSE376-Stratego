@@ -59,6 +59,7 @@ public class TestSetupBoard {
 		testBoard.nonSelectedButtonPressed(new Point(1, 1));
 		
 		Assert.assertTrue(testBoard.getPieces()[1][1] instanceof ClearPiece);
+		Assert.assertTrue(testBoard.getPieces()[1][1].isSelected());
 	}
 	
 	private class SetupBoardNoGui extends SetupBoard {
