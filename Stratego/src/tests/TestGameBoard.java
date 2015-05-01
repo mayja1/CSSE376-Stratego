@@ -66,6 +66,23 @@ public class TestGameBoard {
 			Assert.assertTrue(board.getPieces()[j][0].isSelected());
 		}
 	}
+	
+	@Test
+	public void testScoutCannotMovePastOccupiedSpaces() {
+		AbstractPiece piece = PieceFactory.createScout();
+		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
+		board.remove(board.getPieces()[0][0]);
+		board.addPiece(0, 0, piece);
+		piece.setOwner(User.PLAYER1);
+		board.nonSelectedButtonPressed(new Point(0, 0));
+		
+		AbstractPiece otherPiece = PieceFactory.createScout();
+		board.remove(board.getPieces()[0][5]);
+		board.addPiece(0, 5, otherPiece);
+		piece.setOwner(User.PLAYER1);
+		
+		Assert.assertFalse(board.getPieces()[0][6].isSelected());
+	}
 	public void testSelectedButtonPressedNoSelectedPiece() {
 		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
 		board.remove(board.getPieces()[0][0]);
