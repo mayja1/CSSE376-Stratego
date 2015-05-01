@@ -112,7 +112,10 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 	
 	@Override
 	public void nonSelectedButtonPressed(Point gridLocation) {
-		System.out.println("TEST");
+		int x = gridLocation.x;
+		int y = gridLocation.y;
+		this.remove(pieces[x][y]);
+		addPiece(x, y, PieceFactory.createClearPiece());
 	}
 	
 	public AbstractPiece[][] getPieces() {
