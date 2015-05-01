@@ -2,9 +2,11 @@ package tests;
 
 import java.awt.Point;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import org.hamcrest.Factory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -52,6 +54,8 @@ public class TestSetupBoard {
 	
 	@Test
 	public void testNonSelectedButtonPressed() {
+		DefaultComboBoxModel<AbstractPiece> model = new DefaultComboBoxModel<AbstractPiece>();
+		
 		AbstractPiece piece = PieceFactory.createScout();
 		testBoard.remove(testBoard.getPieces()[1][1]);
 		testBoard.addPiece(1, 1, piece);
@@ -60,6 +64,8 @@ public class TestSetupBoard {
 		
 		Assert.assertTrue(testBoard.getPieces()[1][1] instanceof ClearPiece);
 		Assert.assertTrue(testBoard.getPieces()[1][1].isSelected());
+		Assert.assertTrue(model.getSize() == 1);
+		
 	}
 	
 	private class SetupBoardNoGui extends SetupBoard {
