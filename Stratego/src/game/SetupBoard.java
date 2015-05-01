@@ -115,7 +115,10 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 		int x = gridLocation.x;
 		int y = gridLocation.y;
 		this.remove(pieces[x][y]);
-		addPiece(x, y, PieceFactory.createClearPiece());
+		AbstractPiece piece = PieceFactory.createClearPiece();
+		piece.setSelected(true);
+		addPiece(x, y, piece);
+		
 	}
 	
 	public AbstractPiece[][] getPieces() {
