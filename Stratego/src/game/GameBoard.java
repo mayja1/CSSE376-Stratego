@@ -98,11 +98,30 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			int x = nonSelected.getLocation().x;
 			int y = nonSelected.getLocation().y;
 			if (this.selectedPiece.rank == 1) {
-				for (int i = 0; i < 10; i++) {
+				//Go left
+				for (int i = x - 1; i >= 0; i--) {
 					AbstractPiece piece = pieces[i][y];
-					if(i != x && selectedPiece.getOwner() != piece.getOwner()) {
+					if (piece instanceof ClearPiece) {
 						piece.setSelected(true);
-					}	
+					} else if (selectedPiece.owner != piece.getOwner()) {
+						piece.setSelected(true);
+						break;
+					} else {
+						break;
+					}
+				}
+				//Go right
+				for (int i = x + 1; i <= 9; i++) {
+					AbstractPiece piece = pieces[i][y];
+					if (piece instanceof ClearPiece) {
+						piece.setSelected(true);
+					} 
+					else if (selectedPiece.getOwner() != piece.getOwner()) {
+						piece.setSelected(true);
+						break;
+					} else {
+						break;
+					}
 				}
 				
 				for (int i = 0; i < 10; i++) {
