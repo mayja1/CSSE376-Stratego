@@ -19,7 +19,6 @@ import game.GameBoard.User;
 import game.SetupBoard;
 
 public class TestSetupBoard {
-//	private SetupBoard testBoard;
 	private SetupBoard testBoard;
 	MockPieceObserver observer;
 	
@@ -45,9 +44,21 @@ public class TestSetupBoard {
 		Assert.assertTrue(testBoard.getPieces()[0][0] instanceof Bomb);
 	}
 	
+	@Test
 	public void testSelectedButtonPressedClearPiece() {
 		testBoard.selectedButtonPressed(new Point(0, 0));
 		Assert.assertTrue(((SetupBoardNoGui) testBoard).paneShown);
+	}
+	
+	@Test
+	public void testNonSelectedButtonPressed() {
+		AbstractPiece piece = PieceFactory.createScout();
+		testBoard.remove(testBoard.getPieces()[1][1]);
+		testBoard.addPiece(1, 1, piece);
+		
+		testBoard.nonSelectedButtonPressed(new Point(1, 1));
+		
+		Assert.assertTrue(testBoard.getPieces()[1][1] instanceof ClearPiece);
 	}
 	
 	private class SetupBoardNoGui extends SetupBoard {
