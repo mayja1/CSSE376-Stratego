@@ -86,7 +86,9 @@ public class TestGameBoard {
 		piece.setOwner(User.PLAYER1);
 		
 		board.nonSelectedButtonPressed(new Point(0, 0));
+		Assert.assertFalse(board.getPieces()[6][0].isSelected());
 		Assert.assertFalse(board.getPieces()[0][6].isSelected());
+		
 		
 	}
 	public void testSelectedButtonPressedNoSelectedPiece() {
