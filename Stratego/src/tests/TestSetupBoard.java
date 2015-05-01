@@ -53,9 +53,7 @@ public class TestSetupBoard {
 	}
 	
 	@Test
-	public void testNonSelectedButtonPressed() {
-		DefaultComboBoxModel<AbstractPiece> model = new DefaultComboBoxModel<AbstractPiece>();
-		
+	public void testNonSelectedButtonPressed() {	
 		AbstractPiece piece = PieceFactory.createScout();
 		testBoard.remove(testBoard.getPieces()[1][1]);
 		testBoard.addPiece(1, 1, piece);
@@ -64,8 +62,6 @@ public class TestSetupBoard {
 		
 		Assert.assertTrue(testBoard.getPieces()[1][1] instanceof ClearPiece);
 		Assert.assertTrue(testBoard.getPieces()[1][1].isSelected());
-		Assert.assertTrue(model.getSize() == 1);
-		
 	}
 	
 	private class SetupBoardNoGui extends SetupBoard {
