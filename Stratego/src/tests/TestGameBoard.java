@@ -74,14 +74,14 @@ public class TestGameBoard {
 		board.remove(board.getPieces()[0][0]);
 		board.addPiece(0, 0, piece);
 		piece.setOwner(User.PLAYER1);
-		board.nonSelectedButtonPressed(new Point(0, 0));
 		
 		AbstractPiece otherPiece = PieceFactory.createScout();
-		board.remove(board.getPieces()[0][5]);
-		board.addPiece(0, 5, otherPiece);
+		board.remove(board.getPieces()[5][0]);
+		board.addPiece(5, 0, otherPiece);
 		piece.setOwner(User.PLAYER1);
 		
-		Assert.assertFalse(board.getPieces()[0][6].isSelected());
+		board.nonSelectedButtonPressed(new Point(0, 0));
+		Assert.assertFalse(board.getPieces()[6][0].isSelected());
 	}
 	public void testSelectedButtonPressedNoSelectedPiece() {
 		NoneGuiGameBoard board = (NoneGuiGameBoard) testBoard;
