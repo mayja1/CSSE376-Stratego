@@ -10,8 +10,7 @@ public class Soldier extends AbstractPiece {
 		setBackground(Color.GREEN);
 		this.rank = rank;
 		this.name = name;
-		this.visible = false;
-		this.setText("" + name + " " + "(" + rank + ")");
+		this.visible = true;
 		addActionListener(this);
 	}
 
@@ -33,14 +32,13 @@ public class Soldier extends AbstractPiece {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-
+		this.visible = false;	
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-
+		this.visible = true;
+		this.setText("" + name + " " + "(" + rank + ")");
 	}
 
 	@Override
