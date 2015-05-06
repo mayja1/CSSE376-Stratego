@@ -18,7 +18,7 @@ public abstract class AbstractPiece extends JButton implements IPiece, ActionLis
 	protected int boardIndex = 0;
 	protected User owner;
 	protected String name;
-
+	
 	@Override
 	public abstract void actionPerformed(ActionEvent e);
 
@@ -60,6 +60,10 @@ public abstract class AbstractPiece extends JButton implements IPiece, ActionLis
 	@Override
 	public void setOwner(User owner) {
 		this.owner = owner;
+	}
+	
+	public Boolean getVisiblity() {
+		return visible;
 	}
 	
 	public String getName() {
