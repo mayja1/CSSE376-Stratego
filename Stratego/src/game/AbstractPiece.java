@@ -14,6 +14,7 @@ public abstract class AbstractPiece extends JButton implements IPiece, ActionLis
 	protected Point location = new Point();
 	protected IPieceObserver observer;
 	protected int rank;
+	protected Boolean visible;
 	protected int boardIndex = 0;
 	protected User owner;
 	protected String name;

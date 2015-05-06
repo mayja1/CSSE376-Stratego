@@ -10,6 +10,7 @@ public class Soldier extends AbstractPiece {
 		setBackground(Color.GREEN);
 		this.rank = rank;
 		this.name = name;
+		this.visible = false;
 		this.setText("" + name + " " + "(" + rank + ")");
 		addActionListener(this);
 	}
