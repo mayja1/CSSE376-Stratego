@@ -9,10 +9,10 @@ import javax.swing.border.LineBorder;
 public class Bomb extends AbstractPiece{
 	
 	public Bomb() {
-		setText("Bomb");
 		setBackground(Color.GREEN);
 		this.rank = rank;
 		this.name = "Bomb";
+		this.visible = true;
 		addActionListener(this);
 	}
 
@@ -37,13 +37,12 @@ public class Bomb extends AbstractPiece{
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
+		this.visible = false;
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
+		this.visible = true;
+		this.setText("" + name + " " + "(" + rank + ")");
 	}
 }
