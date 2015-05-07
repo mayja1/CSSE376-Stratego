@@ -21,7 +21,7 @@ public class Bomb extends AbstractPiece{
 		if (selected) {
 			observer.selectedButtonPressed(location);
 		} else {
-			//observer.nonSelectedButtonPressed(location);
+			observer.nonSelectedButtonPressed(location);
 		}
 	}
 
