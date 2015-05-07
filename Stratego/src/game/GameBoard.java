@@ -46,7 +46,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		for (int i = 0; i < opponentPiecesToSet.length; i++) {
 			for (int j = 0; j < opponentPiecesToSet[i].length; j++) {
 				AbstractPiece piece = opponentPiecesToSet[i][j];
-				piece.show();
+				piece.hide();
 				this.remove(pieces[9-i][3-j]);
 				this.addPiece(9-i, 3-j, piece);
 			}
