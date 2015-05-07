@@ -254,6 +254,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		c.gridy = point1.y;
 		pieces[point1.x][point1.y] = clear;
 		this.add(clear, c);
+		observer.endTurn();
 		validate();
 		repaint();
 	}

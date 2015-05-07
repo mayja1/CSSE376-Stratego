@@ -8,7 +8,12 @@ public class TurnObserver implements ITurnObserver {
 	
 	@Override
 	public void endTurn() {
-		// Not implemented	
+		if (turn == User.PLAYER1) {
+			turn = User.PLAYER2;
+			
+		} else {
+			turn = User.PLAYER1;
+		}		
 	}
 
 	@Override
