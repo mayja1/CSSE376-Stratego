@@ -44,15 +44,37 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 		this.board = board;
 	}
 
-	@Override
 	public void doneWithMyBoard(AbstractPiece[][] pieces) {
-		// TODO Auto-generated method stub
-		
+		myPieces = pieces;
+		containerObserver.doneWithMyBoard(pieces);
+		initializeGameBoard();
 	}
 
 	@Override
 	public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard) {
-		// TODO Auto-generated method stub
+		opponentPieces = completedBoard;
+		initializeGameBoard();
 		
+	}
+
+	private void initializeGameBoard() {
+		if(myPieces == null) {
+			return;
+		}
+		if(opponentPieces == null) {
+			this.remove(board);
+			this.status.setText("Waiting on the other player to finish their board");
+			this.validate();
+			this.repaint();
+			return; 
+		}
+		this.remove(board);
+		GameBoard gameBoard = new GameBoard(owner, myPieces, opponentPieces);
+		gameBoard.setObserver(turnObserver);
+		this.add(gameBoard, BorderLayout.CENTER);
+		gameBoard.validate();
+		this.validate();
+		this.repaint();
+		this.setBoard(gameBoard);
 	}
 }
