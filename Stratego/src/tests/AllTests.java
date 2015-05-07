@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses(
 		{
+			TestGameBoardFrame.class,
 			TestBombPiece.class,
 			TestClearPiece.class,
 			TestFlagPiece.class,
