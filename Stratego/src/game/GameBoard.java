@@ -230,33 +230,41 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		if (p2 instanceof Bomb) {
 			if (p1.rank == 3) {
 				swapPieces(p1, p2);
-				removePiece(p2);
+				removePiece(p2);			
+				observer.endTurn();
 				return p1.getOwner() + "defused a" + p2.getOwner() + "bomb";
 			} else {
 				removePiece(p1);
 				removePiece(p2);
+				observer.endTurn();
 				return "A bomb has exploded!";
 			}
 		} else if (p2 instanceof Flag) {
 			swapPieces(p1, p2);
 			removePiece(p2);
+			observer.endTurn();
 			return p1.getOwner() + "has defeated" + p2.getOwner();
 		} else if ((p1.rank == 0) && (p2.rank == 9)) { // Spy attacking Marshall
 														// case
 			swapPieces(p1, p2);
 			removePiece(p2);
+			observer.endTurn();
+			return p1.getOwner() + " beat " + p2.getOwner();
 		} else if (p1.rank > p2.rank) {
 			swapPieces(p1, p2);
 			removePiece(p2);
 			p1.show();
+			observer.endTurn();
 			return p1.getOwner() + " beat " + p2.getOwner();
 		} else if (p1.rank < p2.rank) {
 			removePiece(p1);
 			p2.show();
+			observer.endTurn();
 			return p2.getOwner() + " beat " + p1.getOwner();
 		} else if (p1.rank == p2.rank) {
 			removePiece(p1);
 			removePiece(p2);
+			observer.endTurn();
 			return p1.getOwner() + " tied " + p2.getOwner();
 		}
 		return "Error: case not handled";
