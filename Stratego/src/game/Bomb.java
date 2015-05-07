@@ -43,6 +43,6 @@ public class Bomb extends AbstractPiece{
 	@Override
 	public void show() {
 		this.visible = true;
-		this.setText("" + name + " " + "(" + rank + ")");
+		this.setText("Bomb");
 	}
 }
