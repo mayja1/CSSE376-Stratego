@@ -174,5 +174,4 @@ public class TestAttacking {
 		assertEquals(true, s1.getVisiblity());
 	}
 	
-
 }
