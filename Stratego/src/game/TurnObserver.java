@@ -13,7 +13,7 @@ public class TurnObserver implements ITurnObserver {
 
 	@Override
 	public boolean isTurn(Enum<User> user) {
-		return false;
+		return user.equals(turn);
 	}
 
 }
