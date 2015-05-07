@@ -29,7 +29,7 @@ public class TestAttacking {
 			}
 		}
 		
-		game = new GameBoard(User.PLAYER1, pieces);
+		game = new GameBoard(User.PLAYER1, pieces, pieces);
 	}
 
 	@Test

@@ -8,6 +8,7 @@ import game.PieceFactory;
 import game.PlayerBoard;
 import game.GameBoard.User;
 import game.SetupBoard;
+import game.TurnObserver;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +22,8 @@ public class TestBoardObserver {
 	@Before
 	public void setup() {
 		observer = new MockBoardObserver();
-		testBoard = new PlayerBoard(User.PLAYER1, observer);
+		//testBoard = new PlayerBoard(User.PLAYER1, observer);
+		testBoard = new PlayerBoard(User.PLAYER1, new TurnObserver());
 		pieces = new AbstractPiece[10][4];
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 10; j++) {

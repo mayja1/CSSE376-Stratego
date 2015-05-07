@@ -2,6 +2,6 @@ package game;
 
 public interface IBoardObserver {
 	
-	public void isDone(AbstractPiece[][] pieces);
-
+	public void doneWithMyBoard(AbstractPiece[][] pieces);
+	public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard);
 }

@@ -1,0 +1,3404 @@
+<?xml version="1.0" encoding="UTF-8"?><TestSessionContainer xmlns="http://www.codecover.org/xml/testsession-container" Date="1429881934026" TestSessionContainerId="4f21f399-1f23-41bc-86ef-7a6452a3cfba" version="1.0">
+<SrcFileList>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;import java.awt.Color;&#13;&#10;import java.awt.event.ActionEvent;&#13;&#10;import javax.swing.border.LineBorder;&#13;&#10;&#13;&#10;public class Soldier extends AbstractPiece {&#13;&#10;&#13;&#10;&#9;public Soldier(int rank) {&#13;&#10;&#9;&#9;setBackground(Color.GREEN);&#13;&#10;&#9;&#9;this.rank = rank;&#13;&#10;&#9;&#9;addActionListener(this);&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setSelected(boolean selected) {&#13;&#10;&#9;&#9;if (selected) {&#13;&#10;&#9;&#9;&#9;this.setBorder(new LineBorder(Color.YELLOW, 5));&#13;&#10;&#9;&#9;} else {&#13;&#10;&#9;&#9;&#9;this.setBorder(new LineBorder(Color.GRAY, 1));&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;this.selected = selected;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void hide() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void show() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void actionPerformed(ActionEvent e) {&#13;&#10;&#9;&#9;if (selected) {&#13;&#10;&#9;&#9;&#9;observer.selectedButtonPressed(location);&#13;&#10;&#9;&#9;} else {&#13;&#10;&#9;&#9;&#9;observer.nonSelectedButtonPressed(location);&#13;&#10;&#9;&#9;}&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;}&#13;&#10;" Filename="Soldier.java" Intrnl_Id="1"/>
+<SrcFile Content="package game;&#13;&#10;import game.GameBoard.User;&#13;&#10;&#13;&#10;import java.awt.BorderLayout;&#13;&#10;&#13;&#10;import javax.swing.JLabel;&#13;&#10;import javax.swing.JPanel;&#13;&#10;&#13;&#10;&#13;&#10;public class PlayerBoard extends JPanel {&#13;&#10;&#9;private User owner;&#13;&#10;&#9;private GameBoard board;&#13;&#10;&#9;&#13;&#10;&#9;public PlayerBoard(User owner) {&#13;&#10;&#9;&#9;this.setOwner(owner);&#13;&#10;&#9;&#9;BorderLayout layout = new BorderLayout();&#13;&#10;&#9;&#9;this.setLayout(layout);&#13;&#10;&#9;&#9;JLabel status = new JLabel(&quot;Test Label&quot;);&#13;&#10;&#9;&#9;this.add(status, BorderLayout.NORTH);&#13;&#10;&#9;&#9;this.setBoard(new GameBoard(owner));&#13;&#10;&#9;&#9;this.add(getBoard(), BorderLayout.CENTER);&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public User getOwner() {&#13;&#10;&#9;&#9;return owner;&#13;&#10;&#9;}&#13;&#10;&#9;public void setOwner(User owner) {&#13;&#10;&#9;&#9;this.owner = owner;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public GameBoard getBoard() {&#13;&#10;&#9;&#9;return board;&#13;&#10;&#9;}&#13;&#10;&#9;public void setBoard(GameBoard board) {&#13;&#10;&#9;&#9;this.board = board;&#13;&#10;&#9;}&#13;&#10;}&#13;&#10;" Filename="PlayerBoard.java" Intrnl_Id="2"/>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;public class PieceFactory {&#13;&#10;&#9;&#13;&#10;&#9;public static IPiece createBomb() {&#13;&#10;&#9;&#9;AbstractPiece bomb = new Bomb();&#13;&#10;&#9;&#9;bomb.setName(&quot;Bomb&quot;);&#13;&#10;&#9;&#9;return bomb;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public static IPiece createClearPiece() {&#13;&#10;&#9;&#9;return new ClearPiece();&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public static IPiece createFlag() {&#13;&#10;&#9;&#9;AbstractPiece flag = new Flag();&#13;&#10;&#9;&#9;flag.setName(&quot;Flag&quot;);&#13;&#10;&#9;&#9;return flag;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public static IPiece createSpy() {&#13;&#10;&#9;&#9;AbstractPiece spy = new Soldier(0);&#13;&#10;&#9;&#9;spy.setName(&quot;Spy&quot;);&#13;&#10;&#9;&#9;return spy;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public static IPiece createMarshall() {&#13;&#10;&#9;&#9;AbstractPiece soldier = new Soldier(9);&#13;&#10;&#9;&#9;soldier.setName(&quot;Marshall&quot;);&#13;&#10;&#9;&#9;return soldier;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public static IPiece createGeneral() {&#13;&#10;&#9;&#9;AbstractPiece soldier = new Soldier(8);&#13;&#10;&#9;&#9;soldier.setName(&quot;General&quot;);&#13;&#10;&#9;&#9;return soldier;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public static IPiece createColonel() {&#13;&#10;&#9;&#9;AbstractPiece soldier = new Soldier(7);&#13;&#10;&#9;&#9;soldier.setName(&quot;Colonel&quot;);&#13;&#10;&#9;&#9;return soldier;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public static IPiece createMajor() {&#13;&#10;&#9;&#9;AbstractPiece soldier = new Soldier(6);&#13;&#10;&#9;&#9;soldier.setName(&quot;Major&quot;);&#13;&#10;&#9;&#9;return soldier;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public static AbstractPiece createCaptain() {&#13;&#10;&#9;&#9;AbstractPiece soldier = new Soldier(5);&#13;&#10;&#9;&#9;soldier.setName(&quot;Captain&quot;);&#13;&#10;&#9;&#9;return soldier;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public static AbstractPiece createLieutenant() {&#13;&#10;&#9;&#9;AbstractPiece soldier = new Soldier(4);&#13;&#10;&#9;&#9;soldier.setName(&quot;Lieut&quot;);&#13;&#10;&#9;&#9;return soldier;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public static AbstractPiece createSergeant() {&#13;&#10;&#9;&#9;AbstractPiece soldier = new Soldier(3);&#13;&#10;&#9;&#9;soldier.setName(&quot;Sergeant&quot;);&#13;&#10;&#9;&#9;return soldier;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public static AbstractPiece createMiner() {&#13;&#10;&#9;&#9;AbstractPiece soldier = new Soldier(2);&#13;&#10;&#9;&#9;soldier.setName(&quot;Miner&quot;);&#13;&#10;&#9;&#9;return soldier;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public static AbstractPiece createScout() {&#13;&#10;&#9;&#9;AbstractPiece soldier = new Soldier(1);&#13;&#10;&#9;&#9;soldier.setName(&quot;Scout&quot;);&#13;&#10;&#9;&#9;return soldier;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="PieceFactory.java" Intrnl_Id="3"/>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;import game.GameBoard.User;&#13;&#10;&#13;&#10;import java.awt.event.ActionEvent;&#13;&#10;&#13;&#10;public class Obstacle extends AbstractPiece {&#13;&#10;&#9;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void actionPerformed(ActionEvent e) {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setSelected(boolean selected) {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void hide() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void show() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setOwner(User u) {&#13;&#10;&#9;&#9;this.owner = null;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;@Override&#13;&#10;&#9;public User getOwner() {&#13;&#10;&#9;&#9;return null;&#13;&#10;&#9;}&#13;&#10;}&#13;&#10;" Filename="Obstacle.java" Intrnl_Id="4"/>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;import java.awt.Point;&#13;&#10;&#13;&#10;//The GameBoard should implement this class and add itself as an observer to the IPiece&#13;&#10;public interface IPieceObserver {&#13;&#10;&#13;&#10;&#9;public void selectedButtonPressed(Point gridLocation);&#13;&#10;&#9;public void nonSelectedButtonPressed(Point gridLocation);&#13;&#10;}&#13;&#10;" Filename="IPieceObserver.java" Intrnl_Id="5"/>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;import game.GameBoard.User;&#13;&#10;&#13;&#10;import java.awt.Point;&#13;&#10;&#13;&#10;public interface IPiece {&#13;&#10;&#9;public boolean isSelected();&#13;&#10;&#9;public void setSelected(boolean selected);&#13;&#10;&#9;public void hide();&#13;&#10;&#9;public void show();&#13;&#10;&#9;public void setObserver(IPieceObserver observer);&#13;&#10;&#9;public void setLocation(Point location);&#13;&#10;&#9;public Point getLocation();&#13;&#10;&#9;public User getOwner();&#13;&#10;&#9;public void setOwner(User owner);&#13;&#10;&#9;public void setName(String name);&#13;&#10;&#9;public String getName();&#13;&#10;&#9;public int getRank();&#13;&#10;//&#9;/**&#13;&#10;//&#9; * Method called by the piece when it is pressed&#13;&#10;//&#9; */&#13;&#10;//&#9;public void processPress();&#13;&#10;}&#13;&#10;" Filename="IPiece.java" Intrnl_Id="6"/>
+<SrcFile Content="package game;&#13;&#10;import game.GameBoard.User;&#13;&#10;&#13;&#10;import java.awt.Dimension;&#13;&#10;import java.awt.Insets;&#13;&#10;import java.awt.Toolkit;&#13;&#10;&#13;&#10;import javax.swing.JFrame;&#13;&#10;&#13;&#10;&#13;&#10;public class GameBoardFrame extends JFrame {&#13;&#10;&#13;&#10;&#9;private PlayerBoard board;&#13;&#10;&#9;public GameBoardFrame(User owner) {&#13;&#10;&#9;&#9;this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);&#13;&#10;&#9;&#9;Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();&#13;&#10;&#9;&#9;this.setSize(screenSize.width/2, screenSize.height);&#13;&#10;&#9;&#9;board = new PlayerBoard(owner);&#13;&#10;&#9;&#9;this.add(board);&#13;&#10;&#9;&#9;this.setVisible(true);&#13;&#10;&#9;&#9;this.validate();&#13;&#10;&#9;}&#13;&#10;}&#13;&#10;" Filename="GameBoardFrame.java" Intrnl_Id="7"/>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;import java.awt.Color;&#13;&#10;import java.awt.Dimension;&#13;&#10;import java.awt.GridBagConstraints;&#13;&#10;import java.awt.GridBagLayout;&#13;&#10;import java.awt.Point;&#13;&#10;&#13;&#10;import javax.swing.JPanel;&#13;&#10;&#13;&#10;public class GameBoard extends JPanel implements IPieceObserver {&#13;&#10;&#13;&#10;&#9;public static enum User {PLAYER1, PLAYER2};&#13;&#10;&#9;private static final Dimension PIECE_SIZE = new Dimension(80, 80);&#13;&#10;&#9;protected AbstractPiece[][] pieces;&#13;&#10;&#9;protected AbstractPiece selectedPiece;&#13;&#10;&#9;private GridBagLayout layout;&#13;&#10;&#9;private User owner;&#13;&#10;&#13;&#10;&#9;public GameBoard(User owner) {&#13;&#10;&#9;&#9;super();&#13;&#10;&#9;&#9;this.owner = owner;&#13;&#10;&#9;&#9;pieces = new AbstractPiece[10][10];&#13;&#10;&#9;&#9;layout = new GridBagLayout();&#13;&#10;&#9;&#9;this.setLayout(layout);&#13;&#10;&#9;&#9;instantiateBoard();&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;protected void instantiateBoard() {&#13;&#10;&#9;&#9;for (int i = 0; i &lt; 10; i++) {&#13;&#10;&#9;&#9;&#9;for (int j = 0; j &lt; 10; j++) {&#13;&#10;&#9;&#9;&#9;&#9;AbstractPiece button = (AbstractPiece) PieceFactory.createClearPiece();&#13;&#10;&#9;&#9;&#9;&#9;addPiece(i, j, button);&#13;&#10;&#9;&#9;&#9;&#9;&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;for (int i = 0; i &lt; 10; i++) {&#13;&#10;&#9;&#9;&#9;AbstractPiece s = PieceFactory.createLieutenant();&#13;&#10;&#9;&#9;&#9;if (i % 2 == 0) {&#13;&#10;&#9;&#9;&#9;&#9;s.setOwner(User.PLAYER1);&#13;&#10;&#9;&#9;&#9;} else {&#13;&#10;&#9;&#9;&#9;&#9;s.setOwner(User.PLAYER2);&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;if(s.getOwner() != this.owner) {&#13;&#10;&#9;&#9;&#9;&#9;s.setBackground(Color.RED);&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;this.remove(pieces[i][0]);&#13;&#10;&#9;&#9;&#9;this.addPiece(i, 0, s);&#13;&#10;&#9;&#9;&#9;&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;//Initializing bomb for each player&#13;&#10;&#9;&#9;for (int i = 0; i &lt; 2; i++) {&#13;&#10;&#9;&#9;&#9;AbstractPiece b = new Bomb();&#13;&#10;&#9;&#9;&#9;Point p = new Point(i + 2, 2);&#13;&#10;&#9;&#9;&#9;if (i % 2 == 0){&#13;&#10;&#9;&#9;&#9;&#9;b.setOwner(User.PLAYER1);&#13;&#10;&#9;&#9;&#9;} else {&#13;&#10;&#9;&#9;&#9;&#9;b.setOwner(User.PLAYER2);&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;if(b.owner != this.owner) {&#13;&#10;&#9;&#9;&#9;&#9;b.setBackground(Color.RED);&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;this.remove(pieces[i + 2][2]);&#13;&#10;&#9;&#9;&#9;this.addPiece(i+2,  2, b);&#9;&#9;&#9;&#13;&#10;&#9;&#9;}&#9;&#13;&#10;&#9;}&#13;&#10;&#9;public void addPiece(int x, int y,&#13;&#10;&#9;&#9;&#9;AbstractPiece piece) {&#13;&#10;&#9;&#9;GridBagConstraints c = new GridBagConstraints();&#13;&#10;&#9;&#9;c.fill = GridBagConstraints.BOTH;&#13;&#10;&#9;&#9;piece.setPreferredSize(PIECE_SIZE);&#13;&#10;&#9;&#9;piece.setLocation(new Point(x, y));&#13;&#10;&#9;&#9;piece.setObserver(this);&#13;&#10;&#9;&#9;pieces[x][y] = piece;&#13;&#10;&#9;&#9;c.gridx = x;&#13;&#10;&#9;&#9;c.gridy = y;&#13;&#10;&#9;&#9;this.add(piece, c);&#13;&#10;&#9;&#9;piece.validate();&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void selectedButtonPressed(Point gridLocation) {&#13;&#10;&#9;&#9;if(selectedPiece !=null) {&#13;&#10;&#9;&#9;&#9;if(selectedPiece.equals(pieces[gridLocation.x][gridLocation.y])) {&#13;&#10;&#9;&#9;&#9;&#9;selectedPiece.setSelected(false);&#13;&#10;&#9;&#9;&#9;} else if (isEnemey(selectedPiece, pieces[gridLocation.x][gridLocation.y])) {&#13;&#10;&#9;&#9;&#9;&#9;attack(selectedPiece, pieces[gridLocation.x][gridLocation.y]);&#13;&#10;&#9;&#9;&#9;} else {&#13;&#10;&#9;&#9;&#9;&#9;swapPieces(selectedPiece, pieces[gridLocation.x][gridLocation.y]);&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;for(AbstractPiece[] pRow: pieces) {&#13;&#10;&#9;&#9;&#9;for(AbstractPiece p: pRow) {&#13;&#10;&#9;&#9;&#9;p.setSelected(false);&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;selectedPiece = null;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;private boolean isEnemey(AbstractPiece p1, AbstractPiece p2) {&#13;&#10;&#9;&#9;return p1.getOwner() != null &amp;&amp; !(p1.getOwner().equals(p2.getOwner())) &amp;&amp; p2.getOwner() != null;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void nonSelectedButtonPressed(Point gridLocation) {&#13;&#10;&#9;&#9;for(AbstractPiece[] pRow: pieces) {&#13;&#10;&#9;&#9;&#9;for(AbstractPiece p: pRow) {&#13;&#10;&#9;&#9;&#9;p.setSelected(false);&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;AbstractPiece nonSelected = pieces[gridLocation.x][gridLocation.y];&#13;&#10;&#9;&#9;if(nonSelected.getOwner() != this.owner) {&#13;&#10;&#9;&#9;&#9;return;&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;this.selectedPiece = nonSelected;&#13;&#10;&#9;&#9;&#9;nonSelected.setSelected(true);&#13;&#10;&#9;&#9;&#9;int x = nonSelected.getLocation().x;&#13;&#10;&#9;&#9;&#9;int y = nonSelected.getLocation().y;&#13;&#10;&#9;&#9;&#9;if (x &lt; 9) {&#13;&#10;&#9;&#9;&#9;&#9;AbstractPiece piece = pieces[x + 1][y];&#13;&#10;&#9;&#9;&#9;&#9;if(selectedPiece.getOwner() != piece.getOwner()) {&#13;&#10;&#9;&#9;&#9;&#9;&#9;piece.setSelected(true);&#13;&#10;&#9;&#9;&#9;&#9;}&#9;&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;if (x &gt; 0) {&#13;&#10;&#9;&#9;&#9;&#9;AbstractPiece piece = pieces[x - 1][y];&#13;&#10;&#9;&#9;&#9;&#9;if(selectedPiece.getOwner() != piece.getOwner()) {&#13;&#10;&#9;&#9;&#9;&#9;&#9;piece.setSelected(true);&#13;&#10;&#9;&#9;&#9;&#9;}&#9;&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;if (y &gt; 0) {&#13;&#10;&#9;&#9;&#9;&#9;AbstractPiece piece = pieces[x][y - 1];&#13;&#10;&#9;&#9;&#9;&#9;if(selectedPiece.getOwner() != piece.getOwner()) {&#13;&#10;&#9;&#9;&#9;&#9;&#9;piece.setSelected(true);&#13;&#10;&#9;&#9;&#9;&#9;}&#9;&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;if (y &lt; 9) {&#13;&#10;&#9;&#9;&#9;&#9;AbstractPiece piece = pieces[x][y + 1];&#13;&#10;&#9;&#9;&#9;&#9;if(selectedPiece.getOwner() != piece.getOwner()) {&#13;&#10;&#9;&#9;&#9;&#9;&#9;piece.setSelected(true);&#13;&#10;&#9;&#9;&#9;&#9;}&#9;&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;private void swapPieces(AbstractPiece p1, AbstractPiece p2) {&#13;&#10;&#9;&#9;Point point1 = p1.getLocation();&#13;&#10;&#9;&#9;Point point2 = p2.getLocation();&#13;&#10;&#9;&#9;this.remove(p1);&#13;&#10;&#9;&#9;this.remove(p2);&#13;&#10;&#9;&#9;p1.setLocation(point2);&#13;&#10;&#9;&#9;p2.setLocation(point1);&#13;&#10;&#9;&#9;GridBagConstraints c = new GridBagConstraints();&#13;&#10;&#9;&#9;c.fill = GridBagConstraints.BOTH;&#13;&#10;&#9;&#9;c.gridx = point1.x;&#13;&#10;&#9;&#9;c.gridy = point1.y;&#13;&#10;&#9;&#9;pieces[point1.x][point1.y] = p2;&#13;&#10;&#9;&#9;this.add(p2, c);&#13;&#10;&#9;&#9;c.gridx = point2.x;&#13;&#10;&#9;&#9;c.gridy = point2.y;&#13;&#10;&#9;&#9;pieces[point2.x][point2.y] = p1;&#13;&#10;&#9;&#9;this.add(p1, c);&#13;&#10;&#9;&#9;validate();&#13;&#10;&#9;&#9;repaint();&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public String attack(AbstractPiece p1, AbstractPiece p2) {&#13;&#10;&#9;&#9; if (p2 instanceof Bomb) {&#13;&#10;&#9;&#9;&#9; if (p1.rank == 3) {&#13;&#10;&#9;&#9;&#9;&#9; swapPieces(p1, p2);&#13;&#10;&#9;&#9;&#9;&#9; removePiece(p2);&#13;&#10;&#9;&#9;&#9;&#9; return p1.getOwner() + &quot;defused a&quot; + p2.getOwner() + &quot;bomb&quot;;&#13;&#10;&#9;&#9;&#9; } else {&#13;&#10;&#9;&#9;&#9;&#9;removePiece(p1);&#13;&#10;&#9;&#9;&#9;&#9;removePiece(p2);&#13;&#10;&#9;&#9;&#9;&#9;return &quot;A bomb has exploded!&quot;;&#13;&#10;&#9;&#9;&#9; }&#13;&#10;&#9;&#9;} else if (p2 instanceof Flag) {&#13;&#10;&#9;&#9;&#9;swapPieces(p1, p2);&#13;&#10;&#9;&#9;&#9;removePiece(p2);&#13;&#10;&#9;&#9;&#9;return p1.getOwner() + &quot;has defeated&quot; + p2.getOwner();&#13;&#10;&#9;&#9;} else if ((p1.rank == 0) &amp;&amp; (p2.rank == 9)) { //Spy attacking Marshall case&#13;&#10;&#9;&#9;&#9;swapPieces(p1, p2);&#13;&#10;&#9;&#9;&#9;removePiece(p2);&#13;&#10;&#9;&#9;} else if (p1.rank &gt; p2.rank) {&#13;&#10;&#9;&#9;&#9;swapPieces(p1, p2);&#13;&#10;&#9;&#9;&#9;removePiece(p2);&#13;&#10;&#9;&#9;&#9;return p1.getOwner() + &quot; beat &quot; + p2.getOwner();&#13;&#10;&#9;&#9;} else if (p1.rank &lt; p2.rank) {&#13;&#10;&#9;&#9;&#9;removePiece(p1);&#13;&#10;&#9;&#9;&#9;return p2.getOwner() + &quot; beat &quot; + p1.getOwner();&#13;&#10;&#9;&#9;} else if (p1.rank == p2.rank) {&#13;&#10;&#9;&#9;&#9;removePiece(p1);&#13;&#10;&#9;&#9;&#9;removePiece(p2);&#13;&#10;&#9;&#9;&#9;return p1.getOwner() + &quot; tied &quot; + p2.getOwner();&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;return &quot;Error: case not handled&quot;;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;private void removePiece(AbstractPiece p) {&#13;&#10;&#9;&#9;AbstractPiece clear = new ClearPiece();&#13;&#10;&#9;&#9;clear.setLocation(p.getLocation());&#13;&#10;&#9;&#9;clear.setPreferredSize(PIECE_SIZE);&#13;&#10;&#9;&#9;clear.setObserver(this);&#13;&#10;&#9;&#9;Point point1 = p.getLocation();&#13;&#10;&#9;&#9;this.remove(p);&#13;&#10;&#9;&#9;p.setLocation(null);&#13;&#10;&#9;&#9;clear.setLocation(point1);&#13;&#10;&#9;&#9;GridBagConstraints c = new GridBagConstraints();&#13;&#10;&#9;&#9;c.fill = GridBagConstraints.BOTH;&#13;&#10;&#9;&#9;c.gridx = point1.x;&#13;&#10;&#9;&#9;c.gridy = point1.y;&#13;&#10;&#9;&#9;pieces[point1.x][point1.y] = clear;&#13;&#10;&#9;&#9;this.add(clear, c);&#13;&#10;&#9;&#9;validate();&#13;&#10;&#9;&#9;repaint();&#13;&#10;&#9;}&#13;&#10;}&#13;&#10;" Filename="GameBoard.java" Intrnl_Id="8"/>
+<SrcFile Content="package game;&#13;&#10;import game.GameBoard.User;&#13;&#10;&#13;&#10;import javax.swing.JFrame;&#13;&#10;&#13;&#10;public class GameApplet {&#13;&#10;&#13;&#10;&#9;public static void main(String[] args) {&#13;&#10;&#9;&#9;JFrame player1Frame = new GameBoardFrame(User.PLAYER1);&#13;&#10;&#9;&#9;JFrame player2Frame = new GameBoardFrame(User.PLAYER2);&#13;&#10;&#9;&#9;player2Frame.setLocation(player1Frame.getX() + player1Frame.getWidth(), player2Frame.getY());&#13;&#10;&#9;}&#13;&#10;}&#13;&#10;" Filename="GameApplet.java" Intrnl_Id="9"/>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;import java.awt.Color;&#13;&#10;import java.awt.event.ActionEvent;&#13;&#10;&#13;&#10;public class Flag extends AbstractPiece{&#13;&#10;&#9;&#13;&#10;&#9;public Flag() {&#13;&#10;&#9;&#9;setBackground(Color.ORANGE); //Will be team's color&#13;&#10;&#9;&#9;this.rank = rank;&#13;&#10;&#9;&#9;addActionListener(this);&#13;&#10;&#9;}&#13;&#10;&#9;@Override&#13;&#10;&#9;public void actionPerformed(ActionEvent e) {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setSelected(boolean selected) {&#13;&#10;&#9;&#9;this.selected = selected;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void hide() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void show() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="Flag.java" Intrnl_Id="10"/>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;import game.GameBoard.User;&#13;&#10;&#13;&#10;import java.awt.Color;&#13;&#10;import java.awt.event.ActionEvent;&#13;&#10;&#13;&#10;import javax.swing.border.LineBorder;&#13;&#10;&#13;&#10;public class ClearPiece extends AbstractPiece {&#13;&#10;&#9;&#13;&#10;&#9;private int index;&#13;&#10;&#9;&#13;&#10;&#9;public ClearPiece() {&#13;&#10;&#9;&#9;addActionListener(this);&#13;&#10;&#9;&#9;setBackground(Color.WHITE);&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void actionPerformed(ActionEvent arg0) {&#13;&#10;&#9;&#9;if(selected) {&#13;&#10;&#9;&#9;&#9;observer.selectedButtonPressed(location);&#13;&#10;&#9;&#9;}&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setSelected(boolean selected) {&#13;&#10;&#9;&#9;if(selected) {&#13;&#10;&#9;&#9;&#9;this.setBorder(new LineBorder(Color.RED, 5));&#13;&#10;&#9;&#9;} else {&#13;&#10;&#9;&#9;&#9;this.setBorder(new LineBorder(Color.GRAY, 1));&#13;&#10;&#9;&#9;}&#13;&#10;&#13;&#10;&#9;&#9;this.selected = selected;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void hide() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void show() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setOwner(User u) {&#13;&#10;&#9;&#9;this.owner = null;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;@Override&#13;&#10;&#9;public User getOwner() {&#13;&#10;&#9;&#9;return null;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="ClearPiece.java" Intrnl_Id="11"/>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;import java.awt.Color;&#13;&#10;import java.awt.Point;&#13;&#10;import java.awt.event.ActionEvent;&#13;&#10;&#13;&#10;import javax.swing.border.LineBorder;&#13;&#10;&#13;&#10;public class Bomb extends AbstractPiece{&#13;&#10;&#9;&#13;&#10;&#9;public Bomb() {&#13;&#10;&#9;&#9;setText(&quot;Bomb&quot;);&#13;&#10;&#9;&#9;setBackground(Color.GREEN);&#13;&#10;&#9;&#9;this.rank = rank;&#13;&#10;&#9;&#9;addActionListener(this);&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void actionPerformed(ActionEvent e) {&#13;&#10;&#9;&#9;if (selected) {&#13;&#10;&#9;&#9;&#9;observer.selectedButtonPressed(location);&#13;&#10;&#9;&#9;} else {&#13;&#10;&#9;&#9;&#9;//observer.nonSelectedButtonPressed(location);&#13;&#10;&#9;&#9;}&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setSelected(boolean selected) {&#13;&#10;&#9;&#9;if (selected) {&#13;&#10;&#9;&#9;&#9;this.setBorder(new LineBorder(Color.YELLOW, 5));&#13;&#10;&#9;&#9;} else {&#13;&#10;&#9;&#9;&#9;this.setBorder(new LineBorder(Color.GRAY, 1));&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;this.selected = selected;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void hide() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void show() {&#13;&#10;&#9;&#9;// TODO Auto-generated method stub&#13;&#10;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;}&#13;&#10;" Filename="Bomb.java" Intrnl_Id="12"/>
+<SrcFile Content="package game;&#13;&#10;&#13;&#10;import game.GameBoard.User;&#13;&#10;&#13;&#10;import java.awt.Point;&#13;&#10;import java.awt.event.ActionEvent;&#13;&#10;import java.awt.event.ActionListener;&#13;&#10;&#13;&#10;import javax.swing.JButton;&#13;&#10;&#13;&#10;public abstract class AbstractPiece extends JButton implements IPiece, ActionListener {&#13;&#10;&#13;&#10;&#9;protected Boolean selected = false;&#13;&#10;&#9;protected Point location = new Point();&#13;&#10;&#9;protected IPieceObserver observer;&#13;&#10;&#9;protected int rank;&#13;&#10;&#9;protected int boardIndex = 0;&#13;&#10;&#9;protected User owner;&#13;&#10;&#9;protected String name;&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public abstract void actionPerformed(ActionEvent e);&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public abstract void setSelected(boolean selected);&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public abstract void hide();&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public abstract void show();&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public boolean isSelected() {&#13;&#10;&#9;&#9;return selected;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setObserver(IPieceObserver observer) {&#13;&#10;&#9;&#9;this.observer = observer;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setLocation(Point location) {&#13;&#10;&#9;&#9;this.location = location;&#13;&#10;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public Point getLocation() {&#13;&#10;&#9;&#9;return this.location;&#13;&#10;&#9;} &#13;&#10;&#9;&#13;&#10;&#9;@Override&#13;&#10;&#9;public User getOwner() {&#13;&#10;&#9;&#9;return owner;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void setOwner(User owner) {&#13;&#10;&#9;&#9;this.owner = owner;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public void setName(String name) {&#13;&#10;&#9;&#9;this.name = name;&#13;&#10;&#9;&#9;this.setText(&quot;&quot; + name + &quot; &quot; + &quot;(&quot; + rank + &quot;)&quot;);&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public String getName() {&#13;&#10;&#9;&#9;return name;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public int getRank() {&#13;&#10;&#9;&#9;return rank;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="AbstractPiece.java" Intrnl_Id="13"/>
+</SrcFileList>
+<CritList>
+<CritListEntry Name="org.codecover.model.utils.criteria.LoopCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.BranchCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.ConditionCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.SynchronizedStatementCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.QMOCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.StatementCoverage" PluginName="org.codecover"/>
+</CritList>
+<BoolOpList>
+<BoolOp Arity="2" Intrnl_Id="14" Name="conditional and (&amp;&amp;)">
+<BoolAssgnmntBoolMapList>
+<MapEntry BoolAssgnmnt="10" Value="false"/>
+<MapEntry BoolAssgnmnt="02" Value="false"/>
+<MapEntry BoolAssgnmnt="11" Value="true"/>
+</BoolAssgnmntBoolMapList>
+</BoolOp>
+</BoolOpList>
+<HierarchyLvlTypeList>
+<HierarchyLvlType EnglishName="enumeration" IntrnlName="enum" Intrnl_Id="15"/>
+<HierarchyLvlType EnglishName="package" IntrnlName="package" Intrnl_Id="16"/>
+<HierarchyLvlType EnglishName="class" IntrnlName="class" Intrnl_Id="17"/>
+<HierarchyLvlType EnglishName="method" IntrnlName="method" Intrnl_Id="18"/>
+<HierarchyLvlType EnglishName="default package" IntrnlName="default package" Intrnl_Id="19"/>
+<HierarchyLvlType EnglishName="interface" IntrnlName="interface" Intrnl_Id="20"/>
+</HierarchyLvlTypeList>
+<MASTRoot>
+<HierarchyLvl HierarchyLvlId="3470" HierarchyLvlTypeId="19" Intrnl_Id="21" Name="default package">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="3469" HierarchyLvlTypeId="16" Intrnl_Id="22" Name="game">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="3376" HierarchyLvlTypeId="17" Intrnl_Id="23" Name="Soldier">
+<Header>
+<Loc EndOffset="160" SrcFileId="1" StartOffset="118"/>
+</Header>
+<LocList>
+<Loc EndOffset="874" SrcFileId="1" StartOffset="118"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3371" HierarchyLvlTypeId="18" Intrnl_Id="24" Name="Soldier">
+<Header>
+<Loc EndOffset="191" SrcFileId="1" StartOffset="167"/>
+</Header>
+<LocList>
+<Loc EndOffset="277" SrcFileId="1" StartOffset="167"/>
+</LocList>
+<StmntSeq Intrnl_Id="25">
+<LocList>
+<Loc EndOffset="224" SrcFileId="1" StartOffset="197"/>
+<Loc EndOffset="245" SrcFileId="1" StartOffset="228"/>
+<Loc EndOffset="273" SrcFileId="1" StartOffset="249"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.Soldier.java" Intrnl_Id="26">
+<LocList>
+<Loc EndOffset="224" SrcFileId="1" StartOffset="197"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.Soldier.java" Intrnl_Id="27">
+<LocList>
+<Loc EndOffset="245" SrcFileId="1" StartOffset="228"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="game.Soldier.java" Intrnl_Id="28">
+<LocList>
+<Loc EndOffset="273" SrcFileId="1" StartOffset="249"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3372" HierarchyLvlTypeId="18" Intrnl_Id="29" Name="setSelected">
+<Header>
+<Loc EndOffset="335" SrcFileId="1" StartOffset="282"/>
+</Header>
+<LocList>
+<Loc EndOffset="510" SrcFileId="1" StartOffset="282"/>
+</LocList>
+<StmntSeq Intrnl_Id="30">
+<LocList>
+<Loc EndOffset="477" SrcFileId="1" StartOffset="341"/>
+<Loc EndOffset="506" SrcFileId="1" StartOffset="481"/>
+</LocList>
+<CondStmnt CovItemId="S4" CovItemPrefix="game.Soldier.java" Intrnl_Id="31">
+<Branch CovItemId="B1" CovItemPrefix="game.Soldier.java" Implct="false" Intrnl_Id="32">
+<Cond/>
+<LocList>
+<Loc EndOffset="414" SrcFileId="1" StartOffset="355"/>
+</LocList>
+<StmntSeq Intrnl_Id="33">
+<LocList>
+<Loc EndOffset="409" SrcFileId="1" StartOffset="361"/>
+</LocList>
+<BasicStmnt CovItemId="S5" CovItemPrefix="game.Soldier.java" Intrnl_Id="34">
+<LocList>
+<Loc EndOffset="409" SrcFileId="1" StartOffset="361"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="game.Soldier.java" Implct="false" Intrnl_Id="35">
+<Cond>
+<Loc EndOffset="419" SrcFileId="1" StartOffset="415"/>
+</Cond>
+<LocList>
+<Loc EndOffset="477" SrcFileId="1" StartOffset="420"/>
+</LocList>
+<StmntSeq Intrnl_Id="36">
+<LocList>
+<Loc EndOffset="472" SrcFileId="1" StartOffset="426"/>
+</LocList>
+<BasicStmnt CovItemId="S6" CovItemPrefix="game.Soldier.java" Intrnl_Id="37">
+<LocList>
+<Loc EndOffset="472" SrcFileId="1" StartOffset="426"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="343" SrcFileId="1" StartOffset="341"/>
+<LocList>
+<Loc EndOffset="477" SrcFileId="1" StartOffset="341"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="game.Soldier.java" Intrnl_Id="38">
+<BasicBoolTerm Intrnl_Id="39">
+<LocList>
+<Loc EndOffset="353" SrcFileId="1" StartOffset="345"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="game.Soldier.java" Intrnl_Id="40">
+<LocList>
+<Loc EndOffset="506" SrcFileId="1" StartOffset="481"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3373" HierarchyLvlTypeId="18" Intrnl_Id="41" Name="hide">
+<Header>
+<Loc EndOffset="545" SrcFileId="1" StartOffset="515"/>
+</Header>
+<LocList>
+<Loc EndOffset="591" SrcFileId="1" StartOffset="515"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3374" HierarchyLvlTypeId="18" Intrnl_Id="42" Name="show">
+<Header>
+<Loc EndOffset="626" SrcFileId="1" StartOffset="596"/>
+</Header>
+<LocList>
+<Loc EndOffset="672" SrcFileId="1" StartOffset="596"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3375" HierarchyLvlTypeId="18" Intrnl_Id="43" Name="actionPerformed">
+<Header>
+<Loc EndOffset="731" SrcFileId="1" StartOffset="677"/>
+</Header>
+<LocList>
+<Loc EndOffset="868" SrcFileId="1" StartOffset="677"/>
+</LocList>
+<StmntSeq Intrnl_Id="44">
+<LocList>
+<Loc EndOffset="864" SrcFileId="1" StartOffset="737"/>
+</LocList>
+<CondStmnt CovItemId="S8" CovItemPrefix="game.Soldier.java" Intrnl_Id="45">
+<Branch CovItemId="B3" CovItemPrefix="game.Soldier.java" Implct="false" Intrnl_Id="46">
+<Cond/>
+<LocList>
+<Loc EndOffset="803" SrcFileId="1" StartOffset="751"/>
+</LocList>
+<StmntSeq Intrnl_Id="47">
+<LocList>
+<Loc EndOffset="798" SrcFileId="1" StartOffset="757"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="game.Soldier.java" Intrnl_Id="48">
+<LocList>
+<Loc EndOffset="798" SrcFileId="1" StartOffset="757"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="game.Soldier.java" Implct="false" Intrnl_Id="49">
+<Cond>
+<Loc EndOffset="808" SrcFileId="1" StartOffset="804"/>
+</Cond>
+<LocList>
+<Loc EndOffset="864" SrcFileId="1" StartOffset="809"/>
+</LocList>
+<StmntSeq Intrnl_Id="50">
+<LocList>
+<Loc EndOffset="859" SrcFileId="1" StartOffset="815"/>
+</LocList>
+<BasicStmnt CovItemId="S10" CovItemPrefix="game.Soldier.java" Intrnl_Id="51">
+<LocList>
+<Loc EndOffset="859" SrcFileId="1" StartOffset="815"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="739" SrcFileId="1" StartOffset="737"/>
+<LocList>
+<Loc EndOffset="864" SrcFileId="1" StartOffset="737"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="game.Soldier.java" Intrnl_Id="52">
+<BasicBoolTerm Intrnl_Id="53">
+<LocList>
+<Loc EndOffset="749" SrcFileId="1" StartOffset="741"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3382" HierarchyLvlTypeId="17" Intrnl_Id="54" Name="PlayerBoard">
+<Header>
+<Loc EndOffset="178" SrcFileId="2" StartOffset="139"/>
+</Header>
+<LocList>
+<Loc EndOffset="783" SrcFileId="2" StartOffset="139"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3377" HierarchyLvlTypeId="18" Intrnl_Id="55" Name="PlayerBoard">
+<Header>
+<Loc EndOffset="265" SrcFileId="2" StartOffset="235"/>
+</Header>
+<LocList>
+<Loc EndOffset="540" SrcFileId="2" StartOffset="235"/>
+</LocList>
+<StmntSeq Intrnl_Id="56">
+<LocList>
+<Loc EndOffset="292" SrcFileId="2" StartOffset="271"/>
+<Loc EndOffset="337" SrcFileId="2" StartOffset="296"/>
+<Loc EndOffset="364" SrcFileId="2" StartOffset="341"/>
+<Loc EndOffset="409" SrcFileId="2" StartOffset="368"/>
+<Loc EndOffset="450" SrcFileId="2" StartOffset="413"/>
+<Loc EndOffset="490" SrcFileId="2" StartOffset="454"/>
+<Loc EndOffset="536" SrcFileId="2" StartOffset="494"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="57">
+<LocList>
+<Loc EndOffset="292" SrcFileId="2" StartOffset="271"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="58">
+<LocList>
+<Loc EndOffset="337" SrcFileId="2" StartOffset="296"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="59">
+<LocList>
+<Loc EndOffset="364" SrcFileId="2" StartOffset="341"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="60">
+<LocList>
+<Loc EndOffset="409" SrcFileId="2" StartOffset="368"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S5" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="61">
+<LocList>
+<Loc EndOffset="450" SrcFileId="2" StartOffset="413"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S6" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="62">
+<LocList>
+<Loc EndOffset="490" SrcFileId="2" StartOffset="454"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="63">
+<LocList>
+<Loc EndOffset="536" SrcFileId="2" StartOffset="494"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3378" HierarchyLvlTypeId="18" Intrnl_Id="64" Name="getOwner">
+<Header>
+<Loc EndOffset="568" SrcFileId="2" StartOffset="546"/>
+</Header>
+<LocList>
+<Loc EndOffset="591" SrcFileId="2" StartOffset="546"/>
+</LocList>
+<StmntSeq Intrnl_Id="65">
+<LocList>
+<Loc EndOffset="587" SrcFileId="2" StartOffset="574"/>
+</LocList>
+<BasicStmnt CovItemId="S8" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="66">
+<LocList>
+<Loc EndOffset="587" SrcFileId="2" StartOffset="574"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3379" HierarchyLvlTypeId="18" Intrnl_Id="67" Name="setOwner">
+<Header>
+<Loc EndOffset="626" SrcFileId="2" StartOffset="594"/>
+</Header>
+<LocList>
+<Loc EndOffset="655" SrcFileId="2" StartOffset="594"/>
+</LocList>
+<StmntSeq Intrnl_Id="68">
+<LocList>
+<Loc EndOffset="651" SrcFileId="2" StartOffset="632"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="69">
+<LocList>
+<Loc EndOffset="651" SrcFileId="2" StartOffset="632"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3380" HierarchyLvlTypeId="18" Intrnl_Id="70" Name="getBoard">
+<Header>
+<Loc EndOffset="688" SrcFileId="2" StartOffset="661"/>
+</Header>
+<LocList>
+<Loc EndOffset="711" SrcFileId="2" StartOffset="661"/>
+</LocList>
+<StmntSeq Intrnl_Id="71">
+<LocList>
+<Loc EndOffset="707" SrcFileId="2" StartOffset="694"/>
+</LocList>
+<BasicStmnt CovItemId="S10" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="72">
+<LocList>
+<Loc EndOffset="707" SrcFileId="2" StartOffset="694"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3381" HierarchyLvlTypeId="18" Intrnl_Id="73" Name="setBoard">
+<Header>
+<Loc EndOffset="751" SrcFileId="2" StartOffset="714"/>
+</Header>
+<LocList>
+<Loc EndOffset="780" SrcFileId="2" StartOffset="714"/>
+</LocList>
+<StmntSeq Intrnl_Id="74">
+<LocList>
+<Loc EndOffset="776" SrcFileId="2" StartOffset="757"/>
+</LocList>
+<BasicStmnt CovItemId="S11" CovItemPrefix="game.PlayerBoard.java" Intrnl_Id="75">
+<LocList>
+<Loc EndOffset="776" SrcFileId="2" StartOffset="757"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3396" HierarchyLvlTypeId="17" Intrnl_Id="76" Name="PieceFactory">
+<Header>
+<Loc EndOffset="42" SrcFileId="3" StartOffset="17"/>
+</Header>
+<LocList>
+<Loc EndOffset="1785" SrcFileId="3" StartOffset="17"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3383" HierarchyLvlTypeId="18" Intrnl_Id="77" Name="createBomb">
+<Header>
+<Loc EndOffset="83" SrcFileId="3" StartOffset="50"/>
+</Header>
+<LocList>
+<Loc EndOffset="166" SrcFileId="3" StartOffset="50"/>
+</LocList>
+<StmntSeq Intrnl_Id="78">
+<LocList>
+<Loc EndOffset="121" SrcFileId="3" StartOffset="89"/>
+<Loc EndOffset="146" SrcFileId="3" StartOffset="125"/>
+<Loc EndOffset="162" SrcFileId="3" StartOffset="150"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="79">
+<LocList>
+<Loc EndOffset="121" SrcFileId="3" StartOffset="89"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="80">
+<LocList>
+<Loc EndOffset="146" SrcFileId="3" StartOffset="125"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="81">
+<LocList>
+<Loc EndOffset="162" SrcFileId="3" StartOffset="150"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3384" HierarchyLvlTypeId="18" Intrnl_Id="82" Name="createClearPiece">
+<Header>
+<Loc EndOffset="211" SrcFileId="3" StartOffset="172"/>
+</Header>
+<LocList>
+<Loc EndOffset="245" SrcFileId="3" StartOffset="172"/>
+</LocList>
+<StmntSeq Intrnl_Id="83">
+<LocList>
+<Loc EndOffset="241" SrcFileId="3" StartOffset="217"/>
+</LocList>
+<BasicStmnt CovItemId="S4" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="84">
+<LocList>
+<Loc EndOffset="241" SrcFileId="3" StartOffset="217"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3385" HierarchyLvlTypeId="18" Intrnl_Id="85" Name="createFlag">
+<Header>
+<Loc EndOffset="284" SrcFileId="3" StartOffset="251"/>
+</Header>
+<LocList>
+<Loc EndOffset="367" SrcFileId="3" StartOffset="251"/>
+</LocList>
+<StmntSeq Intrnl_Id="86">
+<LocList>
+<Loc EndOffset="322" SrcFileId="3" StartOffset="290"/>
+<Loc EndOffset="347" SrcFileId="3" StartOffset="326"/>
+<Loc EndOffset="363" SrcFileId="3" StartOffset="351"/>
+</LocList>
+<BasicStmnt CovItemId="S5" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="87">
+<LocList>
+<Loc EndOffset="322" SrcFileId="3" StartOffset="290"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S6" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="88">
+<LocList>
+<Loc EndOffset="347" SrcFileId="3" StartOffset="326"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="89">
+<LocList>
+<Loc EndOffset="363" SrcFileId="3" StartOffset="351"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3386" HierarchyLvlTypeId="18" Intrnl_Id="90" Name="createSpy">
+<Header>
+<Loc EndOffset="405" SrcFileId="3" StartOffset="373"/>
+</Header>
+<LocList>
+<Loc EndOffset="488" SrcFileId="3" StartOffset="373"/>
+</LocList>
+<StmntSeq Intrnl_Id="91">
+<LocList>
+<Loc EndOffset="446" SrcFileId="3" StartOffset="411"/>
+<Loc EndOffset="469" SrcFileId="3" StartOffset="450"/>
+<Loc EndOffset="484" SrcFileId="3" StartOffset="473"/>
+</LocList>
+<BasicStmnt CovItemId="S8" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="92">
+<LocList>
+<Loc EndOffset="446" SrcFileId="3" StartOffset="411"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S9" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="93">
+<LocList>
+<Loc EndOffset="469" SrcFileId="3" StartOffset="450"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S10" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="94">
+<LocList>
+<Loc EndOffset="484" SrcFileId="3" StartOffset="473"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3387" HierarchyLvlTypeId="18" Intrnl_Id="95" Name="createMarshall">
+<Header>
+<Loc EndOffset="531" SrcFileId="3" StartOffset="494"/>
+</Header>
+<LocList>
+<Loc EndOffset="631" SrcFileId="3" StartOffset="494"/>
+</LocList>
+<StmntSeq Intrnl_Id="96">
+<LocList>
+<Loc EndOffset="576" SrcFileId="3" StartOffset="537"/>
+<Loc EndOffset="608" SrcFileId="3" StartOffset="580"/>
+<Loc EndOffset="627" SrcFileId="3" StartOffset="612"/>
+</LocList>
+<BasicStmnt CovItemId="S11" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="97">
+<LocList>
+<Loc EndOffset="576" SrcFileId="3" StartOffset="537"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S12" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="98">
+<LocList>
+<Loc EndOffset="608" SrcFileId="3" StartOffset="580"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S13" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="99">
+<LocList>
+<Loc EndOffset="627" SrcFileId="3" StartOffset="612"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3388" HierarchyLvlTypeId="18" Intrnl_Id="100" Name="createGeneral">
+<Header>
+<Loc EndOffset="673" SrcFileId="3" StartOffset="637"/>
+</Header>
+<LocList>
+<Loc EndOffset="772" SrcFileId="3" StartOffset="637"/>
+</LocList>
+<StmntSeq Intrnl_Id="101">
+<LocList>
+<Loc EndOffset="718" SrcFileId="3" StartOffset="679"/>
+<Loc EndOffset="749" SrcFileId="3" StartOffset="722"/>
+<Loc EndOffset="768" SrcFileId="3" StartOffset="753"/>
+</LocList>
+<BasicStmnt CovItemId="S14" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="102">
+<LocList>
+<Loc EndOffset="718" SrcFileId="3" StartOffset="679"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S15" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="103">
+<LocList>
+<Loc EndOffset="749" SrcFileId="3" StartOffset="722"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S16" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="104">
+<LocList>
+<Loc EndOffset="768" SrcFileId="3" StartOffset="753"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3389" HierarchyLvlTypeId="18" Intrnl_Id="105" Name="createColonel">
+<Header>
+<Loc EndOffset="814" SrcFileId="3" StartOffset="778"/>
+</Header>
+<LocList>
+<Loc EndOffset="913" SrcFileId="3" StartOffset="778"/>
+</LocList>
+<StmntSeq Intrnl_Id="106">
+<LocList>
+<Loc EndOffset="859" SrcFileId="3" StartOffset="820"/>
+<Loc EndOffset="890" SrcFileId="3" StartOffset="863"/>
+<Loc EndOffset="909" SrcFileId="3" StartOffset="894"/>
+</LocList>
+<BasicStmnt CovItemId="S17" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="107">
+<LocList>
+<Loc EndOffset="859" SrcFileId="3" StartOffset="820"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S18" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="108">
+<LocList>
+<Loc EndOffset="890" SrcFileId="3" StartOffset="863"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S19" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="109">
+<LocList>
+<Loc EndOffset="909" SrcFileId="3" StartOffset="894"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3390" HierarchyLvlTypeId="18" Intrnl_Id="110" Name="createMajor">
+<Header>
+<Loc EndOffset="953" SrcFileId="3" StartOffset="919"/>
+</Header>
+<LocList>
+<Loc EndOffset="1050" SrcFileId="3" StartOffset="919"/>
+</LocList>
+<StmntSeq Intrnl_Id="111">
+<LocList>
+<Loc EndOffset="998" SrcFileId="3" StartOffset="959"/>
+<Loc EndOffset="1027" SrcFileId="3" StartOffset="1002"/>
+<Loc EndOffset="1046" SrcFileId="3" StartOffset="1031"/>
+</LocList>
+<BasicStmnt CovItemId="S20" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="112">
+<LocList>
+<Loc EndOffset="998" SrcFileId="3" StartOffset="959"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S21" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="113">
+<LocList>
+<Loc EndOffset="1027" SrcFileId="3" StartOffset="1002"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S22" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="114">
+<LocList>
+<Loc EndOffset="1046" SrcFileId="3" StartOffset="1031"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3391" HierarchyLvlTypeId="18" Intrnl_Id="115" Name="createCaptain">
+<Header>
+<Loc EndOffset="1098" SrcFileId="3" StartOffset="1055"/>
+</Header>
+<LocList>
+<Loc EndOffset="1197" SrcFileId="3" StartOffset="1055"/>
+</LocList>
+<StmntSeq Intrnl_Id="116">
+<LocList>
+<Loc EndOffset="1143" SrcFileId="3" StartOffset="1104"/>
+<Loc EndOffset="1174" SrcFileId="3" StartOffset="1147"/>
+<Loc EndOffset="1193" SrcFileId="3" StartOffset="1178"/>
+</LocList>
+<BasicStmnt CovItemId="S23" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="117">
+<LocList>
+<Loc EndOffset="1143" SrcFileId="3" StartOffset="1104"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S24" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="118">
+<LocList>
+<Loc EndOffset="1174" SrcFileId="3" StartOffset="1147"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S25" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="119">
+<LocList>
+<Loc EndOffset="1193" SrcFileId="3" StartOffset="1178"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3392" HierarchyLvlTypeId="18" Intrnl_Id="120" Name="createLieutenant">
+<Header>
+<Loc EndOffset="1248" SrcFileId="3" StartOffset="1202"/>
+</Header>
+<LocList>
+<Loc EndOffset="1345" SrcFileId="3" StartOffset="1202"/>
+</LocList>
+<StmntSeq Intrnl_Id="121">
+<LocList>
+<Loc EndOffset="1293" SrcFileId="3" StartOffset="1254"/>
+<Loc EndOffset="1322" SrcFileId="3" StartOffset="1297"/>
+<Loc EndOffset="1341" SrcFileId="3" StartOffset="1326"/>
+</LocList>
+<BasicStmnt CovItemId="S26" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="122">
+<LocList>
+<Loc EndOffset="1293" SrcFileId="3" StartOffset="1254"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S27" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="123">
+<LocList>
+<Loc EndOffset="1322" SrcFileId="3" StartOffset="1297"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S28" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="124">
+<LocList>
+<Loc EndOffset="1341" SrcFileId="3" StartOffset="1326"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3393" HierarchyLvlTypeId="18" Intrnl_Id="125" Name="createSergeant">
+<Header>
+<Loc EndOffset="1394" SrcFileId="3" StartOffset="1350"/>
+</Header>
+<LocList>
+<Loc EndOffset="1494" SrcFileId="3" StartOffset="1350"/>
+</LocList>
+<StmntSeq Intrnl_Id="126">
+<LocList>
+<Loc EndOffset="1439" SrcFileId="3" StartOffset="1400"/>
+<Loc EndOffset="1471" SrcFileId="3" StartOffset="1443"/>
+<Loc EndOffset="1490" SrcFileId="3" StartOffset="1475"/>
+</LocList>
+<BasicStmnt CovItemId="S29" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="127">
+<LocList>
+<Loc EndOffset="1439" SrcFileId="3" StartOffset="1400"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S30" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="128">
+<LocList>
+<Loc EndOffset="1471" SrcFileId="3" StartOffset="1443"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S31" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="129">
+<LocList>
+<Loc EndOffset="1490" SrcFileId="3" StartOffset="1475"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3394" HierarchyLvlTypeId="18" Intrnl_Id="130" Name="createMiner">
+<Header>
+<Loc EndOffset="1540" SrcFileId="3" StartOffset="1499"/>
+</Header>
+<LocList>
+<Loc EndOffset="1637" SrcFileId="3" StartOffset="1499"/>
+</LocList>
+<StmntSeq Intrnl_Id="131">
+<LocList>
+<Loc EndOffset="1585" SrcFileId="3" StartOffset="1546"/>
+<Loc EndOffset="1614" SrcFileId="3" StartOffset="1589"/>
+<Loc EndOffset="1633" SrcFileId="3" StartOffset="1618"/>
+</LocList>
+<BasicStmnt CovItemId="S32" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="132">
+<LocList>
+<Loc EndOffset="1585" SrcFileId="3" StartOffset="1546"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S33" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="133">
+<LocList>
+<Loc EndOffset="1614" SrcFileId="3" StartOffset="1589"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S34" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="134">
+<LocList>
+<Loc EndOffset="1633" SrcFileId="3" StartOffset="1618"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3395" HierarchyLvlTypeId="18" Intrnl_Id="135" Name="createScout">
+<Header>
+<Loc EndOffset="1683" SrcFileId="3" StartOffset="1642"/>
+</Header>
+<LocList>
+<Loc EndOffset="1780" SrcFileId="3" StartOffset="1642"/>
+</LocList>
+<StmntSeq Intrnl_Id="136">
+<LocList>
+<Loc EndOffset="1728" SrcFileId="3" StartOffset="1689"/>
+<Loc EndOffset="1757" SrcFileId="3" StartOffset="1732"/>
+<Loc EndOffset="1776" SrcFileId="3" StartOffset="1761"/>
+</LocList>
+<BasicStmnt CovItemId="S35" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="137">
+<LocList>
+<Loc EndOffset="1728" SrcFileId="3" StartOffset="1689"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S36" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="138">
+<LocList>
+<Loc EndOffset="1757" SrcFileId="3" StartOffset="1732"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S37" CovItemPrefix="game.PieceFactory.java" Intrnl_Id="139">
+<LocList>
+<Loc EndOffset="1776" SrcFileId="3" StartOffset="1761"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3403" HierarchyLvlTypeId="17" Intrnl_Id="140" Name="Obstacle">
+<Header>
+<Loc EndOffset="129" SrcFileId="4" StartOffset="86"/>
+</Header>
+<LocList>
+<Loc EndOffset="650" SrcFileId="4" StartOffset="86"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3397" HierarchyLvlTypeId="18" Intrnl_Id="141" Name="actionPerformed">
+<Header>
+<Loc EndOffset="191" SrcFileId="4" StartOffset="137"/>
+</Header>
+<LocList>
+<Loc EndOffset="239" SrcFileId="4" StartOffset="137"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3398" HierarchyLvlTypeId="18" Intrnl_Id="142" Name="setSelected">
+<Header>
+<Loc EndOffset="297" SrcFileId="4" StartOffset="244"/>
+</Header>
+<LocList>
+<Loc EndOffset="345" SrcFileId="4" StartOffset="244"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3399" HierarchyLvlTypeId="18" Intrnl_Id="143" Name="hide">
+<Header>
+<Loc EndOffset="380" SrcFileId="4" StartOffset="350"/>
+</Header>
+<LocList>
+<Loc EndOffset="428" SrcFileId="4" StartOffset="350"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3400" HierarchyLvlTypeId="18" Intrnl_Id="144" Name="show">
+<Header>
+<Loc EndOffset="463" SrcFileId="4" StartOffset="433"/>
+</Header>
+<LocList>
+<Loc EndOffset="511" SrcFileId="4" StartOffset="433"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3401" HierarchyLvlTypeId="18" Intrnl_Id="145" Name="setOwner">
+<Header>
+<Loc EndOffset="557" SrcFileId="4" StartOffset="517"/>
+</Header>
+<LocList>
+<Loc EndOffset="585" SrcFileId="4" StartOffset="517"/>
+</LocList>
+<StmntSeq Intrnl_Id="146">
+<LocList>
+<Loc EndOffset="581" SrcFileId="4" StartOffset="563"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.Obstacle.java" Intrnl_Id="147">
+<LocList>
+<Loc EndOffset="581" SrcFileId="4" StartOffset="563"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3402" HierarchyLvlTypeId="18" Intrnl_Id="148" Name="getOwner">
+<Header>
+<Loc EndOffset="625" SrcFileId="4" StartOffset="591"/>
+</Header>
+<LocList>
+<Loc EndOffset="647" SrcFileId="4" StartOffset="591"/>
+</LocList>
+<StmntSeq Intrnl_Id="149">
+<LocList>
+<Loc EndOffset="643" SrcFileId="4" StartOffset="631"/>
+</LocList>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.Obstacle.java" Intrnl_Id="150">
+<LocList>
+<Loc EndOffset="643" SrcFileId="4" StartOffset="631"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3406" HierarchyLvlTypeId="20" Intrnl_Id="151" Name="IPieceObserver">
+<Header>
+<Loc EndOffset="163" SrcFileId="5" StartOffset="132"/>
+</Header>
+<LocList>
+<Loc EndOffset="287" SrcFileId="5" StartOffset="132"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3404" HierarchyLvlTypeId="18" Intrnl_Id="152" Name="selectedButtonPressed">
+<Header>
+<Loc EndOffset="223" SrcFileId="5" StartOffset="170"/>
+</Header>
+<LocList>
+<Loc EndOffset="224" SrcFileId="5" StartOffset="170"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3405" HierarchyLvlTypeId="18" Intrnl_Id="153" Name="nonSelectedButtonPressed">
+<Header>
+<Loc EndOffset="283" SrcFileId="5" StartOffset="227"/>
+</Header>
+<LocList>
+<Loc EndOffset="284" SrcFileId="5" StartOffset="227"/>
+</LocList>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3419" HierarchyLvlTypeId="20" Intrnl_Id="154" Name="IPiece">
+<Header>
+<Loc EndOffset="97" SrcFileId="6" StartOffset="74"/>
+</Header>
+<LocList>
+<Loc EndOffset="597" SrcFileId="6" StartOffset="74"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3407" HierarchyLvlTypeId="18" Intrnl_Id="155" Name="isSelected">
+<Header>
+<Loc EndOffset="129" SrcFileId="6" StartOffset="102"/>
+</Header>
+<LocList>
+<Loc EndOffset="130" SrcFileId="6" StartOffset="102"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3408" HierarchyLvlTypeId="18" Intrnl_Id="156" Name="setSelected">
+<Header>
+<Loc EndOffset="174" SrcFileId="6" StartOffset="133"/>
+</Header>
+<LocList>
+<Loc EndOffset="175" SrcFileId="6" StartOffset="133"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3409" HierarchyLvlTypeId="18" Intrnl_Id="157" Name="hide">
+<Header>
+<Loc EndOffset="196" SrcFileId="6" StartOffset="178"/>
+</Header>
+<LocList>
+<Loc EndOffset="197" SrcFileId="6" StartOffset="178"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3410" HierarchyLvlTypeId="18" Intrnl_Id="158" Name="show">
+<Header>
+<Loc EndOffset="218" SrcFileId="6" StartOffset="200"/>
+</Header>
+<LocList>
+<Loc EndOffset="219" SrcFileId="6" StartOffset="200"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3411" HierarchyLvlTypeId="18" Intrnl_Id="159" Name="setObserver">
+<Header>
+<Loc EndOffset="270" SrcFileId="6" StartOffset="222"/>
+</Header>
+<LocList>
+<Loc EndOffset="271" SrcFileId="6" StartOffset="222"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3412" HierarchyLvlTypeId="18" Intrnl_Id="160" Name="setLocation">
+<Header>
+<Loc EndOffset="313" SrcFileId="6" StartOffset="274"/>
+</Header>
+<LocList>
+<Loc EndOffset="314" SrcFileId="6" StartOffset="274"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3413" HierarchyLvlTypeId="18" Intrnl_Id="161" Name="getLocation">
+<Header>
+<Loc EndOffset="343" SrcFileId="6" StartOffset="317"/>
+</Header>
+<LocList>
+<Loc EndOffset="344" SrcFileId="6" StartOffset="317"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3414" HierarchyLvlTypeId="18" Intrnl_Id="162" Name="getOwner">
+<Header>
+<Loc EndOffset="369" SrcFileId="6" StartOffset="347"/>
+</Header>
+<LocList>
+<Loc EndOffset="370" SrcFileId="6" StartOffset="347"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3415" HierarchyLvlTypeId="18" Intrnl_Id="163" Name="setOwner">
+<Header>
+<Loc EndOffset="405" SrcFileId="6" StartOffset="373"/>
+</Header>
+<LocList>
+<Loc EndOffset="406" SrcFileId="6" StartOffset="373"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3416" HierarchyLvlTypeId="18" Intrnl_Id="164" Name="setName">
+<Header>
+<Loc EndOffset="441" SrcFileId="6" StartOffset="409"/>
+</Header>
+<LocList>
+<Loc EndOffset="442" SrcFileId="6" StartOffset="409"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3417" HierarchyLvlTypeId="18" Intrnl_Id="165" Name="getName">
+<Header>
+<Loc EndOffset="468" SrcFileId="6" StartOffset="445"/>
+</Header>
+<LocList>
+<Loc EndOffset="469" SrcFileId="6" StartOffset="445"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3418" HierarchyLvlTypeId="18" Intrnl_Id="166" Name="getRank">
+<Header>
+<Loc EndOffset="492" SrcFileId="6" StartOffset="472"/>
+</Header>
+<LocList>
+<Loc EndOffset="493" SrcFileId="6" StartOffset="472"/>
+</LocList>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3421" HierarchyLvlTypeId="17" Intrnl_Id="167" Name="GameBoardFrame">
+<Header>
+<Loc EndOffset="201" SrcFileId="7" StartOffset="159"/>
+</Header>
+<LocList>
+<Loc EndOffset="563" SrcFileId="7" StartOffset="159"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3420" HierarchyLvlTypeId="18" Intrnl_Id="168" Name="GameBoardFrame">
+<Header>
+<Loc EndOffset="270" SrcFileId="7" StartOffset="237"/>
+</Header>
+<LocList>
+<Loc EndOffset="560" SrcFileId="7" StartOffset="237"/>
+</LocList>
+<StmntSeq Intrnl_Id="169">
+<LocList>
+<Loc EndOffset="328" SrcFileId="7" StartOffset="276"/>
+<Loc EndOffset="399" SrcFileId="7" StartOffset="332"/>
+<Loc EndOffset="455" SrcFileId="7" StartOffset="403"/>
+<Loc EndOffset="490" SrcFileId="7" StartOffset="459"/>
+<Loc EndOffset="510" SrcFileId="7" StartOffset="494"/>
+<Loc EndOffset="536" SrcFileId="7" StartOffset="514"/>
+<Loc EndOffset="556" SrcFileId="7" StartOffset="540"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.GameBoardFrame.java" Intrnl_Id="170">
+<LocList>
+<Loc EndOffset="328" SrcFileId="7" StartOffset="276"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.GameBoardFrame.java" Intrnl_Id="171">
+<LocList>
+<Loc EndOffset="399" SrcFileId="7" StartOffset="332"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="game.GameBoardFrame.java" Intrnl_Id="172">
+<LocList>
+<Loc EndOffset="455" SrcFileId="7" StartOffset="403"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="game.GameBoardFrame.java" Intrnl_Id="173">
+<LocList>
+<Loc EndOffset="490" SrcFileId="7" StartOffset="459"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S5" CovItemPrefix="game.GameBoardFrame.java" Intrnl_Id="174">
+<LocList>
+<Loc EndOffset="510" SrcFileId="7" StartOffset="494"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S6" CovItemPrefix="game.GameBoardFrame.java" Intrnl_Id="175">
+<LocList>
+<Loc EndOffset="536" SrcFileId="7" StartOffset="514"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="game.GameBoardFrame.java" Intrnl_Id="176">
+<LocList>
+<Loc EndOffset="556" SrcFileId="7" StartOffset="540"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3432" HierarchyLvlTypeId="17" Intrnl_Id="177" Name="GameBoard">
+<Header>
+<Loc EndOffset="257" SrcFileId="8" StartOffset="194"/>
+</Header>
+<LocList>
+<Loc EndOffset="264" SrcFileId="8" StartOffset="194"/>
+<Loc EndOffset="6052" SrcFileId="8" StartOffset="306"/>
+</LocList>
+<StmntSeq Intrnl_Id="178">
+<LocList>
+<Loc EndOffset="376" SrcFileId="8" StartOffset="310"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.GameBoard.java" Intrnl_Id="179">
+<LocList>
+<Loc EndOffset="376" SrcFileId="8" StartOffset="310"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<HierarchyLvl HierarchyLvlId="3422" HierarchyLvlTypeId="15" Intrnl_Id="180" Name="User">
+<Header>
+<Loc EndOffset="287" SrcFileId="8" StartOffset="264"/>
+</Header>
+<LocList>
+<Loc EndOffset="306" SrcFileId="8" StartOffset="264"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3423" HierarchyLvlTypeId="18" Intrnl_Id="181" Name="GameBoard">
+<Header>
+<Loc EndOffset="542" SrcFileId="8" StartOffset="514"/>
+</Header>
+<LocList>
+<Loc EndOffset="705" SrcFileId="8" StartOffset="514"/>
+</LocList>
+<StmntSeq Intrnl_Id="182">
+<LocList>
+<Loc EndOffset="556" SrcFileId="8" StartOffset="548"/>
+<Loc EndOffset="579" SrcFileId="8" StartOffset="560"/>
+<Loc EndOffset="618" SrcFileId="8" StartOffset="583"/>
+<Loc EndOffset="651" SrcFileId="8" StartOffset="622"/>
+<Loc EndOffset="678" SrcFileId="8" StartOffset="655"/>
+<Loc EndOffset="701" SrcFileId="8" StartOffset="682"/>
+</LocList>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.GameBoard.java" Intrnl_Id="183">
+<LocList>
+<Loc EndOffset="556" SrcFileId="8" StartOffset="548"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="game.GameBoard.java" Intrnl_Id="184">
+<LocList>
+<Loc EndOffset="579" SrcFileId="8" StartOffset="560"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="game.GameBoard.java" Intrnl_Id="185">
+<LocList>
+<Loc EndOffset="618" SrcFileId="8" StartOffset="583"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S5" CovItemPrefix="game.GameBoard.java" Intrnl_Id="186">
+<LocList>
+<Loc EndOffset="651" SrcFileId="8" StartOffset="622"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S6" CovItemPrefix="game.GameBoard.java" Intrnl_Id="187">
+<LocList>
+<Loc EndOffset="678" SrcFileId="8" StartOffset="655"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="game.GameBoard.java" Intrnl_Id="188">
+<LocList>
+<Loc EndOffset="701" SrcFileId="8" StartOffset="682"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3424" HierarchyLvlTypeId="18" Intrnl_Id="189" Name="instantiateBoard">
+<Header>
+<Loc EndOffset="743" SrcFileId="8" StartOffset="710"/>
+</Header>
+<LocList>
+<Loc EndOffset="1671" SrcFileId="8" StartOffset="710"/>
+</LocList>
+<StmntSeq Intrnl_Id="190">
+<LocList>
+<Loc EndOffset="937" SrcFileId="8" StartOffset="749"/>
+<Loc EndOffset="1274" SrcFileId="8" StartOffset="941"/>
+<Loc EndOffset="1666" SrcFileId="8" StartOffset="1321"/>
+</LocList>
+<LoopStmnt CovItemId="S8" CovItemPrefix="game.GameBoard.java" Intrnl_Id="191" MltplExecId="L1-2" MltplExecPrefix="game.GameBoard.java" NvrExecId="L1-0" NvrExecPrefix="game.GameBoard.java" OnceExecutedId="L1-1" OnceExecutedPrefix="game.GameBoard.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="192">
+<LocList>
+<Loc EndOffset="932" SrcFileId="8" StartOffset="784"/>
+</LocList>
+<LoopStmnt CovItemId="S9" CovItemPrefix="game.GameBoard.java" Intrnl_Id="193" MltplExecId="L2-2" MltplExecPrefix="game.GameBoard.java" NvrExecId="L2-0" NvrExecPrefix="game.GameBoard.java" OnceExecutedId="L2-1" OnceExecutedPrefix="game.GameBoard.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="194">
+<LocList>
+<Loc EndOffset="891" SrcFileId="8" StartOffset="820"/>
+<Loc EndOffset="920" SrcFileId="8" StartOffset="897"/>
+</LocList>
+<BasicStmnt CovItemId="S10" CovItemPrefix="game.GameBoard.java" Intrnl_Id="195">
+<LocList>
+<Loc EndOffset="891" SrcFileId="8" StartOffset="820"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S11" CovItemPrefix="game.GameBoard.java" Intrnl_Id="196">
+<LocList>
+<Loc EndOffset="920" SrcFileId="8" StartOffset="897"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="787" SrcFileId="8" StartOffset="784"/>
+<LocList>
+<Loc EndOffset="932" SrcFileId="8" StartOffset="784"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="game.GameBoard.java" Intrnl_Id="197">
+<BasicBoolTerm Intrnl_Id="198">
+<LocList>
+<Loc EndOffset="806" SrcFileId="8" StartOffset="800"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+</StmntSeq>
+<Keyword EndOffset="752" SrcFileId="8" StartOffset="749"/>
+<LocList>
+<Loc EndOffset="937" SrcFileId="8" StartOffset="749"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="game.GameBoard.java" Intrnl_Id="199">
+<BasicBoolTerm Intrnl_Id="200">
+<LocList>
+<Loc EndOffset="771" SrcFileId="8" StartOffset="765"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+<LoopStmnt CovItemId="S12" CovItemPrefix="game.GameBoard.java" Intrnl_Id="201" MltplExecId="L3-2" MltplExecPrefix="game.GameBoard.java" NvrExecId="L3-0" NvrExecPrefix="game.GameBoard.java" OnceExecutedId="L3-1" OnceExecutedPrefix="game.GameBoard.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="202">
+<LocList>
+<Loc EndOffset="1026" SrcFileId="8" StartOffset="976"/>
+<Loc EndOffset="1129" SrcFileId="8" StartOffset="1031"/>
+<Loc EndOffset="1205" SrcFileId="8" StartOffset="1134"/>
+<Loc EndOffset="1236" SrcFileId="8" StartOffset="1210"/>
+<Loc EndOffset="1264" SrcFileId="8" StartOffset="1241"/>
+</LocList>
+<BasicStmnt CovItemId="S13" CovItemPrefix="game.GameBoard.java" Intrnl_Id="203">
+<LocList>
+<Loc EndOffset="1026" SrcFileId="8" StartOffset="976"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S14" CovItemPrefix="game.GameBoard.java" Intrnl_Id="204">
+<Branch CovItemId="B1" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="205">
+<Cond/>
+<LocList>
+<Loc EndOffset="1085" SrcFileId="8" StartOffset="1047"/>
+</LocList>
+<StmntSeq Intrnl_Id="206">
+<LocList>
+<Loc EndOffset="1079" SrcFileId="8" StartOffset="1054"/>
+</LocList>
+<BasicStmnt CovItemId="S15" CovItemPrefix="game.GameBoard.java" Intrnl_Id="207">
+<LocList>
+<Loc EndOffset="1079" SrcFileId="8" StartOffset="1054"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="208">
+<Cond>
+<Loc EndOffset="1090" SrcFileId="8" StartOffset="1086"/>
+</Cond>
+<LocList>
+<Loc EndOffset="1129" SrcFileId="8" StartOffset="1091"/>
+</LocList>
+<StmntSeq Intrnl_Id="209">
+<LocList>
+<Loc EndOffset="1123" SrcFileId="8" StartOffset="1098"/>
+</LocList>
+<BasicStmnt CovItemId="S16" CovItemPrefix="game.GameBoard.java" Intrnl_Id="210">
+<LocList>
+<Loc EndOffset="1123" SrcFileId="8" StartOffset="1098"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1033" SrcFileId="8" StartOffset="1031"/>
+<LocList>
+<Loc EndOffset="1129" SrcFileId="8" StartOffset="1031"/>
+</LocList>
+<RootTerm CovItemId="C4" CovItemPrefix="game.GameBoard.java" Intrnl_Id="211">
+<BasicBoolTerm Intrnl_Id="212">
+<LocList>
+<Loc EndOffset="1045" SrcFileId="8" StartOffset="1035"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<CondStmnt CovItemId="S17" CovItemPrefix="game.GameBoard.java" Intrnl_Id="213">
+<Branch CovItemId="B3" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="214">
+<Cond/>
+<LocList>
+<Loc EndOffset="1205" SrcFileId="8" StartOffset="1165"/>
+</LocList>
+<StmntSeq Intrnl_Id="215">
+<LocList>
+<Loc EndOffset="1199" SrcFileId="8" StartOffset="1172"/>
+</LocList>
+<BasicStmnt CovItemId="S18" CovItemPrefix="game.GameBoard.java" Intrnl_Id="216">
+<LocList>
+<Loc EndOffset="1199" SrcFileId="8" StartOffset="1172"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="217">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="218">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1136" SrcFileId="8" StartOffset="1134"/>
+<LocList>
+<Loc EndOffset="1205" SrcFileId="8" StartOffset="1134"/>
+</LocList>
+<RootTerm CovItemId="C5" CovItemPrefix="game.GameBoard.java" Intrnl_Id="219">
+<BasicBoolTerm Intrnl_Id="220">
+<LocList>
+<Loc EndOffset="1163" SrcFileId="8" StartOffset="1137"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S19" CovItemPrefix="game.GameBoard.java" Intrnl_Id="221">
+<LocList>
+<Loc EndOffset="1236" SrcFileId="8" StartOffset="1210"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S20" CovItemPrefix="game.GameBoard.java" Intrnl_Id="222">
+<LocList>
+<Loc EndOffset="1264" SrcFileId="8" StartOffset="1241"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="944" SrcFileId="8" StartOffset="941"/>
+<LocList>
+<Loc EndOffset="1274" SrcFileId="8" StartOffset="941"/>
+</LocList>
+<RootTerm CovItemId="C3" CovItemPrefix="game.GameBoard.java" Intrnl_Id="223">
+<BasicBoolTerm Intrnl_Id="224">
+<LocList>
+<Loc EndOffset="963" SrcFileId="8" StartOffset="957"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+<LoopStmnt CovItemId="S21" CovItemPrefix="game.GameBoard.java" Intrnl_Id="225" MltplExecId="L4-2" MltplExecPrefix="game.GameBoard.java" NvrExecId="L4-0" NvrExecPrefix="game.GameBoard.java" OnceExecutedId="L4-1" OnceExecutedPrefix="game.GameBoard.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="226">
+<LocList>
+<Loc EndOffset="1384" SrcFileId="8" StartOffset="1355"/>
+<Loc EndOffset="1419" SrcFileId="8" StartOffset="1389"/>
+<Loc EndOffset="1521" SrcFileId="8" StartOffset="1424"/>
+<Loc EndOffset="1592" SrcFileId="8" StartOffset="1526"/>
+<Loc EndOffset="1627" SrcFileId="8" StartOffset="1597"/>
+<Loc EndOffset="1658" SrcFileId="8" StartOffset="1632"/>
+</LocList>
+<BasicStmnt CovItemId="S22" CovItemPrefix="game.GameBoard.java" Intrnl_Id="227">
+<LocList>
+<Loc EndOffset="1384" SrcFileId="8" StartOffset="1355"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S23" CovItemPrefix="game.GameBoard.java" Intrnl_Id="228">
+<LocList>
+<Loc EndOffset="1419" SrcFileId="8" StartOffset="1389"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S24" CovItemPrefix="game.GameBoard.java" Intrnl_Id="229">
+<Branch CovItemId="B5" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="230">
+<Cond/>
+<LocList>
+<Loc EndOffset="1477" SrcFileId="8" StartOffset="1439"/>
+</LocList>
+<StmntSeq Intrnl_Id="231">
+<LocList>
+<Loc EndOffset="1471" SrcFileId="8" StartOffset="1446"/>
+</LocList>
+<BasicStmnt CovItemId="S25" CovItemPrefix="game.GameBoard.java" Intrnl_Id="232">
+<LocList>
+<Loc EndOffset="1471" SrcFileId="8" StartOffset="1446"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B6" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="233">
+<Cond>
+<Loc EndOffset="1482" SrcFileId="8" StartOffset="1478"/>
+</Cond>
+<LocList>
+<Loc EndOffset="1521" SrcFileId="8" StartOffset="1483"/>
+</LocList>
+<StmntSeq Intrnl_Id="234">
+<LocList>
+<Loc EndOffset="1515" SrcFileId="8" StartOffset="1490"/>
+</LocList>
+<BasicStmnt CovItemId="S26" CovItemPrefix="game.GameBoard.java" Intrnl_Id="235">
+<LocList>
+<Loc EndOffset="1515" SrcFileId="8" StartOffset="1490"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1426" SrcFileId="8" StartOffset="1424"/>
+<LocList>
+<Loc EndOffset="1521" SrcFileId="8" StartOffset="1424"/>
+</LocList>
+<RootTerm CovItemId="C7" CovItemPrefix="game.GameBoard.java" Intrnl_Id="236">
+<BasicBoolTerm Intrnl_Id="237">
+<LocList>
+<Loc EndOffset="1438" SrcFileId="8" StartOffset="1428"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<CondStmnt CovItemId="S27" CovItemPrefix="game.GameBoard.java" Intrnl_Id="238">
+<Branch CovItemId="B7" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="239">
+<Cond/>
+<LocList>
+<Loc EndOffset="1592" SrcFileId="8" StartOffset="1552"/>
+</LocList>
+<StmntSeq Intrnl_Id="240">
+<LocList>
+<Loc EndOffset="1586" SrcFileId="8" StartOffset="1559"/>
+</LocList>
+<BasicStmnt CovItemId="S28" CovItemPrefix="game.GameBoard.java" Intrnl_Id="241">
+<LocList>
+<Loc EndOffset="1586" SrcFileId="8" StartOffset="1559"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B8" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="242">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="243">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1528" SrcFileId="8" StartOffset="1526"/>
+<LocList>
+<Loc EndOffset="1592" SrcFileId="8" StartOffset="1526"/>
+</LocList>
+<RootTerm CovItemId="C8" CovItemPrefix="game.GameBoard.java" Intrnl_Id="244">
+<BasicBoolTerm Intrnl_Id="245">
+<LocList>
+<Loc EndOffset="1550" SrcFileId="8" StartOffset="1529"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S29" CovItemPrefix="game.GameBoard.java" Intrnl_Id="246">
+<LocList>
+<Loc EndOffset="1627" SrcFileId="8" StartOffset="1597"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S30" CovItemPrefix="game.GameBoard.java" Intrnl_Id="247">
+<LocList>
+<Loc EndOffset="1658" SrcFileId="8" StartOffset="1632"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="1324" SrcFileId="8" StartOffset="1321"/>
+<LocList>
+<Loc EndOffset="1666" SrcFileId="8" StartOffset="1321"/>
+</LocList>
+<RootTerm CovItemId="C6" CovItemPrefix="game.GameBoard.java" Intrnl_Id="248">
+<BasicBoolTerm Intrnl_Id="249">
+<LocList>
+<Loc EndOffset="1342" SrcFileId="8" StartOffset="1337"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3425" HierarchyLvlTypeId="18" Intrnl_Id="250" Name="addPiece">
+<Header>
+<Loc EndOffset="1733" SrcFileId="8" StartOffset="1674"/>
+</Header>
+<LocList>
+<Loc EndOffset="2035" SrcFileId="8" StartOffset="1674"/>
+</LocList>
+<StmntSeq Intrnl_Id="251">
+<LocList>
+<Loc EndOffset="1787" SrcFileId="8" StartOffset="1739"/>
+<Loc EndOffset="1824" SrcFileId="8" StartOffset="1791"/>
+<Loc EndOffset="1863" SrcFileId="8" StartOffset="1828"/>
+<Loc EndOffset="1902" SrcFileId="8" StartOffset="1867"/>
+<Loc EndOffset="1930" SrcFileId="8" StartOffset="1906"/>
+<Loc EndOffset="1955" SrcFileId="8" StartOffset="1934"/>
+<Loc EndOffset="1971" SrcFileId="8" StartOffset="1959"/>
+<Loc EndOffset="1987" SrcFileId="8" StartOffset="1975"/>
+<Loc EndOffset="2010" SrcFileId="8" StartOffset="1991"/>
+<Loc EndOffset="2031" SrcFileId="8" StartOffset="2014"/>
+</LocList>
+<BasicStmnt CovItemId="S31" CovItemPrefix="game.GameBoard.java" Intrnl_Id="252">
+<LocList>
+<Loc EndOffset="1787" SrcFileId="8" StartOffset="1739"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S32" CovItemPrefix="game.GameBoard.java" Intrnl_Id="253">
+<LocList>
+<Loc EndOffset="1824" SrcFileId="8" StartOffset="1791"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S33" CovItemPrefix="game.GameBoard.java" Intrnl_Id="254">
+<LocList>
+<Loc EndOffset="1863" SrcFileId="8" StartOffset="1828"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S34" CovItemPrefix="game.GameBoard.java" Intrnl_Id="255">
+<LocList>
+<Loc EndOffset="1902" SrcFileId="8" StartOffset="1867"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S35" CovItemPrefix="game.GameBoard.java" Intrnl_Id="256">
+<LocList>
+<Loc EndOffset="1930" SrcFileId="8" StartOffset="1906"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S36" CovItemPrefix="game.GameBoard.java" Intrnl_Id="257">
+<LocList>
+<Loc EndOffset="1955" SrcFileId="8" StartOffset="1934"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S37" CovItemPrefix="game.GameBoard.java" Intrnl_Id="258">
+<LocList>
+<Loc EndOffset="1971" SrcFileId="8" StartOffset="1959"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S38" CovItemPrefix="game.GameBoard.java" Intrnl_Id="259">
+<LocList>
+<Loc EndOffset="1987" SrcFileId="8" StartOffset="1975"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S39" CovItemPrefix="game.GameBoard.java" Intrnl_Id="260">
+<LocList>
+<Loc EndOffset="2010" SrcFileId="8" StartOffset="1991"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S40" CovItemPrefix="game.GameBoard.java" Intrnl_Id="261">
+<LocList>
+<Loc EndOffset="2031" SrcFileId="8" StartOffset="2014"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3426" HierarchyLvlTypeId="18" Intrnl_Id="262" Name="selectedButtonPressed">
+<Header>
+<Loc EndOffset="2105" SrcFileId="8" StartOffset="2040"/>
+</Header>
+<LocList>
+<Loc EndOffset="2631" SrcFileId="8" StartOffset="2040"/>
+</LocList>
+<StmntSeq Intrnl_Id="263">
+<LocList>
+<Loc EndOffset="2493" SrcFileId="8" StartOffset="2111"/>
+<Loc EndOffset="2602" SrcFileId="8" StartOffset="2497"/>
+<Loc EndOffset="2627" SrcFileId="8" StartOffset="2606"/>
+</LocList>
+<CondStmnt CovItemId="S41" CovItemPrefix="game.GameBoard.java" Intrnl_Id="264">
+<Branch CovItemId="B9" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="265">
+<Cond/>
+<LocList>
+<Loc EndOffset="2493" SrcFileId="8" StartOffset="2136"/>
+</LocList>
+<StmntSeq Intrnl_Id="266">
+<LocList>
+<Loc EndOffset="2488" SrcFileId="8" StartOffset="2142"/>
+</LocList>
+<CondStmnt CovItemId="S42" CovItemPrefix="game.GameBoard.java" Intrnl_Id="267">
+<Branch CovItemId="B11" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="268">
+<Cond/>
+<LocList>
+<Loc EndOffset="2253" SrcFileId="8" StartOffset="2207"/>
+</LocList>
+<StmntSeq Intrnl_Id="269">
+<LocList>
+<Loc EndOffset="2247" SrcFileId="8" StartOffset="2214"/>
+</LocList>
+<BasicStmnt CovItemId="S43" CovItemPrefix="game.GameBoard.java" Intrnl_Id="270">
+<LocList>
+<Loc EndOffset="2247" SrcFileId="8" StartOffset="2214"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B12" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="271">
+<Cond>
+<Loc EndOffset="2258" SrcFileId="8" StartOffset="2254"/>
+</Cond>
+<LocList>
+<Loc EndOffset="2488" SrcFileId="8" StartOffset="2259"/>
+</LocList>
+<StmntSeq Intrnl_Id="272">
+<LocList>
+<Loc EndOffset="2488" SrcFileId="8" StartOffset="2259"/>
+</LocList>
+<CondStmnt CovItemId="S44" CovItemPrefix="game.GameBoard.java" Intrnl_Id="273">
+<Branch CovItemId="B13" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="274">
+<Cond/>
+<LocList>
+<Loc EndOffset="2403" SrcFileId="8" StartOffset="2328"/>
+</LocList>
+<StmntSeq Intrnl_Id="275">
+<LocList>
+<Loc EndOffset="2397" SrcFileId="8" StartOffset="2335"/>
+</LocList>
+<BasicStmnt CovItemId="S45" CovItemPrefix="game.GameBoard.java" Intrnl_Id="276">
+<LocList>
+<Loc EndOffset="2397" SrcFileId="8" StartOffset="2335"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B14" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="277">
+<Cond>
+<Loc EndOffset="2408" SrcFileId="8" StartOffset="2404"/>
+</Cond>
+<LocList>
+<Loc EndOffset="2488" SrcFileId="8" StartOffset="2409"/>
+</LocList>
+<StmntSeq Intrnl_Id="278">
+<LocList>
+<Loc EndOffset="2482" SrcFileId="8" StartOffset="2416"/>
+</LocList>
+<BasicStmnt CovItemId="S46" CovItemPrefix="game.GameBoard.java" Intrnl_Id="279">
+<LocList>
+<Loc EndOffset="2482" SrcFileId="8" StartOffset="2416"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="2261" SrcFileId="8" StartOffset="2259"/>
+<LocList>
+<Loc EndOffset="2488" SrcFileId="8" StartOffset="2259"/>
+</LocList>
+<RootTerm CovItemId="C11" CovItemPrefix="game.GameBoard.java" Intrnl_Id="280">
+<BasicBoolTerm Intrnl_Id="281">
+<LocList>
+<Loc EndOffset="2326" SrcFileId="8" StartOffset="2263"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="2144" SrcFileId="8" StartOffset="2142"/>
+<LocList>
+<Loc EndOffset="2488" SrcFileId="8" StartOffset="2142"/>
+</LocList>
+<RootTerm CovItemId="C10" CovItemPrefix="game.GameBoard.java" Intrnl_Id="282">
+<BasicBoolTerm Intrnl_Id="283">
+<LocList>
+<Loc EndOffset="2205" SrcFileId="8" StartOffset="2145"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B10" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="284">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="285">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="2113" SrcFileId="8" StartOffset="2111"/>
+<LocList>
+<Loc EndOffset="2493" SrcFileId="8" StartOffset="2111"/>
+</LocList>
+<RootTerm CovItemId="C9" CovItemPrefix="game.GameBoard.java" Intrnl_Id="286">
+<BasicBoolTerm Intrnl_Id="287">
+<LocList>
+<Loc EndOffset="2134" SrcFileId="8" StartOffset="2114"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<LoopStmnt CovItemId="S47" CovItemPrefix="game.GameBoard.java" Intrnl_Id="288" MltplExecId="L5-2" MltplExecPrefix="game.GameBoard.java" NvrExecId="L5-0" NvrExecPrefix="game.GameBoard.java" OnceExecutedId="L5-1" OnceExecutedPrefix="game.GameBoard.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="289">
+<LocList>
+<Loc EndOffset="2597" SrcFileId="8" StartOffset="2537"/>
+</LocList>
+<LoopStmnt CovItemId="S48" CovItemPrefix="game.GameBoard.java" Intrnl_Id="290" MltplExecId="L6-2" MltplExecPrefix="game.GameBoard.java" NvrExecId="L6-0" NvrExecPrefix="game.GameBoard.java" OnceExecutedId="L6-1" OnceExecutedPrefix="game.GameBoard.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="291">
+<LocList>
+<Loc EndOffset="2591" SrcFileId="8" StartOffset="2570"/>
+</LocList>
+<BasicStmnt CovItemId="S49" CovItemPrefix="game.GameBoard.java" Intrnl_Id="292">
+<LocList>
+<Loc EndOffset="2591" SrcFileId="8" StartOffset="2570"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="2540" SrcFileId="8" StartOffset="2537"/>
+<LocList>
+<Loc EndOffset="2597" SrcFileId="8" StartOffset="2537"/>
+</LocList>
+</LoopStmnt>
+</StmntSeq>
+<Keyword EndOffset="2500" SrcFileId="8" StartOffset="2497"/>
+<LocList>
+<Loc EndOffset="2602" SrcFileId="8" StartOffset="2497"/>
+</LocList>
+</LoopStmnt>
+<BasicStmnt CovItemId="S50" CovItemPrefix="game.GameBoard.java" Intrnl_Id="293">
+<LocList>
+<Loc EndOffset="2627" SrcFileId="8" StartOffset="2606"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3427" HierarchyLvlTypeId="18" Intrnl_Id="294" Name="isEnemey">
+<Header>
+<Loc EndOffset="2696" SrcFileId="8" StartOffset="2636"/>
+</Header>
+<LocList>
+<Loc EndOffset="2802" SrcFileId="8" StartOffset="2636"/>
+</LocList>
+<StmntSeq Intrnl_Id="295">
+<LocList>
+<Loc EndOffset="2798" SrcFileId="8" StartOffset="2702"/>
+</LocList>
+<BasicStmnt CovItemId="S51" CovItemPrefix="game.GameBoard.java" Intrnl_Id="296">
+<LocList>
+<Loc EndOffset="2798" SrcFileId="8" StartOffset="2702"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3428" HierarchyLvlTypeId="18" Intrnl_Id="297" Name="nonSelectedButtonPressed">
+<Header>
+<Loc EndOffset="2875" SrcFileId="8" StartOffset="2807"/>
+</Header>
+<LocList>
+<Loc EndOffset="3935" SrcFileId="8" StartOffset="2807"/>
+</LocList>
+<StmntSeq Intrnl_Id="298">
+<LocList>
+<Loc EndOffset="2986" SrcFileId="8" StartOffset="2881"/>
+<Loc EndOffset="3057" SrcFileId="8" StartOffset="2990"/>
+<Loc EndOffset="3120" SrcFileId="8" StartOffset="3061"/>
+<Loc EndOffset="3158" SrcFileId="8" StartOffset="3125"/>
+<Loc EndOffset="3193" SrcFileId="8" StartOffset="3163"/>
+<Loc EndOffset="3234" SrcFileId="8" StartOffset="3198"/>
+<Loc EndOffset="3275" SrcFileId="8" StartOffset="3239"/>
+<Loc EndOffset="3438" SrcFileId="8" StartOffset="3280"/>
+<Loc EndOffset="3601" SrcFileId="8" StartOffset="3443"/>
+<Loc EndOffset="3764" SrcFileId="8" StartOffset="3606"/>
+<Loc EndOffset="3927" SrcFileId="8" StartOffset="3769"/>
+</LocList>
+<LoopStmnt CovItemId="S52" CovItemPrefix="game.GameBoard.java" Intrnl_Id="299" MltplExecId="L7-2" MltplExecPrefix="game.GameBoard.java" NvrExecId="L7-0" NvrExecPrefix="game.GameBoard.java" OnceExecutedId="L7-1" OnceExecutedPrefix="game.GameBoard.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="300">
+<LocList>
+<Loc EndOffset="2981" SrcFileId="8" StartOffset="2921"/>
+</LocList>
+<LoopStmnt CovItemId="S53" CovItemPrefix="game.GameBoard.java" Intrnl_Id="301" MltplExecId="L8-2" MltplExecPrefix="game.GameBoard.java" NvrExecId="L8-0" NvrExecPrefix="game.GameBoard.java" OnceExecutedId="L8-1" OnceExecutedPrefix="game.GameBoard.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="302">
+<LocList>
+<Loc EndOffset="2975" SrcFileId="8" StartOffset="2954"/>
+</LocList>
+<BasicStmnt CovItemId="S54" CovItemPrefix="game.GameBoard.java" Intrnl_Id="303">
+<LocList>
+<Loc EndOffset="2975" SrcFileId="8" StartOffset="2954"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="2924" SrcFileId="8" StartOffset="2921"/>
+<LocList>
+<Loc EndOffset="2981" SrcFileId="8" StartOffset="2921"/>
+</LocList>
+</LoopStmnt>
+</StmntSeq>
+<Keyword EndOffset="2884" SrcFileId="8" StartOffset="2881"/>
+<LocList>
+<Loc EndOffset="2986" SrcFileId="8" StartOffset="2881"/>
+</LocList>
+</LoopStmnt>
+<BasicStmnt CovItemId="S55" CovItemPrefix="game.GameBoard.java" Intrnl_Id="304">
+<LocList>
+<Loc EndOffset="3057" SrcFileId="8" StartOffset="2990"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S56" CovItemPrefix="game.GameBoard.java" Intrnl_Id="305">
+<Branch CovItemId="B15" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="306">
+<Cond/>
+<LocList>
+<Loc EndOffset="3120" SrcFileId="8" StartOffset="3102"/>
+</LocList>
+<StmntSeq Intrnl_Id="307">
+<LocList>
+<Loc EndOffset="3115" SrcFileId="8" StartOffset="3108"/>
+</LocList>
+<BasicStmnt CovItemId="S57" CovItemPrefix="game.GameBoard.java" Intrnl_Id="308">
+<LocList>
+<Loc EndOffset="3115" SrcFileId="8" StartOffset="3108"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B16" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="309">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="310">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="3063" SrcFileId="8" StartOffset="3061"/>
+<LocList>
+<Loc EndOffset="3120" SrcFileId="8" StartOffset="3061"/>
+</LocList>
+<RootTerm CovItemId="C12" CovItemPrefix="game.GameBoard.java" Intrnl_Id="311">
+<BasicBoolTerm Intrnl_Id="312">
+<LocList>
+<Loc EndOffset="3100" SrcFileId="8" StartOffset="3064"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S58" CovItemPrefix="game.GameBoard.java" Intrnl_Id="313">
+<LocList>
+<Loc EndOffset="3158" SrcFileId="8" StartOffset="3125"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S59" CovItemPrefix="game.GameBoard.java" Intrnl_Id="314">
+<LocList>
+<Loc EndOffset="3193" SrcFileId="8" StartOffset="3163"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S60" CovItemPrefix="game.GameBoard.java" Intrnl_Id="315">
+<LocList>
+<Loc EndOffset="3234" SrcFileId="8" StartOffset="3198"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S61" CovItemPrefix="game.GameBoard.java" Intrnl_Id="316">
+<LocList>
+<Loc EndOffset="3275" SrcFileId="8" StartOffset="3239"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S62" CovItemPrefix="game.GameBoard.java" Intrnl_Id="317">
+<Branch CovItemId="B17" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="318">
+<Cond/>
+<LocList>
+<Loc EndOffset="3438" SrcFileId="8" StartOffset="3291"/>
+</LocList>
+<StmntSeq Intrnl_Id="319">
+<LocList>
+<Loc EndOffset="3337" SrcFileId="8" StartOffset="3298"/>
+<Loc EndOffset="3431" SrcFileId="8" StartOffset="3343"/>
+</LocList>
+<BasicStmnt CovItemId="S63" CovItemPrefix="game.GameBoard.java" Intrnl_Id="320">
+<LocList>
+<Loc EndOffset="3337" SrcFileId="8" StartOffset="3298"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S64" CovItemPrefix="game.GameBoard.java" Intrnl_Id="321">
+<Branch CovItemId="B19" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="322">
+<Cond/>
+<LocList>
+<Loc EndOffset="3431" SrcFileId="8" StartOffset="3392"/>
+</LocList>
+<StmntSeq Intrnl_Id="323">
+<LocList>
+<Loc EndOffset="3424" SrcFileId="8" StartOffset="3400"/>
+</LocList>
+<BasicStmnt CovItemId="S65" CovItemPrefix="game.GameBoard.java" Intrnl_Id="324">
+<LocList>
+<Loc EndOffset="3424" SrcFileId="8" StartOffset="3400"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B20" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="325">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="326">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="3345" SrcFileId="8" StartOffset="3343"/>
+<LocList>
+<Loc EndOffset="3431" SrcFileId="8" StartOffset="3343"/>
+</LocList>
+<RootTerm CovItemId="C14" CovItemPrefix="game.GameBoard.java" Intrnl_Id="327">
+<BasicBoolTerm Intrnl_Id="328">
+<LocList>
+<Loc EndOffset="3390" SrcFileId="8" StartOffset="3346"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B18" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="329">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="330">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="3282" SrcFileId="8" StartOffset="3280"/>
+<LocList>
+<Loc EndOffset="3438" SrcFileId="8" StartOffset="3280"/>
+</LocList>
+<RootTerm CovItemId="C13" CovItemPrefix="game.GameBoard.java" Intrnl_Id="331">
+<BasicBoolTerm Intrnl_Id="332">
+<LocList>
+<Loc EndOffset="3289" SrcFileId="8" StartOffset="3284"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<CondStmnt CovItemId="S66" CovItemPrefix="game.GameBoard.java" Intrnl_Id="333">
+<Branch CovItemId="B21" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="334">
+<Cond/>
+<LocList>
+<Loc EndOffset="3601" SrcFileId="8" StartOffset="3454"/>
+</LocList>
+<StmntSeq Intrnl_Id="335">
+<LocList>
+<Loc EndOffset="3500" SrcFileId="8" StartOffset="3461"/>
+<Loc EndOffset="3594" SrcFileId="8" StartOffset="3506"/>
+</LocList>
+<BasicStmnt CovItemId="S67" CovItemPrefix="game.GameBoard.java" Intrnl_Id="336">
+<LocList>
+<Loc EndOffset="3500" SrcFileId="8" StartOffset="3461"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S68" CovItemPrefix="game.GameBoard.java" Intrnl_Id="337">
+<Branch CovItemId="B23" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="338">
+<Cond/>
+<LocList>
+<Loc EndOffset="3594" SrcFileId="8" StartOffset="3555"/>
+</LocList>
+<StmntSeq Intrnl_Id="339">
+<LocList>
+<Loc EndOffset="3587" SrcFileId="8" StartOffset="3563"/>
+</LocList>
+<BasicStmnt CovItemId="S69" CovItemPrefix="game.GameBoard.java" Intrnl_Id="340">
+<LocList>
+<Loc EndOffset="3587" SrcFileId="8" StartOffset="3563"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B24" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="341">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="342">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="3508" SrcFileId="8" StartOffset="3506"/>
+<LocList>
+<Loc EndOffset="3594" SrcFileId="8" StartOffset="3506"/>
+</LocList>
+<RootTerm CovItemId="C16" CovItemPrefix="game.GameBoard.java" Intrnl_Id="343">
+<BasicBoolTerm Intrnl_Id="344">
+<LocList>
+<Loc EndOffset="3553" SrcFileId="8" StartOffset="3509"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B22" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="345">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="346">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="3445" SrcFileId="8" StartOffset="3443"/>
+<LocList>
+<Loc EndOffset="3601" SrcFileId="8" StartOffset="3443"/>
+</LocList>
+<RootTerm CovItemId="C15" CovItemPrefix="game.GameBoard.java" Intrnl_Id="347">
+<BasicBoolTerm Intrnl_Id="348">
+<LocList>
+<Loc EndOffset="3452" SrcFileId="8" StartOffset="3447"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<CondStmnt CovItemId="S70" CovItemPrefix="game.GameBoard.java" Intrnl_Id="349">
+<Branch CovItemId="B25" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="350">
+<Cond/>
+<LocList>
+<Loc EndOffset="3764" SrcFileId="8" StartOffset="3617"/>
+</LocList>
+<StmntSeq Intrnl_Id="351">
+<LocList>
+<Loc EndOffset="3663" SrcFileId="8" StartOffset="3624"/>
+<Loc EndOffset="3757" SrcFileId="8" StartOffset="3669"/>
+</LocList>
+<BasicStmnt CovItemId="S71" CovItemPrefix="game.GameBoard.java" Intrnl_Id="352">
+<LocList>
+<Loc EndOffset="3663" SrcFileId="8" StartOffset="3624"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S72" CovItemPrefix="game.GameBoard.java" Intrnl_Id="353">
+<Branch CovItemId="B27" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="354">
+<Cond/>
+<LocList>
+<Loc EndOffset="3757" SrcFileId="8" StartOffset="3718"/>
+</LocList>
+<StmntSeq Intrnl_Id="355">
+<LocList>
+<Loc EndOffset="3750" SrcFileId="8" StartOffset="3726"/>
+</LocList>
+<BasicStmnt CovItemId="S73" CovItemPrefix="game.GameBoard.java" Intrnl_Id="356">
+<LocList>
+<Loc EndOffset="3750" SrcFileId="8" StartOffset="3726"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B28" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="357">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="358">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="3671" SrcFileId="8" StartOffset="3669"/>
+<LocList>
+<Loc EndOffset="3757" SrcFileId="8" StartOffset="3669"/>
+</LocList>
+<RootTerm CovItemId="C18" CovItemPrefix="game.GameBoard.java" Intrnl_Id="359">
+<BasicBoolTerm Intrnl_Id="360">
+<LocList>
+<Loc EndOffset="3716" SrcFileId="8" StartOffset="3672"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B26" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="361">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="362">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="3608" SrcFileId="8" StartOffset="3606"/>
+<LocList>
+<Loc EndOffset="3764" SrcFileId="8" StartOffset="3606"/>
+</LocList>
+<RootTerm CovItemId="C17" CovItemPrefix="game.GameBoard.java" Intrnl_Id="363">
+<BasicBoolTerm Intrnl_Id="364">
+<LocList>
+<Loc EndOffset="3615" SrcFileId="8" StartOffset="3610"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<CondStmnt CovItemId="S74" CovItemPrefix="game.GameBoard.java" Intrnl_Id="365">
+<Branch CovItemId="B29" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="366">
+<Cond/>
+<LocList>
+<Loc EndOffset="3927" SrcFileId="8" StartOffset="3780"/>
+</LocList>
+<StmntSeq Intrnl_Id="367">
+<LocList>
+<Loc EndOffset="3826" SrcFileId="8" StartOffset="3787"/>
+<Loc EndOffset="3920" SrcFileId="8" StartOffset="3832"/>
+</LocList>
+<BasicStmnt CovItemId="S75" CovItemPrefix="game.GameBoard.java" Intrnl_Id="368">
+<LocList>
+<Loc EndOffset="3826" SrcFileId="8" StartOffset="3787"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S76" CovItemPrefix="game.GameBoard.java" Intrnl_Id="369">
+<Branch CovItemId="B31" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="370">
+<Cond/>
+<LocList>
+<Loc EndOffset="3920" SrcFileId="8" StartOffset="3881"/>
+</LocList>
+<StmntSeq Intrnl_Id="371">
+<LocList>
+<Loc EndOffset="3913" SrcFileId="8" StartOffset="3889"/>
+</LocList>
+<BasicStmnt CovItemId="S77" CovItemPrefix="game.GameBoard.java" Intrnl_Id="372">
+<LocList>
+<Loc EndOffset="3913" SrcFileId="8" StartOffset="3889"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B32" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="373">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="374">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="3834" SrcFileId="8" StartOffset="3832"/>
+<LocList>
+<Loc EndOffset="3920" SrcFileId="8" StartOffset="3832"/>
+</LocList>
+<RootTerm CovItemId="C20" CovItemPrefix="game.GameBoard.java" Intrnl_Id="375">
+<BasicBoolTerm Intrnl_Id="376">
+<LocList>
+<Loc EndOffset="3879" SrcFileId="8" StartOffset="3835"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B30" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="377">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="378">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="3771" SrcFileId="8" StartOffset="3769"/>
+<LocList>
+<Loc EndOffset="3927" SrcFileId="8" StartOffset="3769"/>
+</LocList>
+<RootTerm CovItemId="C19" CovItemPrefix="game.GameBoard.java" Intrnl_Id="379">
+<BasicBoolTerm Intrnl_Id="380">
+<LocList>
+<Loc EndOffset="3778" SrcFileId="8" StartOffset="3773"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3429" HierarchyLvlTypeId="18" Intrnl_Id="381" Name="swapPieces">
+<Header>
+<Loc EndOffset="3999" SrcFileId="8" StartOffset="3940"/>
+</Header>
+<LocList>
+<Loc EndOffset="4493" SrcFileId="8" StartOffset="3940"/>
+</LocList>
+<StmntSeq Intrnl_Id="382">
+<LocList>
+<Loc EndOffset="4037" SrcFileId="8" StartOffset="4005"/>
+<Loc EndOffset="4073" SrcFileId="8" StartOffset="4041"/>
+<Loc EndOffset="4093" SrcFileId="8" StartOffset="4077"/>
+<Loc EndOffset="4113" SrcFileId="8" StartOffset="4097"/>
+<Loc EndOffset="4140" SrcFileId="8" StartOffset="4117"/>
+<Loc EndOffset="4167" SrcFileId="8" StartOffset="4144"/>
+<Loc EndOffset="4219" SrcFileId="8" StartOffset="4171"/>
+<Loc EndOffset="4256" SrcFileId="8" StartOffset="4223"/>
+<Loc EndOffset="4279" SrcFileId="8" StartOffset="4260"/>
+<Loc EndOffset="4302" SrcFileId="8" StartOffset="4283"/>
+<Loc EndOffset="4338" SrcFileId="8" StartOffset="4306"/>
+<Loc EndOffset="4358" SrcFileId="8" StartOffset="4342"/>
+<Loc EndOffset="4381" SrcFileId="8" StartOffset="4362"/>
+<Loc EndOffset="4404" SrcFileId="8" StartOffset="4385"/>
+<Loc EndOffset="4440" SrcFileId="8" StartOffset="4408"/>
+<Loc EndOffset="4460" SrcFileId="8" StartOffset="4444"/>
+<Loc EndOffset="4475" SrcFileId="8" StartOffset="4464"/>
+<Loc EndOffset="4489" SrcFileId="8" StartOffset="4479"/>
+</LocList>
+<BasicStmnt CovItemId="S78" CovItemPrefix="game.GameBoard.java" Intrnl_Id="383">
+<LocList>
+<Loc EndOffset="4037" SrcFileId="8" StartOffset="4005"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S79" CovItemPrefix="game.GameBoard.java" Intrnl_Id="384">
+<LocList>
+<Loc EndOffset="4073" SrcFileId="8" StartOffset="4041"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S80" CovItemPrefix="game.GameBoard.java" Intrnl_Id="385">
+<LocList>
+<Loc EndOffset="4093" SrcFileId="8" StartOffset="4077"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S81" CovItemPrefix="game.GameBoard.java" Intrnl_Id="386">
+<LocList>
+<Loc EndOffset="4113" SrcFileId="8" StartOffset="4097"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S82" CovItemPrefix="game.GameBoard.java" Intrnl_Id="387">
+<LocList>
+<Loc EndOffset="4140" SrcFileId="8" StartOffset="4117"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S83" CovItemPrefix="game.GameBoard.java" Intrnl_Id="388">
+<LocList>
+<Loc EndOffset="4167" SrcFileId="8" StartOffset="4144"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S84" CovItemPrefix="game.GameBoard.java" Intrnl_Id="389">
+<LocList>
+<Loc EndOffset="4219" SrcFileId="8" StartOffset="4171"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S85" CovItemPrefix="game.GameBoard.java" Intrnl_Id="390">
+<LocList>
+<Loc EndOffset="4256" SrcFileId="8" StartOffset="4223"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S86" CovItemPrefix="game.GameBoard.java" Intrnl_Id="391">
+<LocList>
+<Loc EndOffset="4279" SrcFileId="8" StartOffset="4260"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S87" CovItemPrefix="game.GameBoard.java" Intrnl_Id="392">
+<LocList>
+<Loc EndOffset="4302" SrcFileId="8" StartOffset="4283"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S88" CovItemPrefix="game.GameBoard.java" Intrnl_Id="393">
+<LocList>
+<Loc EndOffset="4338" SrcFileId="8" StartOffset="4306"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S89" CovItemPrefix="game.GameBoard.java" Intrnl_Id="394">
+<LocList>
+<Loc EndOffset="4358" SrcFileId="8" StartOffset="4342"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S90" CovItemPrefix="game.GameBoard.java" Intrnl_Id="395">
+<LocList>
+<Loc EndOffset="4381" SrcFileId="8" StartOffset="4362"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S91" CovItemPrefix="game.GameBoard.java" Intrnl_Id="396">
+<LocList>
+<Loc EndOffset="4404" SrcFileId="8" StartOffset="4385"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S92" CovItemPrefix="game.GameBoard.java" Intrnl_Id="397">
+<LocList>
+<Loc EndOffset="4440" SrcFileId="8" StartOffset="4408"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S93" CovItemPrefix="game.GameBoard.java" Intrnl_Id="398">
+<LocList>
+<Loc EndOffset="4460" SrcFileId="8" StartOffset="4444"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S94" CovItemPrefix="game.GameBoard.java" Intrnl_Id="399">
+<LocList>
+<Loc EndOffset="4475" SrcFileId="8" StartOffset="4464"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S95" CovItemPrefix="game.GameBoard.java" Intrnl_Id="400">
+<LocList>
+<Loc EndOffset="4489" SrcFileId="8" StartOffset="4479"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3430" HierarchyLvlTypeId="18" Intrnl_Id="401" Name="attack">
+<Header>
+<Loc EndOffset="4555" SrcFileId="8" StartOffset="4499"/>
+</Header>
+<LocList>
+<Loc EndOffset="5513" SrcFileId="8" StartOffset="4499"/>
+</LocList>
+<StmntSeq Intrnl_Id="402">
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="4562"/>
+<Loc EndOffset="5509" SrcFileId="8" StartOffset="5476"/>
+</LocList>
+<CondStmnt CovItemId="S96" CovItemPrefix="game.GameBoard.java" Intrnl_Id="403">
+<Branch CovItemId="B33" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="404">
+<Cond/>
+<LocList>
+<Loc EndOffset="4834" SrcFileId="8" StartOffset="4586"/>
+</LocList>
+<StmntSeq Intrnl_Id="405">
+<LocList>
+<Loc EndOffset="4829" SrcFileId="8" StartOffset="4593"/>
+</LocList>
+<CondStmnt CovItemId="S97" CovItemPrefix="game.GameBoard.java" Intrnl_Id="406">
+<Branch CovItemId="B35" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="407">
+<Cond/>
+<LocList>
+<Loc EndOffset="4735" SrcFileId="8" StartOffset="4611"/>
+</LocList>
+<StmntSeq Intrnl_Id="408">
+<LocList>
+<Loc EndOffset="4638" SrcFileId="8" StartOffset="4619"/>
+<Loc EndOffset="4661" SrcFileId="8" StartOffset="4645"/>
+<Loc EndOffset="4728" SrcFileId="8" StartOffset="4668"/>
+</LocList>
+<BasicStmnt CovItemId="S98" CovItemPrefix="game.GameBoard.java" Intrnl_Id="409">
+<LocList>
+<Loc EndOffset="4638" SrcFileId="8" StartOffset="4619"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S99" CovItemPrefix="game.GameBoard.java" Intrnl_Id="410">
+<LocList>
+<Loc EndOffset="4661" SrcFileId="8" StartOffset="4645"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S100" CovItemPrefix="game.GameBoard.java" Intrnl_Id="411">
+<LocList>
+<Loc EndOffset="4728" SrcFileId="8" StartOffset="4668"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B36" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="412">
+<Cond>
+<Loc EndOffset="4740" SrcFileId="8" StartOffset="4736"/>
+</Cond>
+<LocList>
+<Loc EndOffset="4829" SrcFileId="8" StartOffset="4741"/>
+</LocList>
+<StmntSeq Intrnl_Id="413">
+<LocList>
+<Loc EndOffset="4764" SrcFileId="8" StartOffset="4748"/>
+<Loc EndOffset="4786" SrcFileId="8" StartOffset="4770"/>
+<Loc EndOffset="4822" SrcFileId="8" StartOffset="4792"/>
+</LocList>
+<BasicStmnt CovItemId="S101" CovItemPrefix="game.GameBoard.java" Intrnl_Id="414">
+<LocList>
+<Loc EndOffset="4764" SrcFileId="8" StartOffset="4748"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S102" CovItemPrefix="game.GameBoard.java" Intrnl_Id="415">
+<LocList>
+<Loc EndOffset="4786" SrcFileId="8" StartOffset="4770"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S103" CovItemPrefix="game.GameBoard.java" Intrnl_Id="416">
+<LocList>
+<Loc EndOffset="4822" SrcFileId="8" StartOffset="4792"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="4595" SrcFileId="8" StartOffset="4593"/>
+<LocList>
+<Loc EndOffset="4829" SrcFileId="8" StartOffset="4593"/>
+</LocList>
+<RootTerm CovItemId="C22" CovItemPrefix="game.GameBoard.java" Intrnl_Id="417">
+<BasicBoolTerm Intrnl_Id="418">
+<LocList>
+<Loc EndOffset="4609" SrcFileId="8" StartOffset="4597"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B34" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="419">
+<Cond>
+<Loc EndOffset="4839" SrcFileId="8" StartOffset="4835"/>
+</Cond>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="4840"/>
+</LocList>
+<StmntSeq Intrnl_Id="420">
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="4840"/>
+</LocList>
+<CondStmnt CovItemId="S104" CovItemPrefix="game.GameBoard.java" Intrnl_Id="421">
+<Branch CovItemId="B37" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="422">
+<Cond/>
+<LocList>
+<Loc EndOffset="4974" SrcFileId="8" StartOffset="4864"/>
+</LocList>
+<StmntSeq Intrnl_Id="423">
+<LocList>
+<Loc EndOffset="4889" SrcFileId="8" StartOffset="4870"/>
+<Loc EndOffset="4910" SrcFileId="8" StartOffset="4894"/>
+<Loc EndOffset="4969" SrcFileId="8" StartOffset="4915"/>
+</LocList>
+<BasicStmnt CovItemId="S105" CovItemPrefix="game.GameBoard.java" Intrnl_Id="424">
+<LocList>
+<Loc EndOffset="4889" SrcFileId="8" StartOffset="4870"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S106" CovItemPrefix="game.GameBoard.java" Intrnl_Id="425">
+<LocList>
+<Loc EndOffset="4910" SrcFileId="8" StartOffset="4894"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S107" CovItemPrefix="game.GameBoard.java" Intrnl_Id="426">
+<LocList>
+<Loc EndOffset="4969" SrcFileId="8" StartOffset="4915"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B38" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="427">
+<Cond>
+<Loc EndOffset="4979" SrcFileId="8" StartOffset="4975"/>
+</Cond>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="4980"/>
+</LocList>
+<StmntSeq Intrnl_Id="428">
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="4980"/>
+</LocList>
+<CondStmnt CovItemId="S108" CovItemPrefix="game.GameBoard.java" Intrnl_Id="429">
+<Branch CovItemId="B39" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="430">
+<Cond/>
+<LocList>
+<Loc EndOffset="5099" SrcFileId="8" StartOffset="5018"/>
+</LocList>
+<StmntSeq Intrnl_Id="431">
+<LocList>
+<Loc EndOffset="5073" SrcFileId="8" StartOffset="5054"/>
+<Loc EndOffset="5094" SrcFileId="8" StartOffset="5078"/>
+</LocList>
+<BasicStmnt CovItemId="S109" CovItemPrefix="game.GameBoard.java" Intrnl_Id="432">
+<LocList>
+<Loc EndOffset="5073" SrcFileId="8" StartOffset="5054"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S110" CovItemPrefix="game.GameBoard.java" Intrnl_Id="433">
+<LocList>
+<Loc EndOffset="5094" SrcFileId="8" StartOffset="5078"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B40" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="434">
+<Cond>
+<Loc EndOffset="5104" SrcFileId="8" StartOffset="5100"/>
+</Cond>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5105"/>
+</LocList>
+<StmntSeq Intrnl_Id="435">
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5105"/>
+</LocList>
+<CondStmnt CovItemId="S111" CovItemPrefix="game.GameBoard.java" Intrnl_Id="436">
+<Branch CovItemId="B41" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="437">
+<Cond/>
+<LocList>
+<Loc EndOffset="5232" SrcFileId="8" StartOffset="5128"/>
+</LocList>
+<StmntSeq Intrnl_Id="438">
+<LocList>
+<Loc EndOffset="5153" SrcFileId="8" StartOffset="5134"/>
+<Loc EndOffset="5174" SrcFileId="8" StartOffset="5158"/>
+<Loc EndOffset="5227" SrcFileId="8" StartOffset="5179"/>
+</LocList>
+<BasicStmnt CovItemId="S112" CovItemPrefix="game.GameBoard.java" Intrnl_Id="439">
+<LocList>
+<Loc EndOffset="5153" SrcFileId="8" StartOffset="5134"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S113" CovItemPrefix="game.GameBoard.java" Intrnl_Id="440">
+<LocList>
+<Loc EndOffset="5174" SrcFileId="8" StartOffset="5158"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S114" CovItemPrefix="game.GameBoard.java" Intrnl_Id="441">
+<LocList>
+<Loc EndOffset="5227" SrcFileId="8" StartOffset="5179"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B42" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="442">
+<Cond>
+<Loc EndOffset="5237" SrcFileId="8" StartOffset="5233"/>
+</Cond>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5238"/>
+</LocList>
+<StmntSeq Intrnl_Id="443">
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5238"/>
+</LocList>
+<CondStmnt CovItemId="S115" CovItemPrefix="game.GameBoard.java" Intrnl_Id="444">
+<Branch CovItemId="B43" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="445">
+<Cond/>
+<LocList>
+<Loc EndOffset="5341" SrcFileId="8" StartOffset="5261"/>
+</LocList>
+<StmntSeq Intrnl_Id="446">
+<LocList>
+<Loc EndOffset="5283" SrcFileId="8" StartOffset="5267"/>
+<Loc EndOffset="5336" SrcFileId="8" StartOffset="5288"/>
+</LocList>
+<BasicStmnt CovItemId="S116" CovItemPrefix="game.GameBoard.java" Intrnl_Id="447">
+<LocList>
+<Loc EndOffset="5283" SrcFileId="8" StartOffset="5267"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S117" CovItemPrefix="game.GameBoard.java" Intrnl_Id="448">
+<LocList>
+<Loc EndOffset="5336" SrcFileId="8" StartOffset="5288"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B44" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="449">
+<Cond>
+<Loc EndOffset="5346" SrcFileId="8" StartOffset="5342"/>
+</Cond>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5347"/>
+</LocList>
+<StmntSeq Intrnl_Id="450">
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5347"/>
+</LocList>
+<CondStmnt CovItemId="S118" CovItemPrefix="game.GameBoard.java" Intrnl_Id="451">
+<Branch CovItemId="B45" CovItemPrefix="game.GameBoard.java" Implct="false" Intrnl_Id="452">
+<Cond/>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5371"/>
+</LocList>
+<StmntSeq Intrnl_Id="453">
+<LocList>
+<Loc EndOffset="5393" SrcFileId="8" StartOffset="5377"/>
+<Loc EndOffset="5414" SrcFileId="8" StartOffset="5398"/>
+<Loc EndOffset="5467" SrcFileId="8" StartOffset="5419"/>
+</LocList>
+<BasicStmnt CovItemId="S119" CovItemPrefix="game.GameBoard.java" Intrnl_Id="454">
+<LocList>
+<Loc EndOffset="5393" SrcFileId="8" StartOffset="5377"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S120" CovItemPrefix="game.GameBoard.java" Intrnl_Id="455">
+<LocList>
+<Loc EndOffset="5414" SrcFileId="8" StartOffset="5398"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S121" CovItemPrefix="game.GameBoard.java" Intrnl_Id="456">
+<LocList>
+<Loc EndOffset="5467" SrcFileId="8" StartOffset="5419"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B46" CovItemPrefix="game.GameBoard.java" Implct="true" Intrnl_Id="457">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="458">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="5349" SrcFileId="8" StartOffset="5347"/>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5347"/>
+</LocList>
+<RootTerm CovItemId="C27" CovItemPrefix="game.GameBoard.java" Intrnl_Id="459">
+<BasicBoolTerm Intrnl_Id="460">
+<LocList>
+<Loc EndOffset="5369" SrcFileId="8" StartOffset="5351"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="5240" SrcFileId="8" StartOffset="5238"/>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5238"/>
+</LocList>
+<RootTerm CovItemId="C26" CovItemPrefix="game.GameBoard.java" Intrnl_Id="461">
+<BasicBoolTerm Intrnl_Id="462">
+<LocList>
+<Loc EndOffset="5259" SrcFileId="8" StartOffset="5242"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="5107" SrcFileId="8" StartOffset="5105"/>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="5105"/>
+</LocList>
+<RootTerm CovItemId="C25" CovItemPrefix="game.GameBoard.java" Intrnl_Id="463">
+<BasicBoolTerm Intrnl_Id="464">
+<LocList>
+<Loc EndOffset="5126" SrcFileId="8" StartOffset="5109"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="4982" SrcFileId="8" StartOffset="4980"/>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="4980"/>
+</LocList>
+<RootTerm CovItemId="C24" CovItemPrefix="game.GameBoard.java" Intrnl_Id="465">
+<OpTerm BooleanOpId="14" Intrnl_Id="466">
+<BasicBoolTerm Intrnl_Id="467">
+<LocList>
+<Loc EndOffset="4997" SrcFileId="8" StartOffset="4985"/>
+</LocList>
+</BasicBoolTerm>
+<BasicBoolTerm Intrnl_Id="468">
+<LocList>
+<Loc EndOffset="5015" SrcFileId="8" StartOffset="5003"/>
+</LocList>
+</BasicBoolTerm>
+<LocList>
+<Loc EndOffset="5001" SrcFileId="8" StartOffset="4999"/>
+</LocList>
+</OpTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="4842" SrcFileId="8" StartOffset="4840"/>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="4840"/>
+</LocList>
+<RootTerm CovItemId="C23" CovItemPrefix="game.GameBoard.java" Intrnl_Id="469">
+<BasicBoolTerm Intrnl_Id="470">
+<LocList>
+<Loc EndOffset="4862" SrcFileId="8" StartOffset="4844"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="4564" SrcFileId="8" StartOffset="4562"/>
+<LocList>
+<Loc EndOffset="5472" SrcFileId="8" StartOffset="4562"/>
+</LocList>
+<RootTerm CovItemId="C21" CovItemPrefix="game.GameBoard.java" Intrnl_Id="471">
+<BasicBoolTerm Intrnl_Id="472">
+<LocList>
+<Loc EndOffset="4584" SrcFileId="8" StartOffset="4566"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S122" CovItemPrefix="game.GameBoard.java" Intrnl_Id="473">
+<LocList>
+<Loc EndOffset="5509" SrcFileId="8" StartOffset="5476"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3431" HierarchyLvlTypeId="18" Intrnl_Id="474" Name="removePiece">
+<Header>
+<Loc EndOffset="5560" SrcFileId="8" StartOffset="5519"/>
+</Header>
+<LocList>
+<Loc EndOffset="6049" SrcFileId="8" StartOffset="5519"/>
+</LocList>
+<StmntSeq Intrnl_Id="475">
+<LocList>
+<Loc EndOffset="5605" SrcFileId="8" StartOffset="5566"/>
+<Loc EndOffset="5644" SrcFileId="8" StartOffset="5609"/>
+<Loc EndOffset="5683" SrcFileId="8" StartOffset="5648"/>
+<Loc EndOffset="5711" SrcFileId="8" StartOffset="5687"/>
+<Loc EndOffset="5746" SrcFileId="8" StartOffset="5715"/>
+<Loc EndOffset="5765" SrcFileId="8" StartOffset="5750"/>
+<Loc EndOffset="5789" SrcFileId="8" StartOffset="5769"/>
+<Loc EndOffset="5819" SrcFileId="8" StartOffset="5793"/>
+<Loc EndOffset="5871" SrcFileId="8" StartOffset="5823"/>
+<Loc EndOffset="5908" SrcFileId="8" StartOffset="5875"/>
+<Loc EndOffset="5931" SrcFileId="8" StartOffset="5912"/>
+<Loc EndOffset="5954" SrcFileId="8" StartOffset="5935"/>
+<Loc EndOffset="5993" SrcFileId="8" StartOffset="5958"/>
+<Loc EndOffset="6016" SrcFileId="8" StartOffset="5997"/>
+<Loc EndOffset="6031" SrcFileId="8" StartOffset="6020"/>
+<Loc EndOffset="6045" SrcFileId="8" StartOffset="6035"/>
+</LocList>
+<BasicStmnt CovItemId="S123" CovItemPrefix="game.GameBoard.java" Intrnl_Id="476">
+<LocList>
+<Loc EndOffset="5605" SrcFileId="8" StartOffset="5566"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S124" CovItemPrefix="game.GameBoard.java" Intrnl_Id="477">
+<LocList>
+<Loc EndOffset="5644" SrcFileId="8" StartOffset="5609"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S125" CovItemPrefix="game.GameBoard.java" Intrnl_Id="478">
+<LocList>
+<Loc EndOffset="5683" SrcFileId="8" StartOffset="5648"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S126" CovItemPrefix="game.GameBoard.java" Intrnl_Id="479">
+<LocList>
+<Loc EndOffset="5711" SrcFileId="8" StartOffset="5687"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S127" CovItemPrefix="game.GameBoard.java" Intrnl_Id="480">
+<LocList>
+<Loc EndOffset="5746" SrcFileId="8" StartOffset="5715"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S128" CovItemPrefix="game.GameBoard.java" Intrnl_Id="481">
+<LocList>
+<Loc EndOffset="5765" SrcFileId="8" StartOffset="5750"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S129" CovItemPrefix="game.GameBoard.java" Intrnl_Id="482">
+<LocList>
+<Loc EndOffset="5789" SrcFileId="8" StartOffset="5769"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S130" CovItemPrefix="game.GameBoard.java" Intrnl_Id="483">
+<LocList>
+<Loc EndOffset="5819" SrcFileId="8" StartOffset="5793"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S131" CovItemPrefix="game.GameBoard.java" Intrnl_Id="484">
+<LocList>
+<Loc EndOffset="5871" SrcFileId="8" StartOffset="5823"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S132" CovItemPrefix="game.GameBoard.java" Intrnl_Id="485">
+<LocList>
+<Loc EndOffset="5908" SrcFileId="8" StartOffset="5875"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S133" CovItemPrefix="game.GameBoard.java" Intrnl_Id="486">
+<LocList>
+<Loc EndOffset="5931" SrcFileId="8" StartOffset="5912"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S134" CovItemPrefix="game.GameBoard.java" Intrnl_Id="487">
+<LocList>
+<Loc EndOffset="5954" SrcFileId="8" StartOffset="5935"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S135" CovItemPrefix="game.GameBoard.java" Intrnl_Id="488">
+<LocList>
+<Loc EndOffset="5993" SrcFileId="8" StartOffset="5958"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S136" CovItemPrefix="game.GameBoard.java" Intrnl_Id="489">
+<LocList>
+<Loc EndOffset="6016" SrcFileId="8" StartOffset="5997"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S137" CovItemPrefix="game.GameBoard.java" Intrnl_Id="490">
+<LocList>
+<Loc EndOffset="6031" SrcFileId="8" StartOffset="6020"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S138" CovItemPrefix="game.GameBoard.java" Intrnl_Id="491">
+<LocList>
+<Loc EndOffset="6045" SrcFileId="8" StartOffset="6035"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3434" HierarchyLvlTypeId="17" Intrnl_Id="492" Name="GameApplet">
+<Header>
+<Loc EndOffset="99" SrcFileId="9" StartOffset="76"/>
+</Header>
+<LocList>
+<Loc EndOffset="368" SrcFileId="9" StartOffset="76"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3433" HierarchyLvlTypeId="18" Intrnl_Id="493" Name="main">
+<Header>
+<Loc EndOffset="144" SrcFileId="9" StartOffset="106"/>
+</Header>
+<LocList>
+<Loc EndOffset="365" SrcFileId="9" StartOffset="106"/>
+</LocList>
+<StmntSeq Intrnl_Id="494">
+<LocList>
+<Loc EndOffset="205" SrcFileId="9" StartOffset="150"/>
+<Loc EndOffset="264" SrcFileId="9" StartOffset="209"/>
+<Loc EndOffset="361" SrcFileId="9" StartOffset="268"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.GameApplet.java" Intrnl_Id="495">
+<LocList>
+<Loc EndOffset="205" SrcFileId="9" StartOffset="150"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.GameApplet.java" Intrnl_Id="496">
+<LocList>
+<Loc EndOffset="264" SrcFileId="9" StartOffset="209"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="game.GameApplet.java" Intrnl_Id="497">
+<LocList>
+<Loc EndOffset="361" SrcFileId="9" StartOffset="268"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3440" HierarchyLvlTypeId="17" Intrnl_Id="498" Name="Flag">
+<Header>
+<Loc EndOffset="118" SrcFileId="10" StartOffset="79"/>
+</Header>
+<LocList>
+<Loc EndOffset="617" SrcFileId="10" StartOffset="79"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3435" HierarchyLvlTypeId="18" Intrnl_Id="499" Name="Flag">
+<Header>
+<Loc EndOffset="138" SrcFileId="10" StartOffset="125"/>
+</Header>
+<LocList>
+<Loc EndOffset="248" SrcFileId="10" StartOffset="125"/>
+</LocList>
+<StmntSeq Intrnl_Id="500">
+<LocList>
+<Loc EndOffset="172" SrcFileId="10" StartOffset="144"/>
+<Loc EndOffset="216" SrcFileId="10" StartOffset="199"/>
+<Loc EndOffset="244" SrcFileId="10" StartOffset="220"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.Flag.java" Intrnl_Id="501">
+<LocList>
+<Loc EndOffset="172" SrcFileId="10" StartOffset="144"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.Flag.java" Intrnl_Id="502">
+<LocList>
+<Loc EndOffset="216" SrcFileId="10" StartOffset="199"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="game.Flag.java" Intrnl_Id="503">
+<LocList>
+<Loc EndOffset="244" SrcFileId="10" StartOffset="220"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3436" HierarchyLvlTypeId="18" Intrnl_Id="504" Name="actionPerformed">
+<Header>
+<Loc EndOffset="305" SrcFileId="10" StartOffset="251"/>
+</Header>
+<LocList>
+<Loc EndOffset="353" SrcFileId="10" StartOffset="251"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3437" HierarchyLvlTypeId="18" Intrnl_Id="505" Name="setSelected">
+<Header>
+<Loc EndOffset="411" SrcFileId="10" StartOffset="358"/>
+</Header>
+<LocList>
+<Loc EndOffset="446" SrcFileId="10" StartOffset="358"/>
+</LocList>
+<StmntSeq Intrnl_Id="506">
+<LocList>
+<Loc EndOffset="442" SrcFileId="10" StartOffset="417"/>
+</LocList>
+<BasicStmnt CovItemId="S4" CovItemPrefix="game.Flag.java" Intrnl_Id="507">
+<LocList>
+<Loc EndOffset="442" SrcFileId="10" StartOffset="417"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3438" HierarchyLvlTypeId="18" Intrnl_Id="508" Name="hide">
+<Header>
+<Loc EndOffset="481" SrcFileId="10" StartOffset="451"/>
+</Header>
+<LocList>
+<Loc EndOffset="529" SrcFileId="10" StartOffset="451"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3439" HierarchyLvlTypeId="18" Intrnl_Id="509" Name="show">
+<Header>
+<Loc EndOffset="564" SrcFileId="10" StartOffset="534"/>
+</Header>
+<LocList>
+<Loc EndOffset="612" SrcFileId="10" StartOffset="534"/>
+</LocList>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3448" HierarchyLvlTypeId="17" Intrnl_Id="510" Name="ClearPiece">
+<Header>
+<Loc EndOffset="196" SrcFileId="11" StartOffset="151"/>
+</Header>
+<LocList>
+<Loc EndOffset="987" SrcFileId="11" StartOffset="151"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3441" HierarchyLvlTypeId="18" Intrnl_Id="511" Name="ClearPiece">
+<Header>
+<Loc EndOffset="247" SrcFileId="11" StartOffset="228"/>
+</Header>
+<LocList>
+<Loc EndOffset="312" SrcFileId="11" StartOffset="228"/>
+</LocList>
+<StmntSeq Intrnl_Id="512">
+<LocList>
+<Loc EndOffset="277" SrcFileId="11" StartOffset="253"/>
+<Loc EndOffset="308" SrcFileId="11" StartOffset="281"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="513">
+<LocList>
+<Loc EndOffset="277" SrcFileId="11" StartOffset="253"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="514">
+<LocList>
+<Loc EndOffset="308" SrcFileId="11" StartOffset="281"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3442" HierarchyLvlTypeId="18" Intrnl_Id="515" Name="actionPerformed">
+<Header>
+<Loc EndOffset="374" SrcFileId="11" StartOffset="317"/>
+</Header>
+<LocList>
+<Loc EndOffset="449" SrcFileId="11" StartOffset="317"/>
+</LocList>
+<StmntSeq Intrnl_Id="516">
+<LocList>
+<Loc EndOffset="445" SrcFileId="11" StartOffset="380"/>
+</LocList>
+<CondStmnt CovItemId="S3" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="517">
+<Branch CovItemId="B1" CovItemPrefix="game.ClearPiece.java" Implct="false" Intrnl_Id="518">
+<Cond/>
+<LocList>
+<Loc EndOffset="445" SrcFileId="11" StartOffset="393"/>
+</LocList>
+<StmntSeq Intrnl_Id="519">
+<LocList>
+<Loc EndOffset="440" SrcFileId="11" StartOffset="399"/>
+</LocList>
+<BasicStmnt CovItemId="S4" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="520">
+<LocList>
+<Loc EndOffset="440" SrcFileId="11" StartOffset="399"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="game.ClearPiece.java" Implct="true" Intrnl_Id="521">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="522">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="382" SrcFileId="11" StartOffset="380"/>
+<LocList>
+<Loc EndOffset="445" SrcFileId="11" StartOffset="380"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="523">
+<BasicBoolTerm Intrnl_Id="524">
+<LocList>
+<Loc EndOffset="391" SrcFileId="11" StartOffset="383"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3443" HierarchyLvlTypeId="18" Intrnl_Id="525" Name="setSelected">
+<Header>
+<Loc EndOffset="507" SrcFileId="11" StartOffset="454"/>
+</Header>
+<LocList>
+<Loc EndOffset="680" SrcFileId="11" StartOffset="454"/>
+</LocList>
+<StmntSeq Intrnl_Id="526">
+<LocList>
+<Loc EndOffset="645" SrcFileId="11" StartOffset="513"/>
+<Loc EndOffset="676" SrcFileId="11" StartOffset="651"/>
+</LocList>
+<CondStmnt CovItemId="S5" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="527">
+<Branch CovItemId="B3" CovItemPrefix="game.ClearPiece.java" Implct="false" Intrnl_Id="528">
+<Cond/>
+<LocList>
+<Loc EndOffset="582" SrcFileId="11" StartOffset="526"/>
+</LocList>
+<StmntSeq Intrnl_Id="529">
+<LocList>
+<Loc EndOffset="577" SrcFileId="11" StartOffset="532"/>
+</LocList>
+<BasicStmnt CovItemId="S6" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="530">
+<LocList>
+<Loc EndOffset="577" SrcFileId="11" StartOffset="532"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="game.ClearPiece.java" Implct="false" Intrnl_Id="531">
+<Cond>
+<Loc EndOffset="587" SrcFileId="11" StartOffset="583"/>
+</Cond>
+<LocList>
+<Loc EndOffset="645" SrcFileId="11" StartOffset="588"/>
+</LocList>
+<StmntSeq Intrnl_Id="532">
+<LocList>
+<Loc EndOffset="640" SrcFileId="11" StartOffset="594"/>
+</LocList>
+<BasicStmnt CovItemId="S7" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="533">
+<LocList>
+<Loc EndOffset="640" SrcFileId="11" StartOffset="594"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="515" SrcFileId="11" StartOffset="513"/>
+<LocList>
+<Loc EndOffset="645" SrcFileId="11" StartOffset="513"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="534">
+<BasicBoolTerm Intrnl_Id="535">
+<LocList>
+<Loc EndOffset="524" SrcFileId="11" StartOffset="516"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S8" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="536">
+<LocList>
+<Loc EndOffset="676" SrcFileId="11" StartOffset="651"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3444" HierarchyLvlTypeId="18" Intrnl_Id="537" Name="hide">
+<Header>
+<Loc EndOffset="715" SrcFileId="11" StartOffset="685"/>
+</Header>
+<LocList>
+<Loc EndOffset="763" SrcFileId="11" StartOffset="685"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3445" HierarchyLvlTypeId="18" Intrnl_Id="538" Name="show">
+<Header>
+<Loc EndOffset="798" SrcFileId="11" StartOffset="768"/>
+</Header>
+<LocList>
+<Loc EndOffset="846" SrcFileId="11" StartOffset="768"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3446" HierarchyLvlTypeId="18" Intrnl_Id="539" Name="setOwner">
+<Header>
+<Loc EndOffset="892" SrcFileId="11" StartOffset="852"/>
+</Header>
+<LocList>
+<Loc EndOffset="920" SrcFileId="11" StartOffset="852"/>
+</LocList>
+<StmntSeq Intrnl_Id="540">
+<LocList>
+<Loc EndOffset="916" SrcFileId="11" StartOffset="898"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="541">
+<LocList>
+<Loc EndOffset="916" SrcFileId="11" StartOffset="898"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3447" HierarchyLvlTypeId="18" Intrnl_Id="542" Name="getOwner">
+<Header>
+<Loc EndOffset="960" SrcFileId="11" StartOffset="926"/>
+</Header>
+<LocList>
+<Loc EndOffset="982" SrcFileId="11" StartOffset="926"/>
+</LocList>
+<StmntSeq Intrnl_Id="543">
+<LocList>
+<Loc EndOffset="978" SrcFileId="11" StartOffset="966"/>
+</LocList>
+<BasicStmnt CovItemId="S10" CovItemPrefix="game.ClearPiece.java" Intrnl_Id="544">
+<LocList>
+<Loc EndOffset="978" SrcFileId="11" StartOffset="966"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3454" HierarchyLvlTypeId="17" Intrnl_Id="545" Name="Bomb">
+<Header>
+<Loc EndOffset="183" SrcFileId="12" StartOffset="144"/>
+</Header>
+<LocList>
+<Loc EndOffset="909" SrcFileId="12" StartOffset="144"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="3449" HierarchyLvlTypeId="18" Intrnl_Id="546" Name="Bomb">
+<Header>
+<Loc EndOffset="203" SrcFileId="12" StartOffset="190"/>
+</Header>
+<LocList>
+<Loc EndOffset="309" SrcFileId="12" StartOffset="190"/>
+</LocList>
+<StmntSeq Intrnl_Id="547">
+<LocList>
+<Loc EndOffset="225" SrcFileId="12" StartOffset="209"/>
+<Loc EndOffset="256" SrcFileId="12" StartOffset="229"/>
+<Loc EndOffset="277" SrcFileId="12" StartOffset="260"/>
+<Loc EndOffset="305" SrcFileId="12" StartOffset="281"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.Bomb.java" Intrnl_Id="548">
+<LocList>
+<Loc EndOffset="225" SrcFileId="12" StartOffset="209"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.Bomb.java" Intrnl_Id="549">
+<LocList>
+<Loc EndOffset="256" SrcFileId="12" StartOffset="229"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="game.Bomb.java" Intrnl_Id="550">
+<LocList>
+<Loc EndOffset="277" SrcFileId="12" StartOffset="260"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="game.Bomb.java" Intrnl_Id="551">
+<LocList>
+<Loc EndOffset="305" SrcFileId="12" StartOffset="281"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3450" HierarchyLvlTypeId="18" Intrnl_Id="552" Name="actionPerformed">
+<Header>
+<Loc EndOffset="368" SrcFileId="12" StartOffset="314"/>
+</Header>
+<LocList>
+<Loc EndOffset="507" SrcFileId="12" StartOffset="314"/>
+</LocList>
+<StmntSeq Intrnl_Id="553">
+<LocList>
+<Loc EndOffset="503" SrcFileId="12" StartOffset="374"/>
+</LocList>
+<CondStmnt CovItemId="S5" CovItemPrefix="game.Bomb.java" Intrnl_Id="554">
+<Branch CovItemId="B1" CovItemPrefix="game.Bomb.java" Implct="false" Intrnl_Id="555">
+<Cond/>
+<LocList>
+<Loc EndOffset="440" SrcFileId="12" StartOffset="388"/>
+</LocList>
+<StmntSeq Intrnl_Id="556">
+<LocList>
+<Loc EndOffset="435" SrcFileId="12" StartOffset="394"/>
+</LocList>
+<BasicStmnt CovItemId="S6" CovItemPrefix="game.Bomb.java" Intrnl_Id="557">
+<LocList>
+<Loc EndOffset="435" SrcFileId="12" StartOffset="394"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="game.Bomb.java" Implct="false" Intrnl_Id="558">
+<Cond>
+<Loc EndOffset="445" SrcFileId="12" StartOffset="441"/>
+</Cond>
+<LocList>
+<Loc EndOffset="503" SrcFileId="12" StartOffset="446"/>
+</LocList>
+<StmntSeq Intrnl_Id="559">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="376" SrcFileId="12" StartOffset="374"/>
+<LocList>
+<Loc EndOffset="503" SrcFileId="12" StartOffset="374"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="game.Bomb.java" Intrnl_Id="560">
+<BasicBoolTerm Intrnl_Id="561">
+<LocList>
+<Loc EndOffset="386" SrcFileId="12" StartOffset="378"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3451" HierarchyLvlTypeId="18" Intrnl_Id="562" Name="setSelected">
+<Header>
+<Loc EndOffset="565" SrcFileId="12" StartOffset="512"/>
+</Header>
+<LocList>
+<Loc EndOffset="740" SrcFileId="12" StartOffset="512"/>
+</LocList>
+<StmntSeq Intrnl_Id="563">
+<LocList>
+<Loc EndOffset="707" SrcFileId="12" StartOffset="571"/>
+<Loc EndOffset="736" SrcFileId="12" StartOffset="711"/>
+</LocList>
+<CondStmnt CovItemId="S7" CovItemPrefix="game.Bomb.java" Intrnl_Id="564">
+<Branch CovItemId="B3" CovItemPrefix="game.Bomb.java" Implct="false" Intrnl_Id="565">
+<Cond/>
+<LocList>
+<Loc EndOffset="644" SrcFileId="12" StartOffset="585"/>
+</LocList>
+<StmntSeq Intrnl_Id="566">
+<LocList>
+<Loc EndOffset="639" SrcFileId="12" StartOffset="591"/>
+</LocList>
+<BasicStmnt CovItemId="S8" CovItemPrefix="game.Bomb.java" Intrnl_Id="567">
+<LocList>
+<Loc EndOffset="639" SrcFileId="12" StartOffset="591"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="game.Bomb.java" Implct="false" Intrnl_Id="568">
+<Cond>
+<Loc EndOffset="649" SrcFileId="12" StartOffset="645"/>
+</Cond>
+<LocList>
+<Loc EndOffset="707" SrcFileId="12" StartOffset="650"/>
+</LocList>
+<StmntSeq Intrnl_Id="569">
+<LocList>
+<Loc EndOffset="702" SrcFileId="12" StartOffset="656"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="game.Bomb.java" Intrnl_Id="570">
+<LocList>
+<Loc EndOffset="702" SrcFileId="12" StartOffset="656"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="573" SrcFileId="12" StartOffset="571"/>
+<LocList>
+<Loc EndOffset="707" SrcFileId="12" StartOffset="571"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="game.Bomb.java" Intrnl_Id="571">
+<BasicBoolTerm Intrnl_Id="572">
+<LocList>
+<Loc EndOffset="583" SrcFileId="12" StartOffset="575"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S10" CovItemPrefix="game.Bomb.java" Intrnl_Id="573">
+<LocList>
+<Loc EndOffset="736" SrcFileId="12" StartOffset="711"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3452" HierarchyLvlTypeId="18" Intrnl_Id="574" Name="hide">
+<Header>
+<Loc EndOffset="775" SrcFileId="12" StartOffset="745"/>
+</Header>
+<LocList>
+<Loc EndOffset="823" SrcFileId="12" StartOffset="745"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3453" HierarchyLvlTypeId="18" Intrnl_Id="575" Name="show">
+<Header>
+<Loc EndOffset="858" SrcFileId="12" StartOffset="828"/>
+</Header>
+<LocList>
+<Loc EndOffset="906" SrcFileId="12" StartOffset="828"/>
+</LocList>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3468" HierarchyLvlTypeId="17" Intrnl_Id="576" Name="AbstractPiece">
+<Header>
+<Loc EndOffset="265" SrcFileId="13" StartOffset="180"/>
+</Header>
+<LocList>
+<Loc EndOffset="1418" SrcFileId="13" StartOffset="180"/>
+</LocList>
+<StmntSeq Intrnl_Id="577">
+<LocList>
+<Loc EndOffset="307" SrcFileId="13" StartOffset="272"/>
+<Loc EndOffset="349" SrcFileId="13" StartOffset="310"/>
+<Loc EndOffset="440" SrcFileId="13" StartOffset="411"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="578">
+<LocList>
+<Loc EndOffset="307" SrcFileId="13" StartOffset="272"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="579">
+<LocList>
+<Loc EndOffset="349" SrcFileId="13" StartOffset="310"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="580">
+<LocList>
+<Loc EndOffset="440" SrcFileId="13" StartOffset="411"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<HierarchyLvl HierarchyLvlId="3455" HierarchyLvlTypeId="18" Intrnl_Id="581" Name="actionPerformed">
+<Header>
+<Loc EndOffset="557" SrcFileId="13" StartOffset="494"/>
+</Header>
+<LocList>
+<Loc EndOffset="558" SrcFileId="13" StartOffset="494"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3456" HierarchyLvlTypeId="18" Intrnl_Id="582" Name="setSelected">
+<Header>
+<Loc EndOffset="625" SrcFileId="13" StartOffset="563"/>
+</Header>
+<LocList>
+<Loc EndOffset="626" SrcFileId="13" StartOffset="563"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3457" HierarchyLvlTypeId="18" Intrnl_Id="583" Name="hide">
+<Header>
+<Loc EndOffset="670" SrcFileId="13" StartOffset="631"/>
+</Header>
+<LocList>
+<Loc EndOffset="671" SrcFileId="13" StartOffset="631"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3458" HierarchyLvlTypeId="18" Intrnl_Id="584" Name="show">
+<Header>
+<Loc EndOffset="715" SrcFileId="13" StartOffset="676"/>
+</Header>
+<LocList>
+<Loc EndOffset="716" SrcFileId="13" StartOffset="676"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3459" HierarchyLvlTypeId="18" Intrnl_Id="585" Name="isSelected">
+<Header>
+<Loc EndOffset="760" SrcFileId="13" StartOffset="721"/>
+</Header>
+<LocList>
+<Loc EndOffset="786" SrcFileId="13" StartOffset="721"/>
+</LocList>
+<StmntSeq Intrnl_Id="586">
+<LocList>
+<Loc EndOffset="782" SrcFileId="13" StartOffset="766"/>
+</LocList>
+<BasicStmnt CovItemId="S4" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="587">
+<LocList>
+<Loc EndOffset="782" SrcFileId="13" StartOffset="766"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3460" HierarchyLvlTypeId="18" Intrnl_Id="588" Name="setObserver">
+<Header>
+<Loc EndOffset="851" SrcFileId="13" StartOffset="791"/>
+</Header>
+<LocList>
+<Loc EndOffset="886" SrcFileId="13" StartOffset="791"/>
+</LocList>
+<StmntSeq Intrnl_Id="589">
+<LocList>
+<Loc EndOffset="882" SrcFileId="13" StartOffset="857"/>
+</LocList>
+<BasicStmnt CovItemId="S5" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="590">
+<LocList>
+<Loc EndOffset="882" SrcFileId="13" StartOffset="857"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3461" HierarchyLvlTypeId="18" Intrnl_Id="591" Name="setLocation">
+<Header>
+<Loc EndOffset="942" SrcFileId="13" StartOffset="891"/>
+</Header>
+<LocList>
+<Loc EndOffset="980" SrcFileId="13" StartOffset="891"/>
+</LocList>
+<StmntSeq Intrnl_Id="592">
+<LocList>
+<Loc EndOffset="973" SrcFileId="13" StartOffset="948"/>
+</LocList>
+<BasicStmnt CovItemId="S6" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="593">
+<LocList>
+<Loc EndOffset="973" SrcFileId="13" StartOffset="948"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3462" HierarchyLvlTypeId="18" Intrnl_Id="594" Name="getLocation">
+<Header>
+<Loc EndOffset="1023" SrcFileId="13" StartOffset="985"/>
+</Header>
+<LocList>
+<Loc EndOffset="1054" SrcFileId="13" StartOffset="985"/>
+</LocList>
+<StmntSeq Intrnl_Id="595">
+<LocList>
+<Loc EndOffset="1050" SrcFileId="13" StartOffset="1029"/>
+</LocList>
+<BasicStmnt CovItemId="S7" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="596">
+<LocList>
+<Loc EndOffset="1050" SrcFileId="13" StartOffset="1029"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3463" HierarchyLvlTypeId="18" Intrnl_Id="597" Name="getOwner">
+<Header>
+<Loc EndOffset="1095" SrcFileId="13" StartOffset="1061"/>
+</Header>
+<LocList>
+<Loc EndOffset="1118" SrcFileId="13" StartOffset="1061"/>
+</LocList>
+<StmntSeq Intrnl_Id="598">
+<LocList>
+<Loc EndOffset="1114" SrcFileId="13" StartOffset="1101"/>
+</LocList>
+<BasicStmnt CovItemId="S8" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="599">
+<LocList>
+<Loc EndOffset="1114" SrcFileId="13" StartOffset="1101"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3464" HierarchyLvlTypeId="18" Intrnl_Id="600" Name="setOwner">
+<Header>
+<Loc EndOffset="1167" SrcFileId="13" StartOffset="1123"/>
+</Header>
+<LocList>
+<Loc EndOffset="1196" SrcFileId="13" StartOffset="1123"/>
+</LocList>
+<StmntSeq Intrnl_Id="601">
+<LocList>
+<Loc EndOffset="1192" SrcFileId="13" StartOffset="1173"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="602">
+<LocList>
+<Loc EndOffset="1192" SrcFileId="13" StartOffset="1173"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3465" HierarchyLvlTypeId="18" Intrnl_Id="603" Name="setName">
+<Header>
+<Loc EndOffset="1234" SrcFileId="13" StartOffset="1202"/>
+</Header>
+<LocList>
+<Loc EndOffset="1314" SrcFileId="13" StartOffset="1202"/>
+</LocList>
+<StmntSeq Intrnl_Id="604">
+<LocList>
+<Loc EndOffset="1257" SrcFileId="13" StartOffset="1240"/>
+<Loc EndOffset="1310" SrcFileId="13" StartOffset="1261"/>
+</LocList>
+<BasicStmnt CovItemId="S10" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="605">
+<LocList>
+<Loc EndOffset="1257" SrcFileId="13" StartOffset="1240"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S11" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="606">
+<LocList>
+<Loc EndOffset="1310" SrcFileId="13" StartOffset="1261"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3466" HierarchyLvlTypeId="18" Intrnl_Id="607" Name="getName">
+<Header>
+<Loc EndOffset="1343" SrcFileId="13" StartOffset="1320"/>
+</Header>
+<LocList>
+<Loc EndOffset="1365" SrcFileId="13" StartOffset="1320"/>
+</LocList>
+<StmntSeq Intrnl_Id="608">
+<LocList>
+<Loc EndOffset="1361" SrcFileId="13" StartOffset="1349"/>
+</LocList>
+<BasicStmnt CovItemId="S12" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="609">
+<LocList>
+<Loc EndOffset="1361" SrcFileId="13" StartOffset="1349"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="3467" HierarchyLvlTypeId="18" Intrnl_Id="610" Name="getRank">
+<Header>
+<Loc EndOffset="1391" SrcFileId="13" StartOffset="1371"/>
+</Header>
+<LocList>
+<Loc EndOffset="1413" SrcFileId="13" StartOffset="1371"/>
+</LocList>
+<StmntSeq Intrnl_Id="611">
+<LocList>
+<Loc EndOffset="1409" SrcFileId="13" StartOffset="1397"/>
+</LocList>
+<BasicStmnt CovItemId="S13" CovItemPrefix="game.AbstractPiece.java" Intrnl_Id="612">
+<LocList>
+<Loc EndOffset="1409" SrcFileId="13" StartOffset="1397"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+</HierarchyLvl>
+</HierarchyLvl>
+</MASTRoot>
+</TestSessionContainer>

@@ -11,12 +11,18 @@ import javax.swing.JPanel;
 public class PlayerBoard extends JPanel implements IBoardObserver {
 	private User owner;
 	private JPanel board;
-	
-	public PlayerBoard(User owner) {
+	private ITurnObserver turnObserver;
+	private JLabel status;
+	private AbstractPiece[][] myPieces;
+	private AbstractPiece[][] opponentPieces;
+	private IBoardObserver containerObserver;
+	public PlayerBoard(User owner, ITurnObserver turnObserver, IBoardObserver observer) {
 		this.setOwner(owner);
+		this.turnObserver = turnObserver;
+		this.containerObserver = observer;
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
-		JLabel status = new JLabel("Test Label");
+		status = new JLabel("Test Label");
 		this.add(status, BorderLayout.NORTH);		
 		SetupBoard init = new SetupBoard(owner);
 		init.setObserver(this);
@@ -39,14 +45,14 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 	}
 
 	@Override
-	public void isDone(AbstractPiece[][] pieces) {
-		// Not implemented
-		GameBoard gameBoard = new GameBoard(owner, pieces);
-		this.remove(board);
-		this.add(gameBoard);
-		this.validate();
-		this.repaint();
-		this.setBoard(gameBoard);
+	public void doneWithMyBoard(AbstractPiece[][] pieces) {
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
+	public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard) {
+		// TODO Auto-generated method stub
+		
+	}
 }

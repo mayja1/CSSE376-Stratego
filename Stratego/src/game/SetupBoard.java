@@ -92,6 +92,8 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 		c.gridx = x;
 		c.gridy = y;
 		this.add(piece, c);
+		piece.setOwner(this.owner);
+		piece.show();
 		System.out.println("Added piece: " + piece);
 		piece.validate();
 	}
@@ -106,7 +108,7 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 
 		showJOptionPane(gridLocation, panel, comboBox);
 		if(model.getSize() == 0) {
-			observer.isDone(pieces);
+			observer.doneWithMyBoard(pieces);
 		}
 		
 		this.validate();

@@ -229,7 +229,7 @@ public class TestGameBoard {
 	}
 	private class NoneGuiGameBoard extends GameBoard {
 		public NoneGuiGameBoard(User owner, AbstractPiece[][] pieces) {
-			super(owner, pieces);		
+			super(owner, pieces, pieces);		
 		}
 		
 		@Override

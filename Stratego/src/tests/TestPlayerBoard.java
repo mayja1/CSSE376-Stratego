@@ -1,8 +1,10 @@
 package tests;
 
 import org.junit.Assert;
+
 import game.GameBoard.User;
 import game.PlayerBoard;
+import game.TurnObserver;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,7 +15,7 @@ public class TestPlayerBoard {
 	PlayerBoard testBoard;
 	@Before
 	public void setup() {
-		testBoard = new PlayerBoard(User.PLAYER1, null);
+		testBoard = new PlayerBoard(User.PLAYER1, new TurnObserver());
 	}
 	
 	@After
@@ -27,3 +29,4 @@ public class TestPlayerBoard {
 		Assert.assertNotNull(testBoard.getBoard());
 	}
 }
+>>>>>>> 9ffa92f40219bb31c161f8471c61ae6e624649c4
