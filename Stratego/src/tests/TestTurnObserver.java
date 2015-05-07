@@ -44,5 +44,13 @@ public class TestTurnObserver {
 		
 		assertTrue(fieldValue != null);
 	}
+	
+	@Test
+	public void testEndTurn() {
+		ITurnObserver observer = new TurnObserver();
+		assertTrue(observer.isTurn(User.PLAYER1));
+		observer.endTurn();
+		assertTrue(observer.isTurn(User.PLAYER2));
+	}
 
 }
