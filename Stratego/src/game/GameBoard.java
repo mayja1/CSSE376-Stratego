@@ -252,7 +252,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	}
 	
 	public void setObserver(ITurnObserver obs) {
-		// Not implemented
+		observer = obs;
 	}
 
 }
