@@ -22,8 +22,7 @@ public class TestBoardObserver {
 	@Before
 	public void setup() {
 		observer = new MockBoardObserver();
-		//testBoard = new PlayerBoard(User.PLAYER1, observer);
-		testBoard = new PlayerBoard(User.PLAYER1, new TurnObserver());
+		testBoard = new PlayerBoard(User.PLAYER1, new TurnObserver(), observer);
 		pieces = new AbstractPiece[10][4];
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 10; j++) {

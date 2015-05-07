@@ -35,7 +35,7 @@ public class TestTurnObserver {
 	@Test
 	public void testCreateTurnObserver() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		ITurnObserver observer = new TurnObserver();
-		GameBoard board = new GameBoard(User.PLAYER1, pieces);
+		GameBoard board = new GameBoard(User.PLAYER1, pieces, pieces);
 		board.setObserver(observer);
 		Field privateObserverField = GameBoard.class.
 		            getDeclaredField("observer");

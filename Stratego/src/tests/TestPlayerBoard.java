@@ -15,7 +15,7 @@ public class TestPlayerBoard {
 	PlayerBoard testBoard;
 	@Before
 	public void setup() {
-		testBoard = new PlayerBoard(User.PLAYER1, new TurnObserver());
+		testBoard = new PlayerBoard(User.PLAYER1, new TurnObserver(), null);
 	}
 	
 	@After
@@ -29,4 +29,3 @@ public class TestPlayerBoard {
 		Assert.assertNotNull(testBoard.getBoard());
 	}
 }
->>>>>>> 9ffa92f40219bb31c161f8471c61ae6e624649c4
