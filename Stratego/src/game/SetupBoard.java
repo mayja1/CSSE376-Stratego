@@ -38,31 +38,31 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 
 	protected void instantiateModel(DefaultComboBoxModel<AbstractPiece> model) {
 		model.addElement(PieceFactory.createFlag());
-//		for (int i = 0; i < 6; i++) {
-//			model.addElement(PieceFactory.createBomb());
-//		}
-//		model.addElement(PieceFactory.createSpy());
-//		for (int i = 0; i < 8; i++) {
-//			model.addElement(PieceFactory.createScout());
-//		}
-//		for (int i = 0; i < 5; i++) {
-//			model.addElement(PieceFactory.createMiner());
-//		}
-//		for (int i = 0; i < 4; i++) {
-//			model.addElement(PieceFactory.createSergeant());
-//		}
-//		for (int i = 0; i < 4; i++) {
-//			model.addElement(PieceFactory.createLieutenant());
-//		}
-//		for (int i = 0; i < 4; i++) {
-//			model.addElement(PieceFactory.createCaptain());
-//		}
-//		for (int i = 0; i < 3; i++) {
-//			model.addElement(PieceFactory.createMajor());
-//		}
-//		for (int i = 0; i < 2; i++) {
-//			model.addElement(PieceFactory.createColonel());
-//		}
+		for (int i = 0; i < 6; i++) {
+			model.addElement(PieceFactory.createBomb());
+		}
+		model.addElement(PieceFactory.createSpy());
+		for (int i = 0; i < 8; i++) {
+			model.addElement(PieceFactory.createScout());
+		}
+		for (int i = 0; i < 5; i++) {
+			model.addElement(PieceFactory.createMiner());
+		}
+		for (int i = 0; i < 4; i++) {
+			model.addElement(PieceFactory.createSergeant());
+		}
+		for (int i = 0; i < 4; i++) {
+			model.addElement(PieceFactory.createLieutenant());
+		}
+		for (int i = 0; i < 4; i++) {
+			model.addElement(PieceFactory.createCaptain());
+		}
+		for (int i = 0; i < 3; i++) {
+			model.addElement(PieceFactory.createMajor());
+		}
+		for (int i = 0; i < 2; i++) {
+			model.addElement(PieceFactory.createColonel());
+		}
 		model.addElement(PieceFactory.createGeneral());
 		model.addElement(PieceFactory.createMarshall());
 	}

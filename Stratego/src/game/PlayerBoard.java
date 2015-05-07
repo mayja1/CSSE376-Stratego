@@ -44,6 +44,7 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 	public void isDone(AbstractPiece[][] pieces) {
 		// Not implemented
 		GameBoard gameBoard = new GameBoard(owner, pieces);
+		gameBoard.setObserver(turnObserver);
 		this.remove(board);
 		this.add(gameBoard);
 		this.validate();
