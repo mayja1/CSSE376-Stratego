@@ -52,5 +52,11 @@ public class TestTurnObserver {
 		observer.endTurn();
 		assertTrue(observer.isTurn(User.PLAYER2));
 	}
+	
+	@Test
+	public void testIsTurn() {
+		ITurnObserver observer = new TurnObserver();
+		assertTrue(observer.isTurn(User.PLAYER1));
+	}
 
 }
