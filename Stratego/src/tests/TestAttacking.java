@@ -174,4 +174,16 @@ public class TestAttacking {
 		assertEquals(true, s1.getVisiblity());
 	}
 	
+	@Test
+	public void TestVisibilityOnSpecialAttack() {
+		AbstractPiece s1 = new Soldier(3);
+		s1.setOwner(User.PLAYER1);
+		s1.setLocation(new Point (0, 1));
+		AbstractPiece s2 = new Bomb();
+		s2.setOwner(User.PLAYER2);
+		s2.setLocation(new Point (1, 1));
+		game.attack(s1, s2);
+		assertEquals(true, s1.getVisiblity());
+	}
+	
 }
