@@ -64,6 +64,18 @@ public class TestSetupBoard {
 		Assert.assertTrue(testBoard.getPieces()[1][1].isSelected());
 	}
 	
+	@Test
+	public void testNonSelectedButtonPressedSpecialPeice() {
+		AbstractPiece piece = PieceFactory.createBomb();
+		testBoard.remove(testBoard.getPieces()[5][0]);
+		testBoard.addPiece(5, 0, piece);
+		
+		testBoard.nonSelectedButtonPressed(new Point(5, 0));
+		
+		Assert.assertTrue(testBoard.getPieces()[5][0] instanceof ClearPiece);
+		Assert.assertTrue(testBoard.getPieces()[5][0].isSelected());
+	}
+	
 	private class SetupBoardNoGui extends SetupBoard {
 		boolean paneShown;
 		public SetupBoardNoGui(User owner) {
