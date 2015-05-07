@@ -65,12 +65,24 @@ public class TestSetupBoard {
 	}
 	
 	@Test
-	public void testNonSelectedButtonPressedSpecialPeice() {
+	public void testNonSelectedButtonPressedSpecialPeiceBomb() {
 		AbstractPiece piece = PieceFactory.createBomb();
 		testBoard.remove(testBoard.getPieces()[5][0]);
 		testBoard.addPiece(5, 0, piece);
 		
 		testBoard.nonSelectedButtonPressed(new Point(5, 0));
+		
+		Assert.assertTrue(testBoard.getPieces()[5][0] instanceof ClearPiece);
+		Assert.assertTrue(testBoard.getPieces()[5][0].isSelected());
+	}
+	
+	@Test
+	public void testNonSelectedButtonPressedSpecialPeiceFlag() {
+		AbstractPiece piece = PieceFactory.createFlag();
+		testBoard.remove(testBoard.getPieces()[5][1]);
+		testBoard.addPiece(5, 1, piece);
+		
+		testBoard.nonSelectedButtonPressed(new Point(5, 1));
 		
 		Assert.assertTrue(testBoard.getPieces()[5][0] instanceof ClearPiece);
 		Assert.assertTrue(testBoard.getPieces()[5][0].isSelected());
