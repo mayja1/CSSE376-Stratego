@@ -118,7 +118,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 				}
 			}
 			AbstractPiece nonSelected = pieces[gridLocation.x][gridLocation.y];
-			if (nonSelected.getOwner() != this.owner || nonSelected instanceof Bomb) {
+			if (nonSelected.getOwner() != this.owner || nonSelected instanceof Bomb || nonSelected instanceof Flag) {
 				return;
 			}
 			this.selectedPiece = nonSelected;

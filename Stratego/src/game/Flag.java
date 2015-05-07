@@ -3,6 +3,8 @@ package game;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 
+import javax.swing.border.LineBorder;
+
 public class Flag extends AbstractPiece{
 	
 	public Flag() {
@@ -13,12 +15,20 @@ public class Flag extends AbstractPiece{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (selected) {
+			observer.selectedButtonPressed(location);
+		} else {
+			observer.nonSelectedButtonPressed(location);
+		}
 	}
 
 	@Override
 	public void setSelected(boolean selected) {
+		if (selected) {
+			this.setBorder(new LineBorder(Color.YELLOW, 5));
+		} else {
+			this.setBorder(new LineBorder(Color.GRAY, 1));
+		}
 		this.selected = selected;
 	}
 
