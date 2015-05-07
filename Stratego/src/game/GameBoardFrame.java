@@ -22,6 +22,10 @@ public class GameBoardFrame extends JFrame implements IBoardObserver {
 
 		board = new PlayerBoard(owner, observer, this);
 		this.add(board);
+		showGui();
+	}
+	
+	public void showGui() {
 		this.setVisible(true);
 		this.validate();
 	}
@@ -31,14 +35,52 @@ public class GameBoardFrame extends JFrame implements IBoardObserver {
 	}
 
 	@Override
-	public void doneWithMyBoard(AbstractPiece[][] pieces) {
-		// TODO Auto-generated method stub
+	public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard) {
+		AbstractPiece[][] copyBoard = new AbstractPiece[10][4];
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 4; j++) {
+				copyBoard[i][j] = copyInstanceOfPiece(completedBoard[i][j]);
+			}
+		}
+		board.opponentDoneWithThisBoard(copyBoard);
 		
 	}
 
 	@Override
-	public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard) {
-		// TODO Auto-generated method stub
+	public void doneWithMyBoard(AbstractPiece[][] pieces) {
+		otherGameBoard.opponentDoneWithThisBoard(pieces);
+	}
+	
+	public AbstractPiece copyInstanceOfPiece(AbstractPiece piece) {
+		AbstractPiece pieceCopy = null;
+		if(piece instanceof Bomb) {
+			pieceCopy = PieceFactory.createBomb();
+		}		
+		else if(piece instanceof Flag)
+			pieceCopy = PieceFactory.createFlag();
+		else if(piece.rank == 0)
+			pieceCopy = PieceFactory.createSpy();
 		
+		else if(piece.rank == 9)
+			pieceCopy = PieceFactory.createMarshall();
+		else if(piece.rank == 8)
+			pieceCopy = PieceFactory.createGeneral();
+		else if(piece.rank == 7)
+			pieceCopy = PieceFactory.createColonel();
+		else if(piece.rank == 6)
+			pieceCopy = PieceFactory.createMajor();
+		else if(piece.rank == 5)
+			pieceCopy = PieceFactory.createCaptain();
+		else if(piece.rank == 4)
+			pieceCopy = PieceFactory.createLieutenant();
+		else if(piece.rank == 3)
+			pieceCopy = PieceFactory.createSergeant();
+		else if(piece.rank == 2)
+			pieceCopy = PieceFactory.createMiner();
+		else if(piece.rank == 1)
+			pieceCopy = PieceFactory.createScout();
+		pieceCopy.setOwner(piece.owner);
+		pieceCopy.setLocation(piece.getLocation());
+		return pieceCopy;
 	}
 }
