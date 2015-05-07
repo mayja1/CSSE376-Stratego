@@ -11,9 +11,11 @@ import javax.swing.JPanel;
 public class PlayerBoard extends JPanel implements IBoardObserver {
 	private User owner;
 	private JPanel board;
+	private ITurnObserver turnObserver;
 	
-	public PlayerBoard(User owner) {
+	public PlayerBoard(User owner, ITurnObserver turnObserver) {
 		this.setOwner(owner);
+		this.turnObserver = turnObserver;
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
 		JLabel status = new JLabel("Test Label");
@@ -48,5 +50,4 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 		this.repaint();
 		this.setBoard(gameBoard);
 	}
-
 }

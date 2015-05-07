@@ -16,6 +16,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	private AbstractPiece[][] piecesToSet;
 	private GridBagLayout layout;
 	private User owner;
+	private ITurnObserver observer;
 
 	public GameBoard(User owner, AbstractPiece[][] pieces) {
 		super();
@@ -249,4 +250,9 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		validate();
 		repaint();
 	}
+	
+	public void setObserver(ITurnObserver obs) {
+		// Not implemented
+	}
+
 }

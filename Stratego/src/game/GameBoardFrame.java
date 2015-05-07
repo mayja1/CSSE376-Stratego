@@ -6,16 +6,18 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 public class GameBoardFrame extends JFrame {
 
 	private PlayerBoard board;
-	public GameBoardFrame(User owner) {
+	
+	public GameBoardFrame(User owner, ITurnObserver observer) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(screenSize.width/2, screenSize.height);
-		board = new PlayerBoard(owner);
+		board = new PlayerBoard(owner, observer);
 		this.add(board);
 		this.setVisible(true);
 		this.validate();
