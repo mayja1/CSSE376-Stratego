@@ -13,7 +13,7 @@ public class TestPlayerBoard {
 	PlayerBoard testBoard;
 	@Before
 	public void setup() {
-		testBoard = new PlayerBoard(User.PLAYER1);
+		testBoard = new PlayerBoard(User.PLAYER1, null);
 	}
 	
 	@After

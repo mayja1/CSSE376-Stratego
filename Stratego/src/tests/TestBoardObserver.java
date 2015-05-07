@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 import game.AbstractPiece;
 import game.GameBoard;
+import game.IBoardObserver;
 import game.PieceFactory;
 import game.PlayerBoard;
 import game.GameBoard.User;
@@ -14,11 +15,13 @@ import org.junit.Test;
 public class TestBoardObserver {
 	
 	private PlayerBoard testBoard;
+	private MockBoardObserver observer;
 	private AbstractPiece[][] pieces;
 	
 	@Before
 	public void setup() {
-		testBoard = new PlayerBoard(User.PLAYER1);
+		observer = new MockBoardObserver();
+		testBoard = new PlayerBoard(User.PLAYER1, observer);
 		pieces = new AbstractPiece[10][4];
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -28,10 +31,38 @@ public class TestBoardObserver {
 	}
 
 	@Test
-	public void testIsDone() {
-		testBoard.isDone(pieces);
+	public void testDoneWithBoard() {
+		testBoard.doneWithMyBoard(pieces);
+		assertTrue(observer.doneWithBoard);
+	}
+	@Test
+	public void testOpponentDoneWithBoard() {
+		testBoard.doneWithMyBoard(pieces);
+		testBoard.opponentDoneWithThisBoard(pieces);
 		assertFalse(testBoard.getBoard() instanceof SetupBoard);
 		assertTrue(testBoard.getBoard() instanceof GameBoard);
 	}
+	
+	private class MockBoardObserver implements IBoardObserver {
 
+		boolean doneWithBoard;
+		boolean opponentDone;
+		
+		public MockBoardObserver () {
+			doneWithBoard = false;
+			opponentDone = false;
+		}
+		@Override
+		public void doneWithMyBoard(AbstractPiece[][] pieces) {
+			doneWithBoard = true;
+			
+		}
+
+		@Override
+		public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard) {
+			
+		}
+		
+		
+	}
 }
