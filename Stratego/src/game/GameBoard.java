@@ -252,6 +252,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 			return p1.getOwner() + " beat " + p2.getOwner();
 		} else if (p1.rank < p2.rank) {
 			removePiece(p1);
+			p2.show();
 			return p2.getOwner() + " beat " + p1.getOwner();
 		} else if (p1.rank == p2.rank) {
 			removePiece(p1);
