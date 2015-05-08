@@ -112,7 +112,7 @@ public class TestAttacking {
 	
 	@Test
 	public void TestMinorDefuseEnemyBomb() {
-		AbstractPiece s1 = new Soldier(3);
+		AbstractPiece s1 = new Soldier(2);
 		s1.setOwner(User.PLAYER1);
 		s1.setLocation(new Point (0, 1));
 		AbstractPiece s2 = new Bomb();
@@ -176,7 +176,7 @@ public class TestAttacking {
 	
 	@Test
 	public void TestVisibilityOnSpecialAttack() {
-		AbstractPiece s1 = new Soldier(3);
+		AbstractPiece s1 = new Soldier(2);
 		s1.setOwner(User.PLAYER1);
 		s1.setLocation(new Point (0, 1));
 		AbstractPiece s2 = new Bomb();

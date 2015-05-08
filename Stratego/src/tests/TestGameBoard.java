@@ -13,6 +13,7 @@ import game.Bomb;
 import game.ClearPiece;
 import game.GameBoard;
 import game.GameBoard.User;
+import game.ITurnObserver;
 import game.PieceFactory;
 import game.Soldier;
 
@@ -229,7 +230,8 @@ public class TestGameBoard {
 	}
 	private class NoneGuiGameBoard extends GameBoard {
 		public NoneGuiGameBoard(User owner, AbstractPiece[][] pieces) {
-			super(owner, pieces, pieces);		
+			super(owner, pieces, pieces);	
+			this.setObserver(new MockTurnObserver());
 		}
 		
 		@Override
@@ -254,4 +256,25 @@ public class TestGameBoard {
 		}
 	}
 	
+	private class MockTurnObserver implements ITurnObserver {
+
+		@Override
+		public void endTurn(Point p1, Point p2) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public boolean isTurn(Enum<User> user) {
+			// TODO Auto-generated method stub
+			return true;
+		}
+
+		@Override
+		public void addBoard(User owner, GameBoard gameBoard) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 }
