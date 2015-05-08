@@ -85,15 +85,18 @@ public class GameBoard extends JPanel implements IPieceObserver {
 
 	@Override
 	public void selectedButtonPressed(Point gridLocation) {
+		AbstractPiece currentPiece = pieces[gridLocation.x][gridLocation.y];
 		if (observer.isTurn(owner) && selectedPiece != null) {
-			if (selectedPiece.equals(pieces[gridLocation.x][gridLocation.y])) {
+			if (selectedPiece.equals(currentPiece)) {
 				selectedPiece.setSelected(false);
 			} else if (isEnemey(selectedPiece,
-					pieces[gridLocation.x][gridLocation.y])) {
-				attack(selectedPiece, pieces[gridLocation.x][gridLocation.y]);
+					currentPiece)) {
+				observer.endTurn(selectedPiece.location, currentPiece.location);
+				attack(selectedPiece, currentPiece);
 			} else {
+				observer.endTurn(selectedPiece.location, currentPiece.location);
 				swapPieces(selectedPiece,
-						pieces[gridLocation.x][gridLocation.y]);
+						currentPiece);
 			}
 		}
 		for (AbstractPiece[] pRow : pieces) {
@@ -221,52 +224,44 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		c.gridy = point2.y;
 		pieces[point2.x][point2.y] = p1;
 		this.add(p1, c);
-		observer.endTurn();
 		validate();
 		repaint();
 	}
 
 	public String attack(AbstractPiece p1, AbstractPiece p2) {
 		if (p2 instanceof Bomb) {
-			if (p1.rank == 3) {
+			if (p1.rank == 2) {
 				swapPieces(p1, p2);
 				removePiece(p2);
 				p1.show();
-				observer.endTurn();
 				return p1.getOwner() + "defused a" + p2.getOwner() + "bomb";
 			} else {
 				removePiece(p1);
 				removePiece(p2);
-				observer.endTurn();
 				return "A bomb has exploded!";
 			}
 		} else if (p2 instanceof Flag) {
 			swapPieces(p1, p2);
 			removePiece(p2);
-			observer.endTurn();
 			return p1.getOwner() + "has defeated" + p2.getOwner();
 		} else if ((p1.rank == 0) && (p2.rank == 9)) { // Spy attacking Marshall
 														// case
 			swapPieces(p1, p2);
 			removePiece(p2);
 			p1.show();
-			observer.endTurn();
 			return p1.getOwner() + " beat " + p2.getOwner();
 		} else if (p1.rank > p2.rank) {
 			swapPieces(p1, p2);
 			removePiece(p2);
 			p1.show();
-			observer.endTurn();
 			return p1.getOwner() + " beat " + p2.getOwner();
 		} else if (p1.rank < p2.rank) {
 			removePiece(p1);
 			p2.show();
-			observer.endTurn();
 			return p2.getOwner() + " beat " + p1.getOwner();
 		} else if (p1.rank == p2.rank) {
 			removePiece(p1);
 			removePiece(p2);
-			observer.endTurn();
 			return p1.getOwner() + " tied " + p2.getOwner();
 		}
 		return "Error: case not handled";
@@ -295,4 +290,13 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		observer = obs;
 	}
 
+	public void updateBoard(Point p1, Point p2) {
+		AbstractPiece piece1 = pieces[9-p1.x][9-p1.y];
+		AbstractPiece piece2 = pieces[9-p2.x][9-p2.y];
+		if(piece2 instanceof ClearPiece) {
+			swapPieces(piece1, piece2);
+		} else {
+			attack(piece1, piece2);
+		}
+	}
 }

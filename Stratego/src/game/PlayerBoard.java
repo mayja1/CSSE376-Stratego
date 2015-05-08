@@ -71,6 +71,7 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 		this.remove(board);
 		GameBoard gameBoard = new GameBoard(owner, myPieces, opponentPieces);
 		gameBoard.setObserver(turnObserver);
+		turnObserver.addBoard(owner, gameBoard);
 		this.add(gameBoard, BorderLayout.CENTER);
 		gameBoard.validate();
 		this.validate();
