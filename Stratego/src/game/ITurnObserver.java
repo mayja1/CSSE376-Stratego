@@ -12,4 +12,5 @@ public interface ITurnObserver {
 
 	public void addBoard(User owner, GameBoard gameBoard);
 	
+	public User endGame(Enum player);
 }

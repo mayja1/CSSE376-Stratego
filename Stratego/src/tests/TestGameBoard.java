@@ -275,6 +275,12 @@ public class TestGameBoard {
 			// TODO Auto-generated method stub
 			
 		}
+
+		@Override
+		public User endGame(Enum player) {
+			return null;
+			
+		}
 		
 	}
 }

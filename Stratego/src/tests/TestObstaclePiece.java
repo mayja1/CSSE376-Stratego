@@ -89,12 +89,9 @@ private GameBoard game;
 	public void testSelectedButtonPressed() {
 		AbstractPiece miner = new Soldier(2, "Miner");
 		miner.setLocation(new Point(0,1));
-		piece.setOwner(User.PLAYER1);
+		miner.setOwner(User.PLAYER1);
 		
 		AbstractPiece obstacle = new Obstacle();
-		
-		Point obstacleLocation = obstacle.getLocation();
-		Point minerLocation = miner.getLocation();
 		
 		game.selectedButtonPressed(obstacle.getLocation());
 		assertFalse(obstacle.isSelected());
