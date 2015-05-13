@@ -65,5 +65,9 @@ public class PieceFactory {
 		AbstractPiece soldier = new Soldier(1, "Scout");
 		return soldier;
 	}
+	
+	public static AbstractPiece createObstacle() {
+		return null;
+	}
 
 }

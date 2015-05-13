@@ -5,6 +5,7 @@ import game.AbstractPiece;
 import game.Bomb;
 import game.ClearPiece;
 import game.Flag;
+import game.Obstacle;
 import game.PieceFactory;
 import game.Soldier;
 
@@ -17,6 +18,13 @@ public class TestPieceFactory {
 		AbstractPiece bomb = (AbstractPiece) PieceFactory.createBomb();
 		assertTrue(bomb instanceof Bomb);
 		assertEquals("Bomb", bomb.getName());
+	}
+	
+	@Test
+	public void testCreateObstacle() {
+		AbstractPiece obstacle = (AbstractPiece) PieceFactory.createObstacle();
+		assertTrue(obstacle instanceof Obstacle);
+		assertEquals(null, obstacle.getName());
 	}
 	
 	@Test
