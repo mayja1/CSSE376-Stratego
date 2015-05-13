@@ -104,9 +104,8 @@ public class TestTurnObserver {
 		}
 
 		@Override
-		public User endGame(User player) {
+		public void endGame(User player) {
 			// TODO Auto-generated method stub
-			return null;
 		}
 	}
 }

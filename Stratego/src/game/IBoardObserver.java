@@ -6,5 +6,5 @@ public interface IBoardObserver {
 	
 	public void doneWithMyBoard(AbstractPiece[][] pieces);
 	public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard);
-	public User endGame(User player);
+	public void endGame(User player);
 }

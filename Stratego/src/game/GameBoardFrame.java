@@ -85,8 +85,7 @@ public class GameBoardFrame extends JFrame implements IBoardObserver {
 	}
 
 	@Override
-	public User endGame(User player) {
-		this.dispose();
-		return player;
+	public void endGame(User player) {
+		// Un-implemented
 	}
 }

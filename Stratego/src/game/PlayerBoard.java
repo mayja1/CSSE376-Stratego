@@ -80,9 +80,12 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 	}
 
 	@Override
-	public User endGame(User player) {
-		setBoard(null);
-		return player;
-		
+	public void endGame(User player) {
+		this.remove(board);
+		board.validate();
+		this.validate();
+		this.repaint();
+		board = null;
+		this.status.setText("Player " + player + " is the winner!");		
 	}
 }

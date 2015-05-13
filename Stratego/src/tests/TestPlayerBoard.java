@@ -50,20 +50,6 @@ public class TestPlayerBoard {
 	}
 	
 	@Test
-	public void testGetPlayerAfterEndGame() {
-		AbstractPiece miner = new Soldier(2, "Miner");
-		miner.setLocation(new Point(0,1));
-		miner.setOwner(User.PLAYER1);
-		
-		AbstractPiece flag = new Flag();
-		flag.setLocation(new Point(0,0));
-		flag.setOwner(User.PLAYER2);
-		
-		gameBoard2.attack(miner, flag);
-		assertEquals(User.PLAYER1, testBoard.endGame(User.PLAYER1));
-	}
-	
-	@Test
 	public void testCloseGameBoardAfterEndGame() {
 		AbstractPiece miner = new Soldier(2, "Miner");
 		miner.setLocation(new Point(0,1));
@@ -74,7 +60,6 @@ public class TestPlayerBoard {
 		flag.setOwner(User.PLAYER2);
 		
 		gameBoard2.attack(miner, flag);
-		testBoard.endGame(User.PLAYER1);
 		assertEquals(testBoard.getBoard(), null);
 	}
 	
