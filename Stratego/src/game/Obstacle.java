@@ -2,9 +2,15 @@ package game;
 
 import game.GameBoard.User;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 public class Obstacle extends AbstractPiece {
+	
+	public Obstacle() {
+		addActionListener(this);
+		setBackground(Color.BLACK);
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -1,5 +1,7 @@
 package tests;
 
+import static org.junit.Assert.*;
+
 import java.awt.Point;
 
 import org.junit.Assert;
@@ -8,12 +10,29 @@ import org.junit.Before;
 import org.junit.Test;
 
 import game.AbstractPiece;
-import game.IPiece;
+import game.GameBoard;
 import game.Obstacle;
+import game.PieceFactory;
+import game.Soldier;
 import game.GameBoard.User;
 
 //Test that this piece doesn't do anything
 public class TestObstaclePiece {
+	
+private GameBoard game;
+	
+	@Before
+	public void setUp() {
+		
+		AbstractPiece[][] pieces = new AbstractPiece[10][4];
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 10; j++) {
+				pieces[j][i] = PieceFactory.createClearPiece();
+			}
+		}
+		
+		game = new GameBoard(User.PLAYER1, pieces, pieces);
+	}
 
 	AbstractPiece piece = new Obstacle();
 	MockPieceObserver observer;
@@ -65,6 +84,22 @@ public class TestObstaclePiece {
 		piece.setOwner(User.PLAYER1);
 		Assert.assertNull(piece.getOwner());
 	}
+	
+	@Test
+	public void testSelectedButtonPressed() {
+		AbstractPiece miner = new Soldier(2, "Miner");
+		miner.setLocation(new Point(0,1));
+		piece.setOwner(User.PLAYER1);
+		
+		AbstractPiece obstacle = new Obstacle();
+		
+		Point obstacleLocation = obstacle.getLocation();
+		Point minerLocation = miner.getLocation();
+		
+		game.selectedButtonPressed(obstacle.getLocation());
+		assertFalse(obstacle.isSelected());
+	}
+	
 	
 	@After
 	public void tearDown() {
