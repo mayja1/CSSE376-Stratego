@@ -67,7 +67,8 @@ public class PieceFactory {
 	}
 	
 	public static AbstractPiece createObstacle() {
-		return null;
+		AbstractPiece obstacle= new Obstacle();
+		return obstacle;
 	}
 
 }
