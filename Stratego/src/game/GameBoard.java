@@ -37,13 +37,15 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	protected void instantiateBoard() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				AbstractPiece button = PieceFactory.createClearPiece();
-				addPiece(i, j, button);
-
+				if ((i >= 2 && i <= 3 && j >= 4 && j <= 5) || (i >= 6 && i <= 7 && j >= 4 && j <= 5)) {
+					AbstractPiece obs = PieceFactory.createObstacle();
+					addPiece(i, j, obs);
+				} else {
+					AbstractPiece button = PieceFactory.createClearPiece();
+					addPiece(i, j, button);
+				}
 			}
 		}
-		
-		
 		
 		for (int i = 0; i < opponentPiecesToSet.length; i++) {
 			for (int j = 0; j < opponentPiecesToSet[i].length; j++) {
@@ -74,7 +76,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		piece.setObserver(this);
 		if(piece.owner == this.owner) {
 			piece.setBackground(Color.GREEN);
-		} else if (!(piece instanceof ClearPiece)){
+		} else if (!(piece instanceof ClearPiece || piece instanceof Obstacle)){
 			piece.setBackground(Color.RED);
 		}
 		pieces[x][y] = piece;
