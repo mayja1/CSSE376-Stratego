@@ -64,6 +64,11 @@ public class TestBoardObserver {
 			
 		}
 		
+		@Override
+		public User endGame(User player) {
+			return null;
+		}
+		
 		
 	}
 }

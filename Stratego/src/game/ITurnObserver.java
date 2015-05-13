@@ -11,6 +11,4 @@ public interface ITurnObserver {
 	public boolean isTurn(Enum<User> user);
 
 	public void addBoard(User owner, GameBoard gameBoard);
-	
-	public User endGame(Enum player);
 }

@@ -3,6 +3,8 @@ package tests;
 import java.awt.GridBagLayout;
 import java.awt.Point;
 
+import javax.swing.JPanel;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.After;
@@ -13,6 +15,7 @@ import game.Bomb;
 import game.ClearPiece;
 import game.GameBoard;
 import game.GameBoard.User;
+import game.IBoardObserver;
 import game.ITurnObserver;
 import game.PieceFactory;
 import game.Soldier;
@@ -231,7 +234,7 @@ public class TestGameBoard {
 	private class NoneGuiGameBoard extends GameBoard {
 		public NoneGuiGameBoard(User owner, AbstractPiece[][] pieces) {
 			super(owner, pieces, pieces);	
-			this.setObserver(new MockTurnObserver());
+			this.setObserver(new MockTurnObserver(), new MockPlayerBoard());
 		}
 		
 		@Override
@@ -256,6 +259,28 @@ public class TestGameBoard {
 		}
 	}
 	
+	private class MockPlayerBoard extends JPanel implements IBoardObserver {
+
+		@Override
+		public void doneWithMyBoard(AbstractPiece[][] pieces) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public User endGame(User player) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+	}
+	
 	private class MockTurnObserver implements ITurnObserver {
 
 		@Override
@@ -273,12 +298,6 @@ public class TestGameBoard {
 		@Override
 		public void addBoard(User owner, GameBoard gameBoard) {
 			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public User endGame(Enum player) {
-			return null;
 			
 		}
 		

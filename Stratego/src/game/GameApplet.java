@@ -51,4 +51,8 @@ public class GameApplet {
 		}
 	}
 	
+	public static void endGame() {
+		
+	}
+	
 }

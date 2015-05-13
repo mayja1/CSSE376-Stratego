@@ -33,11 +33,4 @@ public class TurnObserver implements ITurnObserver {
 	public void addBoard(User owner, GameBoard b) {
 		boardMap.put(owner, b);
 	}
-
-	@Override
-	public User endGame(Enum player) {
-		return (User) player;
-		
-	}
-
 }

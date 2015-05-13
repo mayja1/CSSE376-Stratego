@@ -83,4 +83,10 @@ public class GameBoardFrame extends JFrame implements IBoardObserver {
 		pieceCopy.setLocation(piece.getLocation());
 		return pieceCopy;
 	}
+
+	@Override
+	public User endGame(User player) {
+		this.dispose();
+		return player;
+	}
 }

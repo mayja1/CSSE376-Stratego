@@ -9,6 +9,7 @@ import game.AbstractPiece;
 import game.Flag;
 import game.GameBoard;
 import game.GameBoardFrame;
+import game.IBoardObserver;
 import game.ITurnObserver;
 import game.Obstacle;
 import game.PieceFactory;
@@ -18,6 +19,7 @@ import game.TurnObserver;
 import game.GameBoard.User;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +46,7 @@ public class TestTurnObserver {
 	@Test
 	public void testCreateTurnObserver() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		GameBoard board = new GameBoard(User.PLAYER1, pieces, pieces);
-		board.setObserver(observer);
+		board.setObserver(observer, new MockPlayerBoard());
 		Field privateObserverField = GameBoard.class.
 		            getDeclaredField("observer");
 		privateObserverField.setAccessible(true);
@@ -73,35 +75,6 @@ public class TestTurnObserver {
 	public void testIsTurn() {
 		assertTrue(observer.isTurn(User.PLAYER1));
 	}
-	
-	@Test
-	public void testGetPlayerAfterEndGame() {
-		AbstractPiece miner = new Soldier(2, "Miner");
-		miner.setLocation(new Point(0,1));
-		miner.setOwner(User.PLAYER1);
-		
-		AbstractPiece flag = new Flag();
-		flag.setLocation(new Point(0,0));
-		flag.setOwner(User.PLAYER2);
-		
-		gameBoard2.attack(miner, flag);
-		assertEquals(User.PLAYER1, observer.endGame(User.PLAYER1));
-	}
-	
-	@Test
-	public void testCloseGameBoardAfterEndGame() {
-		AbstractPiece miner = new Soldier(2, "Miner");
-		miner.setLocation(new Point(0,1));
-		miner.setOwner(User.PLAYER1);
-		
-		AbstractPiece flag = new Flag();
-		flag.setLocation(new Point(0,0));
-		flag.setOwner(User.PLAYER2);
-		
-		gameBoard2.attack(miner, flag);
-		observer.endGame(User.PLAYER1);
-		assertEquals(gameBoard2, null);
-	}
 
 	private class GameBoardMock extends GameBoard {
 		boolean updated;
@@ -113,6 +86,27 @@ public class TestTurnObserver {
 		@Override
 		public void updateBoard(Point p1, Point p2) {
 			updated = true;
+		}
+	}
+	
+	private class MockPlayerBoard extends JPanel implements IBoardObserver {
+
+		@Override
+		public void doneWithMyBoard(AbstractPiece[][] pieces) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public User endGame(User player) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 }

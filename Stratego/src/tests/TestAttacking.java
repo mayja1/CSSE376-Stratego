@@ -4,10 +4,13 @@ import static org.junit.Assert.*;
 
 import java.awt.Point;
 
+import javax.swing.JPanel;
+
 import game.AbstractPiece;
 import game.Bomb;
 import game.Flag;
 import game.GameBoard;
+import game.IBoardObserver;
 import game.PieceFactory;
 import game.GameBoard.User;
 import game.Soldier;
@@ -30,6 +33,7 @@ public class TestAttacking {
 		}
 		
 		game = new GameBoard(User.PLAYER1, pieces, pieces);
+		game.setObserver(null, new MockPlayerBoard());
 	}
 
 	@Test
@@ -184,6 +188,27 @@ public class TestAttacking {
 		s2.setLocation(new Point (1, 1));
 		game.attack(s1, s2);
 		assertEquals(true, s1.getVisiblity());
+	}
+	
+	private class MockPlayerBoard extends JPanel implements IBoardObserver {
+
+		@Override
+		public void doneWithMyBoard(AbstractPiece[][] pieces) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public User endGame(User player) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 	
 }

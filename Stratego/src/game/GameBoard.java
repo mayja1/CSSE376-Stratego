@@ -22,6 +22,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	private GridBagLayout layout;
 	private User owner;
 	private ITurnObserver observer = new TurnObserver();
+	private IBoardObserver boardObserver;
 
 	public GameBoard(User owner, AbstractPiece[][] pieces, AbstractPiece[][] opponentPieces) {
 		super();
@@ -247,7 +248,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		} else if (p2 instanceof Flag) {
 			swapPieces(p1, p2);
 			removePiece(p2);
-			observer.endGame(p1.getOwner());
+			boardObserver.endGame(p1.getOwner());
 			return p1.getOwner() + "has defeated" + p2.getOwner();
 		} else if ((p1.rank == 0) && (p2.rank == 9)) { // Spy attacking Marshall
 														// case
@@ -291,8 +292,9 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		repaint();
 	}
 
-	public void setObserver(ITurnObserver obs) {
+	public void setObserver(ITurnObserver obs, IBoardObserver boardObserver) {
 		observer = obs;
+		this.boardObserver = boardObserver;
 	}
 
 	public void updateBoard(Point p1, Point p2) {
