@@ -75,7 +75,7 @@ public class TestTurnObserver {
 	}
 	
 	@Test
-	public void endGame() {
+	public void testGetPlayerAfterEndGame() {
 		AbstractPiece miner = new Soldier(2, "Miner");
 		miner.setLocation(new Point(0,1));
 		miner.setOwner(User.PLAYER1);
@@ -86,6 +86,21 @@ public class TestTurnObserver {
 		
 		gameBoard2.attack(miner, flag);
 		assertEquals(User.PLAYER1, observer.endGame(User.PLAYER1));
+	}
+	
+	@Test
+	public void testCloseGameBoardAfterEndGame() {
+		AbstractPiece miner = new Soldier(2, "Miner");
+		miner.setLocation(new Point(0,1));
+		miner.setOwner(User.PLAYER1);
+		
+		AbstractPiece flag = new Flag();
+		flag.setLocation(new Point(0,0));
+		flag.setOwner(User.PLAYER2);
+		
+		gameBoard2.attack(miner, flag);
+		observer.endGame(User.PLAYER1);
+		assertEquals(gameBoard2, null);
 	}
 
 	private class GameBoardMock extends GameBoard {
