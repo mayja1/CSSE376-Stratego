@@ -36,7 +36,7 @@ public class TurnObserver implements ITurnObserver {
 
 	@Override
 	public User endGame(Enum player) {
-		return null;
+		return (User) player;
 		
 	}
 

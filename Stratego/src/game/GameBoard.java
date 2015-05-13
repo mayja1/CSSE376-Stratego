@@ -247,6 +247,7 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		} else if (p2 instanceof Flag) {
 			swapPieces(p1, p2);
 			removePiece(p2);
+			observer.endGame(p1.getOwner());
 			return p1.getOwner() + "has defeated" + p2.getOwner();
 		} else if ((p1.rank == 0) && (p2.rank == 9)) { // Spy attacking Marshall
 														// case
