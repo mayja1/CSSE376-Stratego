@@ -3,6 +3,8 @@ import game.GameBoard.User;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -20,6 +24,7 @@ import javax.swing.JTextPane;
 
 
 public class PlayerBoard extends JPanel implements IBoardObserver {
+	private HelpPanel helpPanel;
 	private User owner;
 	private JPanel board;
 	private ITurnObserver turnObserver;
@@ -39,6 +44,17 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 		init.setObserver(this);
 		this.setBoard(init);
 		this.add(init, BorderLayout.CENTER);
+		helpPanel = new HelpPanel();
+		JButton helpButton = new JButton("Help");
+		helpButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 JOptionPane.showMessageDialog(null,helpPanel,"Help",JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+		});
+		this.add(helpButton, BorderLayout.SOUTH);
 	}
 	
 	public User getOwner() {
@@ -84,26 +100,6 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 		gameBoard.setObserver(turnObserver, this);
 		turnObserver.addBoard(owner, gameBoard);
 		this.add(gameBoard, BorderLayout.CENTER);
-		BufferedReader in;
-		try {
-			in = new BufferedReader(new FileReader("./docs/StrategoHelpMenu.txt"));
-			StringBuilder string = new StringBuilder();
-			
-			String line;
-			while((line = in.readLine()) != null)
-			{
-			    string.append(line + "\n");
-			}
-			in.close();
-			JTextPane textPane = new JTextPane();
-			textPane.setText(string.toString());
-			textPane.setEditable(false);
-			textPane.setPreferredSize(new Dimension(300, 100));
-			JScrollPane scrollPane = new JScrollPane(textPane);
-			this.add(scrollPane, BorderLayout.SOUTH);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		gameBoard.validate();
 		this.validate();
 		this.repaint();
