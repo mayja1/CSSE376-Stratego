@@ -34,14 +34,13 @@ public class Flag extends AbstractPiece{
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
+		this.visible = false;
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
+		this.visible = true;
+		this.setText("Flag");
 	}
 
 }
