@@ -2,10 +2,20 @@ package game;
 import game.GameBoard.User;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 
 public class PlayerBoard extends JPanel implements IBoardObserver {
@@ -77,6 +87,27 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 		this.validate();
 		this.repaint();
 		this.setBoard(gameBoard);
+		
+		BufferedReader in;
+		try {
+			in = new BufferedReader(new FileReader("./docs/StrategoHelpMenu.txt"));
+			StringBuilder string = new StringBuilder();
+			
+			String line;
+			while((line = in.readLine()) != null)
+			{
+			    string.append(line + "\n");
+			}
+			in.close();
+			JTextPane textPane = new JTextPane();
+			JScrollPane scrollPane = new JScrollPane(textPane);
+			textPane.setText(string.toString());
+//			textPane.setPreferredSize(new Dimension(1000,100));
+			
+			this.add(scrollPane, BorderLayout.SOUTH);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
