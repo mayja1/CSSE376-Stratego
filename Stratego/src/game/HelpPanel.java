@@ -13,14 +13,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 public class HelpPanel extends JPanel {
-
-	
-	public HelpPanel() {
+	public String errorMsg;
+	public HelpPanel(String file) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		BufferedReader in;
 		try {
-			in = new BufferedReader(new FileReader("./docs/StrategoHelpMenu.txt"));
-			StringBuilder string = new StringBuilder();
+			in = new BufferedReader(new FileReader(file));
 			
 			String line;
 			while((line = in.readLine()) != null)
@@ -28,10 +26,11 @@ public class HelpPanel extends JPanel {
 			    this.add(new JLabel(line));
 			}
 			in.close();
-//			textPane.setPreferredSize(new Dimension(1000,100));
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			this.errorMsg = "Cannot read from file";
+			System.out.println(errorMsg);
 		}
 	}
 }
