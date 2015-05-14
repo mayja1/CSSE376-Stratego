@@ -82,6 +82,8 @@ public class SetupBoard extends JPanel implements IPieceObserver {
 	public void addPiece(int x, int y, AbstractPiece piece) {
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 0;
+		c.weighty = 0;
 		piece.setPreferredSize(PIECE_SIZE);
 		piece.setLocation(new Point(x, y));
 		piece.setObserver(this);
