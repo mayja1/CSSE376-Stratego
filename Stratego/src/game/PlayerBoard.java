@@ -14,6 +14,7 @@ import java.util.Scanner;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
@@ -83,11 +84,6 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 		gameBoard.setObserver(turnObserver, this);
 		turnObserver.addBoard(owner, gameBoard);
 		this.add(gameBoard, BorderLayout.CENTER);
-		gameBoard.validate();
-		this.validate();
-		this.repaint();
-		this.setBoard(gameBoard);
-		
 		BufferedReader in;
 		try {
 			in = new BufferedReader(new FileReader("./docs/StrategoHelpMenu.txt"));
@@ -100,14 +96,18 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 			}
 			in.close();
 			JTextPane textPane = new JTextPane();
-			JScrollPane scrollPane = new JScrollPane(textPane);
 			textPane.setText(string.toString());
-//			textPane.setPreferredSize(new Dimension(1000,100));
-			
+			textPane.setEditable(false);
+			textPane.setPreferredSize(new Dimension(300, 100));
+			JScrollPane scrollPane = new JScrollPane(textPane);
 			this.add(scrollPane, BorderLayout.SOUTH);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		gameBoard.validate();
+		this.validate();
+		this.repaint();
+		this.setBoard(gameBoard);
 	}
 
 	@Override
