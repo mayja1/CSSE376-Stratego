@@ -44,7 +44,7 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 		init.setObserver(this);
 		this.setBoard(init);
 		this.add(init, BorderLayout.CENTER);
-		helpPanel = new HelpPanel();
+		helpPanel = new HelpPanel("./docs/StrategoHelpMenu.txt");
 		JButton helpButton = new JButton("Help");
 		helpButton.addActionListener(new ActionListener() {
 
