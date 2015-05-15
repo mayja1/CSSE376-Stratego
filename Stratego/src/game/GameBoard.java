@@ -140,41 +140,52 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		int x = nonSelected.getLocation().x;
 		int y = nonSelected.getLocation().y;
 		if (this.selectedPiece.rank == 1) {
-			// Go left
-			for (int i = x - 1; i >= 0; i--) {
-				AbstractPiece piece = pieces[i][y];
-				if (selectedPiece.owner != piece.getOwner())
-					piece.setSelected(true);
-				if (!(piece instanceof ClearPiece))
-					break;
-			}
-			// Go right
-			for (int i = x + 1; i <= 9; i++) {
-				AbstractPiece piece = pieces[i][y];
-				if (selectedPiece.owner != piece.getOwner())
-					piece.setSelected(true);
-				if (!(piece instanceof ClearPiece))
-					break;
-			}
-
-			// Go down
-			for (int i = y - 1; i >= 0; i--) {
-				AbstractPiece piece = pieces[x][i];
-				if (selectedPiece.owner != piece.getOwner())
-					piece.setSelected(true);
-				if (!(piece instanceof ClearPiece))
-					break;
-			}
-			// Go right
-			for (int i = y + 1; i <= 9; i++) {
-				AbstractPiece piece = pieces[x][i];
-				if (selectedPiece.owner != piece.getOwner())
-					piece.setSelected(true);
-				if (!(piece instanceof ClearPiece))
-					break;
-			}
+			checkPiecesLeftOfScout(x, y);
+			checkPiecesRightOfScout(x, y);
+			checkPiecesBelowScout(x, y);
+			checkPiecesAboveScout(x, y);
 		} else {
 			handleNonScoutPieceSelected(x, y);
+		}
+	}
+
+	private void checkPiecesAboveScout(int x, int y) {
+		for (int i = y + 1; i <= 9; i++) {
+			AbstractPiece piece = pieces[x][i];
+			if (selectedPiece.owner != piece.getOwner())
+				piece.setSelected(true);
+			if (!(piece instanceof ClearPiece))
+				break;
+		}
+	}
+
+	private void checkPiecesBelowScout(int x, int y) {
+		for (int i = y - 1; i >= 0; i--) {
+			AbstractPiece piece = pieces[x][i];
+			if (selectedPiece.owner != piece.getOwner())
+				piece.setSelected(true);
+			if (!(piece instanceof ClearPiece))
+				break;
+		}
+	}
+
+	private void checkPiecesRightOfScout(int x, int y) {
+		for (int i = x + 1; i <= 9; i++) {
+			AbstractPiece piece = pieces[i][y];
+			if (selectedPiece.owner != piece.getOwner())
+				piece.setSelected(true);
+			if (!(piece instanceof ClearPiece))
+				break;
+		}
+	}
+
+	private void checkPiecesLeftOfScout(int x, int y) {
+		for (int i = x - 1; i >= 0; i--) {
+			AbstractPiece piece = pieces[i][y];
+			if (selectedPiece.owner != piece.getOwner())
+				piece.setSelected(true);
+			if (!(piece instanceof ClearPiece))
+				break;
 		}
 	}
 
