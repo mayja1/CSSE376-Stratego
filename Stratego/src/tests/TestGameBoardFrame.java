@@ -11,6 +11,7 @@ import game.ClearPiece;
 import game.Flag;
 import game.GameBoardFrame;
 import game.GameBoard.User;
+import game.IBoardObserver;
 import game.PieceFactory;
 import game.Soldier;
 
@@ -94,6 +95,44 @@ public class TestGameBoardFrame {
 	public void testCopyBadPiece() {
 		AbstractPiece piece = new Soldier(10);
 		assertNull(frame.copyInstanceOfPiece(piece));
+	}
+	
+	@Test
+	public void testDoneWithMyBoard() {
+		FakeIBoardObserver observer = new FakeIBoardObserver();
+		frame.setObserver(observer);
+		frame.doneWithMyBoard(null);
+		assertTrue(observer.opponentDoneWithThisBoardCalled);
+	}
+	
+	private class FakeIBoardObserver implements IBoardObserver {
+		boolean doneWithMyBoardCalled;
+		boolean opponentDoneWithThisBoardCalled;
+		boolean endGameCalled;
+		
+		public FakeIBoardObserver() {
+			doneWithMyBoardCalled = false;
+			opponentDoneWithThisBoardCalled = false;
+			endGameCalled = false;
+		}
+		@Override
+		public void doneWithMyBoard(AbstractPiece[][] pieces) {
+			doneWithMyBoardCalled = true;
+			
+		}
+
+		@Override
+		public void opponentDoneWithThisBoard(AbstractPiece[][] completedBoard) {
+			opponentDoneWithThisBoardCalled = true;
+			
+		}
+
+		@Override
+		public void endGame(User player) {
+			endGameCalled = true;
+			
+		}
+		
 	}
 	
 }
