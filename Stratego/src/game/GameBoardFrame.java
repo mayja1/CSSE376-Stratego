@@ -58,9 +58,6 @@ public class GameBoardFrame extends JFrame implements IBoardObserver {
 		}		
 		else if(piece instanceof Flag)
 			pieceCopy = PieceFactory.createFlag();
-		else if(piece.rank == 0)
-			pieceCopy = PieceFactory.createSpy();
-		
 		else if(piece.rank == 9)
 			pieceCopy = PieceFactory.createMarshall();
 		else if(piece.rank == 8)
@@ -79,6 +76,11 @@ public class GameBoardFrame extends JFrame implements IBoardObserver {
 			pieceCopy = PieceFactory.createMiner();
 		else if(piece.rank == 1)
 			pieceCopy = PieceFactory.createScout();
+		else if(piece.rank == 0)
+			pieceCopy = PieceFactory.createSpy();
+		else {
+			return null;
+		}
 		pieceCopy.setOwner(piece.owner);
 		pieceCopy.setLocation(piece.getLocation());
 		return pieceCopy;
