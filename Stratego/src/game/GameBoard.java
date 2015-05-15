@@ -24,7 +24,8 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	private ITurnObserver observer = new TurnObserver();
 	private IBoardObserver boardObserver;
 
-	public GameBoard(User owner, AbstractPiece[][] pieces, AbstractPiece[][] opponentPieces) {
+	public GameBoard(User owner, AbstractPiece[][] pieces,
+			AbstractPiece[][] opponentPieces) {
 		super();
 		this.owner = owner;
 		piecesToSet = pieces;
@@ -50,34 +51,38 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		addPiece(6, 5, PieceFactory.createObstacle());
 		addPiece(7, 4, PieceFactory.createObstacle());
 		addPiece(7, 5, PieceFactory.createObstacle());
+		
 		for (int i = 0; i < opponentPiecesToSet.length; i++) {
 			for (int j = 0; j < opponentPiecesToSet[i].length; j++) {
 				AbstractPiece piece = opponentPiecesToSet[i][j];
 				piece.hide();
-				this.addPiece(9-i, 3-j, piece);
+				this.addPiece(9 - i, 3 - j, piece);
 			}
 		}
-		
+
 		for (int i = 0; i < piecesToSet.length; i++) {
 			for (int j = 0; j < piecesToSet[i].length; j++) {
 				AbstractPiece piece = piecesToSet[i][j];
 				piece.setOwner(owner);
 				piece.show();
-				this.addPiece(i, j+6, piece);
+				this.addPiece(i, j + 6, piece);
 			}
 		}
 
 	}
 
 	public void addPiece(int x, int y, AbstractPiece piece) {
+		if(pieces[x][y] != null) {
+			this.remove(pieces[x][y]);
+		}
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
 		piece.setPreferredSize(PIECE_SIZE);
 		piece.setLocation(new Point(x, y));
 		piece.setObserver(this);
-		if(piece.owner == this.owner) {
+		if (piece.owner == this.owner) {
 			piece.setBackground(Color.GREEN);
-		} else if (!(piece instanceof ClearPiece || piece instanceof Obstacle)){
+		} else if (!(piece instanceof ClearPiece || piece instanceof Obstacle)) {
 			piece.setBackground(Color.RED);
 		}
 		pieces[x][y] = piece;
@@ -94,14 +99,12 @@ public class GameBoard extends JPanel implements IPieceObserver {
 		if (observer.isTurn(owner) && selectedPiece != null) {
 			if (selectedPiece.equals(currentPiece)) {
 				selectedPiece.setSelected(false);
-			} else if (isEnemey(selectedPiece,
-					currentPiece)) {
+			} else if (isEnemey(selectedPiece, currentPiece)) {
 				observer.endTurn(selectedPiece.location, currentPiece.location);
 				attack(selectedPiece, currentPiece);
 			} else {
 				observer.endTurn(selectedPiece.location, currentPiece.location);
-				swapPieces(selectedPiece,
-						currentPiece);
+				swapPieces(selectedPiece, currentPiece);
 			}
 		}
 		for (AbstractPiece[] pRow : pieces) {
@@ -119,95 +122,85 @@ public class GameBoard extends JPanel implements IPieceObserver {
 
 	@Override
 	public void nonSelectedButtonPressed(Point gridLocation) {
-		if (observer.isTurn(owner)) {
-			for (AbstractPiece[] pRow : pieces) {
-				for (AbstractPiece p : pRow) {
-					p.setSelected(false);
-				}
+		if (!observer.isTurn(owner)) {
+			return;
+		}
+		for (AbstractPiece[] pRow : pieces) {
+			for (AbstractPiece p : pRow) {
+				p.setSelected(false);
 			}
-			AbstractPiece nonSelected = pieces[gridLocation.x][gridLocation.y];
-			if (nonSelected.getOwner() != this.owner || nonSelected instanceof Bomb || nonSelected instanceof Flag) {
-				return;
+		}
+		AbstractPiece nonSelected = pieces[gridLocation.x][gridLocation.y];
+		if (nonSelected.getOwner() != this.owner || nonSelected instanceof Bomb
+				|| nonSelected instanceof Flag) {
+			return;
+		}
+		this.selectedPiece = nonSelected;
+		nonSelected.setSelected(true);
+		int x = nonSelected.getLocation().x;
+		int y = nonSelected.getLocation().y;
+		if (this.selectedPiece.rank == 1) {
+			// Go left
+			for (int i = x - 1; i >= 0; i--) {
+				AbstractPiece piece = pieces[i][y];
+				if (selectedPiece.owner != piece.getOwner())
+					piece.setSelected(true);
+				if (!(piece instanceof ClearPiece))
+					break;
 			}
-			this.selectedPiece = nonSelected;
-			nonSelected.setSelected(true);
-			int x = nonSelected.getLocation().x;
-			int y = nonSelected.getLocation().y;
-			if (this.selectedPiece.rank == 1) {
-				// Go left
-				for (int i = x - 1; i >= 0; i--) {
-					AbstractPiece piece = pieces[i][y];
-					if (piece instanceof ClearPiece) {
-						piece.setSelected(true);
-					} else if (selectedPiece.owner != piece.getOwner()) {
-						piece.setSelected(true);
-						break;
-					} else {
-						break;
-					}
-				}
-				// Go right
-				for (int i = x + 1; i <= 9; i++) {
-					AbstractPiece piece = pieces[i][y];
-					if (piece instanceof ClearPiece) {
-						piece.setSelected(true);
-					} else if (selectedPiece.getOwner() != piece.getOwner()) {
-						piece.setSelected(true);
-						break;
-					} else {
-						break;
-					}
-				}
+			// Go right
+			for (int i = x + 1; i <= 9; i++) {
+				AbstractPiece piece = pieces[i][y];
+				if (selectedPiece.owner != piece.getOwner())
+					piece.setSelected(true);
+				if (!(piece instanceof ClearPiece))
+					break;
+			}
 
-				// Go down
-				for (int i = y - 1; i >= 0; i--) {
-					AbstractPiece piece = pieces[x][i];
-					if (piece instanceof ClearPiece) {
-						piece.setSelected(true);
-					} else if (selectedPiece.owner != piece.getOwner()) {
-						piece.setSelected(true);
-						break;
-					} else {
-						break;
-					}
-				}
-				// Go right
-				for (int i = y + 1; i <= 9; i++) {
-					AbstractPiece piece = pieces[x][i];
-					if (piece instanceof ClearPiece) {
-						piece.setSelected(true);
-					} else if (selectedPiece.getOwner() != piece.getOwner()) {
-						piece.setSelected(true);
-						break;
-					} else {
-						break;
-					}
-				}
-			} else {
-				if (x < 9) {
-					AbstractPiece piece = pieces[x + 1][y];
-					if (selectedPiece.getOwner() != piece.getOwner()) {
-						piece.setSelected(true);
-					}
-				}
-				if (x > 0) {
-					AbstractPiece piece = pieces[x - 1][y];
-					if (selectedPiece.getOwner() != piece.getOwner()) {
-						piece.setSelected(true);
-					}
-				}
-				if (y > 0) {
-					AbstractPiece piece = pieces[x][y - 1];
-					if (selectedPiece.getOwner() != piece.getOwner()) {
-						piece.setSelected(true);
-					}
-				}
-				if (y < 9) {
-					AbstractPiece piece = pieces[x][y + 1];
-					if (selectedPiece.getOwner() != piece.getOwner()) {
-						piece.setSelected(true);
-					}
-				}
+			// Go down
+			for (int i = y - 1; i >= 0; i--) {
+				AbstractPiece piece = pieces[x][i];
+				if (selectedPiece.owner != piece.getOwner())
+					piece.setSelected(true);
+				if (!(piece instanceof ClearPiece))
+					break;
+			}
+			// Go right
+			for (int i = y + 1; i <= 9; i++) {
+				AbstractPiece piece = pieces[x][i];
+				if (selectedPiece.owner != piece.getOwner())
+					piece.setSelected(true);
+				if (!(piece instanceof ClearPiece))
+					break;
+			}
+		} else {
+			handleNonScoutPieceSelected(x, y);
+		}
+	}
+
+	private void handleNonScoutPieceSelected(int x, int y) {
+		if (x < 9) {
+			AbstractPiece piece = pieces[x + 1][y];
+			if (selectedPiece.getOwner() != piece.getOwner()) {
+				piece.setSelected(true);
+			}
+		}
+		if (x > 0) {
+			AbstractPiece piece = pieces[x - 1][y];
+			if (selectedPiece.getOwner() != piece.getOwner()) {
+				piece.setSelected(true);
+			}
+		}
+		if (y > 0) {
+			AbstractPiece piece = pieces[x][y - 1];
+			if (selectedPiece.getOwner() != piece.getOwner()) {
+				piece.setSelected(true);
+			}
+		}
+		if (y < 9) {
+			AbstractPiece piece = pieces[x][y + 1];
+			if (selectedPiece.getOwner() != piece.getOwner()) {
+				piece.setSelected(true);
 			}
 		}
 	}
@@ -298,9 +291,9 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	}
 
 	public void updateBoard(Point p1, Point p2) {
-		AbstractPiece piece1 = pieces[9-p1.x][9-p1.y];
-		AbstractPiece piece2 = pieces[9-p2.x][9-p2.y];
-		if(piece2 instanceof ClearPiece) {
+		AbstractPiece piece1 = pieces[9 - p1.x][9 - p1.y];
+		AbstractPiece piece2 = pieces[9 - p2.x][9 - p2.y];
+		if (piece2 instanceof ClearPiece) {
 			swapPieces(piece1, piece2);
 		} else {
 			attack(piece1, piece2);

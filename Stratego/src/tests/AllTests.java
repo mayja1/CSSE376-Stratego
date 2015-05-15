@@ -18,7 +18,8 @@ import org.junit.runners.Suite;
 			TestPlayerBoard.class,
 			TestBoardObserver.class,
 			TestTurnObserver.class,
-			TestSetupBoard.class
+			TestSetupBoard.class,
+			TestHelpPanel.class
 		})
 public class AllTests {
 	
