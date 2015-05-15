@@ -38,21 +38,22 @@ public class GameBoard extends JPanel implements IPieceObserver {
 	protected void instantiateBoard() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if ((i >= 2 && i <= 3 && j >= 4 && j <= 5) || (i >= 6 && i <= 7 && j >= 4 && j <= 5)) {
-					AbstractPiece obs = PieceFactory.createObstacle();
-					addPiece(i, j, obs);
-				} else {
-					AbstractPiece button = PieceFactory.createClearPiece();
-					addPiece(i, j, button);
-				}
+				AbstractPiece button = PieceFactory.createClearPiece();
+				addPiece(i, j, button);
 			}
 		}
-		
+		addPiece(2, 4, PieceFactory.createObstacle());
+		addPiece(2, 5, PieceFactory.createObstacle());
+		addPiece(3, 4, PieceFactory.createObstacle());
+		addPiece(3, 5, PieceFactory.createObstacle());
+		addPiece(6, 4, PieceFactory.createObstacle());
+		addPiece(6, 5, PieceFactory.createObstacle());
+		addPiece(7, 4, PieceFactory.createObstacle());
+		addPiece(7, 5, PieceFactory.createObstacle());
 		for (int i = 0; i < opponentPiecesToSet.length; i++) {
 			for (int j = 0; j < opponentPiecesToSet[i].length; j++) {
 				AbstractPiece piece = opponentPiecesToSet[i][j];
 				piece.hide();
-				this.remove(pieces[9-i][3-j]);
 				this.addPiece(9-i, 3-j, piece);
 			}
 		}
@@ -62,7 +63,6 @@ public class GameBoard extends JPanel implements IPieceObserver {
 				AbstractPiece piece = piecesToSet[i][j];
 				piece.setOwner(owner);
 				piece.show();
-				this.remove(pieces[i][j+6]);
 				this.addPiece(i, j+6, piece);
 			}
 		}
