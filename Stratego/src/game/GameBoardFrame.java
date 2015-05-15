@@ -58,28 +58,9 @@ public class GameBoardFrame extends JFrame implements IBoardObserver {
 		}		
 		else if(piece instanceof Flag)
 			pieceCopy = PieceFactory.createFlag();
-		else if(piece.rank == 9)
-			pieceCopy = PieceFactory.createMarshall();
-		else if(piece.rank == 8)
-			pieceCopy = PieceFactory.createGeneral();
-		else if(piece.rank == 7)
-			pieceCopy = PieceFactory.createColonel();
-		else if(piece.rank == 6)
-			pieceCopy = PieceFactory.createMajor();
-		else if(piece.rank == 5)
-			pieceCopy = PieceFactory.createCaptain();
-		else if(piece.rank == 4)
-			pieceCopy = PieceFactory.createLieutenant();
-		else if(piece.rank == 3)
-			pieceCopy = PieceFactory.createSergeant();
-		else if(piece.rank == 2)
-			pieceCopy = PieceFactory.createMiner();
-		else if(piece.rank == 1)
-			pieceCopy = PieceFactory.createScout();
-		else if(piece.rank == 0)
-			pieceCopy = PieceFactory.createSpy();
 		else {
-			return null;
+		pieceCopy = new Soldier(piece.getRank());
+		pieceCopy.setName(piece.getName());
 		}
 		pieceCopy.setOwner(piece.owner);
 		pieceCopy.setLocation(piece.getLocation());

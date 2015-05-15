@@ -91,11 +91,6 @@ public class TestGameBoardFrame {
 		AbstractPiece piece = PieceFactory.createMarshall();
 		assertTrue(frame.copyInstanceOfPiece(piece).getRank() == 9);
 	}
-	@Test
-	public void testCopyBadPiece() {
-		AbstractPiece piece = new Soldier(10);
-		assertNull(frame.copyInstanceOfPiece(piece));
-	}
 	
 	@Test
 	public void testDoneWithMyBoard() {
