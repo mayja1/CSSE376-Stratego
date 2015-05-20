@@ -38,7 +38,7 @@ public class PlayerBoard extends JPanel implements IBoardObserver {
 		this.containerObserver = observer;
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
-		status = new JLabel("Test Label");
+		status = new JLabel(owner.name());
 		this.add(status, BorderLayout.NORTH);		
 		SetupBoard init = new SetupBoard(owner);
 		init.setObserver(this);
